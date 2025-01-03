@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 
 export default function HomePage() {
@@ -9,7 +10,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto text-center">
           {/* Headshot */}
           <div className="mb-6">
-            <img
+            <Image
               src="/headshot.jpg" // Add your image to the public folder as "headshot.jpg"
               alt="Profile Headshot"
               className="w-32 h-32 mx-auto rounded-full shadow-lg"

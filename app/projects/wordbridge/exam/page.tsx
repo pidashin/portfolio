@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
 import wordResource from './words.json';
 import { FiX } from 'react-icons/fi'; // Icon for exit button
 
