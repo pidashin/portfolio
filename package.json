@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/server": "^4.11.3",
+    "@as-integrations/next": "^3.2.0",
+    "graphql": "^16.10.0",
+    "graphql-tag": "^2.12.6",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
@@ -26,5 +30,8 @@
     "prettier": "^3.4.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "resolutions": {
+    "graphql": "^16.10.0"
   }
 }

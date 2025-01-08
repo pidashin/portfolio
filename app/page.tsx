@@ -13,6 +13,8 @@ export default function HomePage() {
             <Image
               src="/headshot.jpg" // Add your image to the public folder as "headshot.jpg"
               alt="Profile Headshot"
+              width={128}
+              height={128}
               className="w-32 h-32 mx-auto rounded-full shadow-lg"
             />
           </div>
