@@ -1,8 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import wordResource from './words.json';
+import React, { useState } from 'react';
+// import wordResource from './words.json';
 import { FiX } from 'react-icons/fi'; // Icon for exit button
+import GET_WORDS from '../gql/getWords';
+import { useQuery } from '@apollo/client';
+import Notice, { ColorVariant } from '../components/notice';
+
+type Word = { enUS: string; zhTW: string };
 
 type Question = {
   question: { enUS: string; zhTW: string };
@@ -96,7 +101,7 @@ const Summary = ({
   );
 };
 
-const genQuestions = () => {
+const genQuestions = (wordResource: Word[]): Question[] => {
   // Prepare 10 random questions
   const shuffledWords = [...wordResource]
     .sort(() => 0.5 - Math.random())
@@ -127,9 +132,15 @@ const ExamPage = () => {
   const [showSummary, setShowSummary] = useState(false);
   const [showExitAlert, setShowExitAlert] = useState(false);
 
-  useEffect(() => {
-    setQuestions(genQuestions);
-  }, []);
+  const {
+    data: data_get_words,
+    loading,
+    error,
+  } = useQuery(GET_WORDS, {
+    onCompleted: (data) => {
+      setQuestions(genQuestions(data.words));
+    },
+  });
 
   const handleOptionSelect = (idx: number) => {
     if (isCorrect === null) {
@@ -188,9 +199,27 @@ const ExamPage = () => {
     setSelectedOptionIdx(null);
     setIsCorrect(null);
     setShowSummary(false);
+    setWrongAnswers([]);
     setScore(0);
-    setQuestions(genQuestions);
+    setQuestions(genQuestions(data_get_words.words));
   };
+
+  if (loading) {
+    return (
+      <Notice
+        colorVariant={ColorVariant.Loading}
+        message="Loading questions, please wait..."
+      />
+    );
+  }
+  if (error) {
+    return (
+      <Notice
+        colorVariant={ColorVariant.Loading}
+        message={`Error loading questions: ${error}`}
+      />
+    );
+  }
 
   if (showSummary) {
     return (
