@@ -3,6 +3,7 @@ import { ApolloServer } from '@apollo/server';
 import { gql } from 'graphql-tag';
 import fs from 'fs';
 import path from 'path';
+import { NextRequest } from 'next/server';
 
 // Define the shape of a word
 interface Word {
@@ -215,6 +216,8 @@ const server = new ApolloServer({
 });
 
 // Initialize the Next.js handler for GraphQL
-const handler = startServerAndCreateNextHandler(server);
+const handler = startServerAndCreateNextHandler<NextRequest>(server, {
+  context: async (req) => ({ req }),
+});
 
 export { handler as GET, handler as POST };

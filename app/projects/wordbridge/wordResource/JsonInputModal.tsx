@@ -43,7 +43,8 @@ const JsonInputModal: React.FC<JsonInputModalProps> = ({
       } else {
         setError('Invalid JSON format. Expected an array.');
       }
-    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
       setError('Invalid JSON format.');
     }
   };

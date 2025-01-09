@@ -84,7 +84,8 @@ const WordGrid: React.FC = () => {
         // Remove the word from the state list if deletion was successful
         setWordGroups((prev) => prev.filter((_, i) => i !== index));
       }
-    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
       setErrMsg('An error occurred while deleting the word.');
     }
   };
