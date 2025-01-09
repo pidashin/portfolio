@@ -120,6 +120,8 @@ const genQuestions = (wordResource: Word[]): Question[] => {
   });
 };
 
+const ENUS_QUESTION_WEIGHT = 0.6;
+
 const ExamPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -131,6 +133,10 @@ const ExamPage = () => {
   const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
   const [showSummary, setShowSummary] = useState(false);
   const [showExitAlert, setShowExitAlert] = useState(false);
+
+  const [isReverse, setIsReverse] = useState(
+    Math.random() > ENUS_QUESTION_WEIGHT,
+  );
 
   const {
     data: data_get_words,
@@ -177,6 +183,7 @@ const ExamPage = () => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedOptionIdx(null);
       setIsCorrect(null);
+      setIsReverse(Math.random() > ENUS_QUESTION_WEIGHT);
     } else {
       setShowSummary(true);
     }
@@ -202,6 +209,7 @@ const ExamPage = () => {
     setWrongAnswers([]);
     setScore(0);
     setQuestions(genQuestions(data_get_words.words));
+    setIsReverse(Math.random() > ENUS_QUESTION_WEIGHT);
   };
 
   if (loading) {
@@ -253,7 +261,9 @@ const ExamPage = () => {
         Question {currentQuestionIndex + 1}
       </h1>
       <p className="mb-4 text-3xl font-semibold capitalize">
-        {currentQuestion?.question.enUS}
+        {isReverse
+          ? currentQuestion?.question.zhTW
+          : currentQuestion?.question.enUS}
       </p>
       <div className="mb-4">
         {currentQuestion?.options.map((option, index) => (
@@ -266,7 +276,7 @@ const ExamPage = () => {
             }`}
             onClick={() => handleOptionSelect(index)}
           >
-            {option.zhTW}
+            {isReverse ? option.enUS : option.zhTW}
           </button>
         ))}
       </div>
