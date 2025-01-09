@@ -60,6 +60,25 @@ const saveWords = (words: Word[]) => {
   }
 };
 
+// Helper function to add words while avoiding duplicates
+const addUniqueWords = (words: Word[], newWords: WordInput[]): Word[] => {
+  const existingWords = new Set(words.map((word) => word.enUS));
+
+  newWords.forEach((newWord) => {
+    if (!existingWords.has(newWord.enUS)) {
+      words.push({ enUS: newWord.enUS, zhTW: newWord.zhTW });
+      existingWords.add(newWord.enUS); // Mark the word as added
+    }
+  });
+
+  return words;
+};
+
+const deleteWordsByKey = (words: Word[], enUsKeys: string[]): Word[] => {
+  const wordsToDelete = new Set(enUsKeys);
+  return words.filter((word) => !wordsToDelete.has(word.enUS));
+};
+
 // GraphQL Schema Definition
 const typeDefs = gql`
   type Word {
@@ -105,10 +124,20 @@ const resolvers = {
         throw new Error('Failed to load words data.');
       }
 
-      const newWord: Word = { enUS: word.enUS, zhTW: word.zhTW };
-      words.push(newWord);
-      saveWords(words); // Save the updated list
-      return newWord;
+      const updatedWords = addUniqueWords(words, [word]); // Pass as an array to reuse the helper
+      saveWords(updatedWords); // Save the updated list
+      return updatedWords.find((w) => w.enUS === word.enUS) as Word;
+    },
+
+    addWords: (_: unknown, { words }: { words: WordInput[] }): Word[] => {
+      const currentWords = getWords();
+      if (!currentWords) {
+        throw new Error('Failed to load words data.');
+      }
+
+      const updatedWords = addUniqueWords(currentWords, words);
+      saveWords(updatedWords);
+      return updatedWords;
     },
 
     updateWord: (_: unknown, { word }: { word: WordInput }): Word | null => {
@@ -125,32 +154,6 @@ const resolvers = {
       words[index] = { enUS: word.enUS, zhTW: word.zhTW };
       saveWords(words);
       return words[index];
-    },
-
-    deleteWord: (_: unknown, { enUsKey }: { enUsKey: string }): boolean => {
-      const words = getWords();
-      if (!words) {
-        throw new Error('Failed to load words data.');
-      }
-
-      const newWords = words.filter((word) => word.enUS !== enUsKey);
-      if (newWords.length === words.length) {
-        return false; // No word was deleted
-      }
-
-      saveWords(newWords);
-      return true;
-    },
-
-    addWords: (_: unknown, { words }: { words: WordInput[] }): Word[] => {
-      const currentWords = getWords();
-      if (!currentWords) {
-        throw new Error('Failed to load words data.');
-      }
-
-      const updatedWords = [...currentWords, ...words];
-      saveWords(updatedWords);
-      return updatedWords;
     },
 
     updateWords: (_: unknown, { words }: { words: WordInput[] }): Word[] => {
@@ -170,6 +173,21 @@ const resolvers = {
       return currentWords;
     },
 
+    deleteWord: (_: unknown, { enUsKey }: { enUsKey: string }): boolean => {
+      const words = getWords();
+      if (!words) {
+        throw new Error('Failed to load words data.');
+      }
+
+      const newWords = deleteWordsByKey(words, [enUsKey]); // Pass single key as an array
+      if (newWords.length === words.length) {
+        return false; // No word was deleted
+      }
+
+      saveWords(newWords);
+      return true;
+    },
+
     deleteWords: (
       _: unknown,
       { enUsKeys }: { enUsKeys: string[] },
@@ -179,7 +197,7 @@ const resolvers = {
         throw new Error('Failed to load words data.');
       }
 
-      const newWords = words.filter((word) => !enUsKeys.includes(word.enUS));
+      const newWords = deleteWordsByKey(words, enUsKeys); // Pass multiple keys as an array
       if (newWords.length === words.length) {
         return false; // No words were deleted
       }

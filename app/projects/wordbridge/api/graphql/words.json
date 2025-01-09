@@ -70,5 +70,53 @@
   {
     "enUS": "reach",
     "zhTW": "抵達"
+  },
+  {
+    "enUS": "bright",
+    "zhTW": "明亮"
+  },
+  {
+    "enUS": "sleep",
+    "zhTW": "睡覺"
+  },
+  {
+    "enUS": "night",
+    "zhTW": "夜晚"
+  },
+  {
+    "enUS": "grandma",
+    "zhTW": "奶奶"
+  },
+  {
+    "enUS": "bake",
+    "zhTW": "烘焙"
+  },
+  {
+    "enUS": "cake",
+    "zhTW": "蛋糕"
+  },
+  {
+    "enUS": "lake",
+    "zhTW": "湖泊"
+  },
+  {
+    "enUS": "queen",
+    "zhTW": "皇后"
+  },
+  {
+    "enUS": "king",
+    "zhTW": "國王"
+  },
+  {
+    "enUS": "dance",
+    "zhTW": "跳舞"
+  },
+  {
+    "enUS": "sing",
+    "zhTW": "唱歌"
+  },
+  {
+    "enUS": "song",
+    "zhTW": "歌曲"
   }
 ]
