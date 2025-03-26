@@ -266,19 +266,32 @@ const ExamPage = () => {
           : currentQuestion?.question.enUS}
       </p>
       <div className="mb-4">
-        {currentQuestion?.options.map((option, index) => (
-          <button
-            key={index}
-            className={`block w-full p-2 mb-2 text-left border rounded-md transition-all duration-200 text-2xl ${
-              selectedOptionIdx === index
-                ? 'bg-orange-200 border-orange-400'
-                : 'border-gray-300 hover:bg-orange-100 hover:border-orange-300'
-            }`}
-            onClick={() => handleOptionSelect(index)}
-          >
-            {isReverse ? option.enUS : option.zhTW}
-          </button>
-        ))}
+        {currentQuestion?.options.map((option, index) => {
+          const isAnswerCorrect = option.zhTW === currentQuestion.question.zhTW;
+
+          let btnClass =
+            'block w-full p-2 mb-2 text-left border rounded-md transition-all duration-200 text-2xl';
+
+          if (selectedOptionIdx === index) {
+            if (isCorrect) {
+              btnClass += ' bg-green-200 border-green-400';
+            } else {
+              btnClass += ' bg-orange-200 border-orange-400';
+            }
+          } else if (isCorrect !== null && isAnswerCorrect) {
+            btnClass += ' bg-green-200 border-green-400';
+          }
+
+          return (
+            <button
+              key={index}
+              className={btnClass}
+              onClick={() => handleOptionSelect(index)}
+            >
+              {isReverse ? option.enUS : option.zhTW}
+            </button>
+          );
+        })}
       </div>
       <p
         className={`${isCorrect === null ? 'invisible' : 'visible'} ${isCorrect ? 'text-green-500' : 'text-red-500'} mb-4 text-xl`}
