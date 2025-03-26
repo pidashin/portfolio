@@ -17,15 +17,17 @@ interface WordInput {
 }
 
 // Path to the words.json file (ensure it's relative to the project root or public directory)
-const wordsFilePath = path.join(
-  process.cwd(),
-  'app',
-  'projects',
-  'wordbridge',
-  'api',
-  'graphql',
-  'words.json',
-);
+const wordsFilePath =
+  process.env.WORDS_JSON_PATH ||
+  path.join(
+    process.cwd(),
+    'app',
+    'projects',
+    'wordbridge',
+    'api',
+    'graphql',
+    'words.json',
+  );
 
 let wordsCache: Word[] | null = null;
 
