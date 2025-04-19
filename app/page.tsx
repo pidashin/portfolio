@@ -98,11 +98,20 @@ export default function HomePage() {
                 height={138}
                 className="mx-auto shadow-lg"
               />
+              <p className="mt-4 text-left">
+                <strong>Experience:</strong> 2014 - 2021
+              </p>
               <p className="text-gray-700 mb-4 mt-4 text-left">
-                From 2014 to 2021, I worked on multiple sportsbook platforms,
-                including 188bet.com. These platforms provided a seamless online
-                sports betting experience, allowing users to browse events,
-                place bets, and track results efficiently.
+                Experienced in working on multiple sportsbook platforms,
+                including 188bet.com. These platforms delivered a seamless
+                online sports betting experience, enabling users to browse
+                events, place bets, and track results with ease. Contributed to
+                the development of key features such as landing pages, game
+                interfaces, betslips, and result tracking tools to enhance user
+                engagement and platform performance.
+              </p>
+              <p className="text-left">
+                <strong>Key Features:</strong>
               </p>
               <ul className="text-gray-700 mb-4 text-left list-disc pl-5">
                 <li>
@@ -122,11 +131,16 @@ export default function HomePage() {
                   winnings, and losses.
                 </li>
               </ul>
-              <Link href="/projects/sportsbook">
+
+              <div className="bg-white p-2 rounded shadow text-left">
+                <strong>Technologies:</strong> React.js, asp.net, c#
+              </div>
+
+              {/* <Link href="/projects/sportsbook">
                 <button className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                   Learn More
                 </button>
-              </Link>
+              </Link> */}
             </div>
             {/* Project Card 2 */}
             <div className="bg-white p-6 rounded shadow">
@@ -138,14 +152,44 @@ export default function HomePage() {
                 height={138}
                 className="mx-auto shadow-lg"
               />
-              <p className="text-gray-700 mb-4 mt-4">
-                A brief description of the project.
+              <p className="mt-4 text-left">
+                <strong>Experience:</strong> 2021 – Present
               </p>
-              <Link href="/projects/project2">
+              <p className="text-gray-700 mb-4 mt-4 text-left">
+                Developing a web application for designing and visualizing 3D
+                floor plans. The platform supports interactive layout creation,
+                real-time 3D rendering, and interior customization to streamline
+                home design.
+              </p>
+              <p className="text-left">
+                <strong>Key Features:</strong>
+              </p>
+              <ul className="text-gray-700 mb-4 text-left list-disc pl-5">
+                <li>
+                  <strong>Commenting:</strong> Allows users to add comments
+                  directly to items, enhancing communication between
+                  professionals and clients.
+                </li>
+                <li>
+                  <strong>Photorealistic Rendering:</strong> Generates
+                  high-quality, lifelike visuals for realistic project
+                  presentations.
+                </li>
+                <li>
+                  <strong>Automated 2D to 3D Conversion:</strong> Transforms
+                  uploaded 2D floor plans into fully interactive 3D models
+                  automatically.
+                </li>
+              </ul>
+
+              <div className="bg-white p-2 rounded shadow text-left">
+                <strong>Technologies:</strong> React.js, graphql, nodejs
+              </div>
+              {/* <Link href="/projects/project2">
                 <button className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                   Learn More
                 </button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

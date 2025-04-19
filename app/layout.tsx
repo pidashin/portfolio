@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-orange-50">
         {children}
-        <footer className="fixed bottom-0 w-full flex justify-center">
+        <footer className="bottom-0 w-full flex justify-center">
           <p className="text-gray-700">
             © 2024 Kai-Chen Yeh. All rights reserved.
           </p>
