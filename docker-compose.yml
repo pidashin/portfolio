@@ -1,0 +1,12 @@
+version: '3'
+services:
+  webapp:
+    build:
+      context: https://github.com/pidashin/portfolio.git
+      dockerfile: Dockerfile
+    image: portfolio
+    container_name: portfolio
+    volumes:
+      - /volume1/docker/data/words.json:/app/projects/wordbridge/api/graphql/words.json
+    ports:
+      - "3000:3000"
