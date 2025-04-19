@@ -37,7 +37,7 @@ To run this project locally:
 
 ## start docker
 ```sh
-docker-compose up --build
+docker-compose up -d --build
 ```
 
 🚀 *Thank you for visiting my portfolio! Feel free to explore and contribute.*
