@@ -303,7 +303,7 @@ const ExamPage = () => {
         Question {currentQuestionIndex + 1}
       </h1>
       <p
-        className={`mb-4 text-3xl font-semibold ${currentQuestion.type === 'basic' ? 'capitalize' : ''}`}
+        className={`mb-4 text-3xl font-semibold ${currentQuestion?.type === 'basic' ? 'capitalize' : ''}`}
       >
         {currentQuestion?.question.text}
       </p>
