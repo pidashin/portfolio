@@ -1,79 +1,174 @@
 [
   {
     "enUS": "share",
-    "zhTW": "分享"
+    "zhTW": "分享",
+    "label": "verb",
+    "templates": [
+      "I like to ____ my toys with my friend.",
+      "We ____ the cake at the party."
+    ]
   },
   {
     "enUS": "candy",
-    "zhTW": "糖果"
+    "zhTW": "糖果",
+    "label": "food",
+    "templates": [
+      "She eats a piece of ____ after lunch.",
+      "The jar is full of colorful ____."
+    ]
   },
   {
     "enUS": "ladder",
-    "zhTW": "梯子"
+    "zhTW": "梯子",
+    "label": "object",
+    "templates": [
+      "He climbs the ____ to get the ball.",
+      "The ____ is next to the wall."
+    ]
   },
   {
     "enUS": "sand",
-    "zhTW": "沙子"
+    "zhTW": "沙子",
+    "label": "material",
+    "templates": [
+      "We play in the ____ at the beach.",
+      "The bucket is full of ____."
+    ]
   },
   {
     "enUS": "water",
-    "zhTW": "水"
+    "zhTW": "水",
+    "label": "liquid",
+    "templates": [
+      "Please drink some ____.",
+      "The glass is filled with ____."
+    ]
   },
   {
     "enUS": "talk",
-    "zhTW": "說話"
+    "zhTW": "說話",
+    "label": "verb",
+    "templates": [
+      "I ____ to my friend at lunch.",
+      "The teacher says, ‘Don’t ____ in class.’"
+    ]
   },
   {
     "enUS": "hand",
-    "zhTW": "手"
+    "zhTW": "手",
+    "label": "body",
+    "templates": [
+      "She raises her ____ in class.",
+      "I draw with my right ____."
+    ]
   },
   {
     "enUS": "finger",
-    "zhTW": "手指"
+    "zhTW": "手指",
+    "label": "body",
+    "templates": [
+      "He points with his ____.",
+      "I hurt my ____ while playing."
+    ]
   },
   {
     "enUS": "arm",
-    "zhTW": "手臂"
+    "zhTW": "手臂",
+    "label": "body",
+    "templates": [
+      "She lifts her ____ to wave.",
+      "My ____ feels tired after sports."
+    ]
   },
   {
     "enUS": "mouth",
-    "zhTW": "嘴巴"
+    "zhTW": "嘴巴",
+    "label": "body",
+    "templates": [
+      "Open your ____ and say 'Ah'.",
+      "He puts food in his ____."
+    ]
   },
   {
     "enUS": "eat",
-    "zhTW": "吃"
+    "zhTW": "吃",
+    "label": "verb",
+    "templates": [
+      "I ____ lunch at noon.",
+      "We ____ apples and bananas."
+    ]
   },
   {
     "enUS": "sweet",
-    "zhTW": "甜的"
+    "zhTW": "甜的",
+    "label": "adjective",
+    "templates": [
+      "This candy is very ____.",
+      "I like ____ fruits like mangoes."
+    ]
   },
   {
     "enUS": "smell",
-    "zhTW": "聞"
+    "zhTW": "聞",
+    "label": "verb",
+    "templates": [
+      "I ____ the flowers in the garden.",
+      "She ____s the cake baking."
+    ]
   },
   {
     "enUS": "ear",
-    "zhTW": "耳朵"
+    "zhTW": "耳朵",
+    "label": "body",
+    "templates": [
+      "She wears earrings on her ____s.",
+      "I hear with my ____."
+    ]
   },
   {
     "enUS": "school",
-    "zhTW": "學校"
+    "zhTW": "學校",
+    "label": "place",
+    "templates": [
+      "I go to ____ every weekday.",
+      "The ____ has a big playground."
+    ]
   },
   {
     "enUS": "bell",
-    "zhTW": "鈴鐺"
+    "zhTW": "鈴鐺",
+    "label": "object",
+    "templates": [
+      "The ____ rings at 3 o’clock.",
+      "I hear the ____ at the door."
+    ]
   },
   {
     "enUS": "high",
-    "zhTW": "高的"
+    "zhTW": "高的",
+    "label": "adjective",
+    "templates": [
+      "The mountain is very ____.",
+      "He jumps ____ to catch the ball."
+    ]
   },
   {
     "enUS": "reach",
-    "zhTW": "抵達"
+    "zhTW": "抵達",
+    "label": "verb",
+    "templates": [
+      "I ____ the top shelf with a stool.",
+      "We ____ the park before sunset."
+    ]
   },
   {
     "enUS": "bright",
-    "zhTW": "明亮"
+    "zhTW": "明亮",
+    "label": "adjective",
+    "templates": [
+      "The sun is very ____ today.",
+      "Her dress is a ____ color."
+    ]
   },
   {
     "enUS": "sleep",
@@ -1114,321 +1209,5 @@
   {
     "enUS": "shell",
     "zhTW": "外殼"
-  },
-  {
-    "enUS": "hill",
-    "zhTW": "山丘"
-  },
-  {
-    "enUS": "station",
-    "zhTW": "車站"
-  },
-  {
-    "enUS": "tunnel",
-    "zhTW": "隧道"
-  },
-  {
-    "enUS": "singal",
-    "zhTW": "訊號；紅綠燈"
-  },
-  {
-    "enUS": "plantation",
-    "zhTW": "農園"
-  },
-  {
-    "enUS": "town",
-    "zhTW": "小鎮"
-  },
-  {
-    "enUS": "playground",
-    "zhTW": "遊樂場"
-  },
-  {
-    "enUS": "steam",
-    "zhTW": "蒸氣"
-  },
-  {
-    "enUS": "another",
-    "zhTW": "另一個"
-  },
-  {
-    "enUS": "journey",
-    "zhTW": "旅程"
-  },
-  {
-    "enUS": "ocean",
-    "zhTW": "海洋"
-  },
-  {
-    "enUS": "eel",
-    "zhTW": "鰻魚"
-  },
-  {
-    "enUS": "octopus",
-    "zhTW": "章魚"
-  },
-  {
-    "enUS": "rock",
-    "zhTW": "岩石"
-  },
-  {
-    "enUS": "seaweed",
-    "zhTW": "海藻"
-  },
-  {
-    "enUS": "coral",
-    "zhTW": "珊瑚"
-  },
-  {
-    "enUS": "lay",
-    "zhTW": "下蛋"
-  },
-  {
-    "enUS": "careful",
-    "zhTW": "小心的"
-  },
-  {
-    "enUS": "feed",
-    "zhTW": "餵食"
-  },
-  {
-    "enUS": "female",
-    "zhTW": "女性"
-  },
-  {
-    "enUS": "male",
-    "zhTW": "男性"
-  },
-  {
-    "enUS": "born",
-    "zhTW": "出生"
-  },
-  {
-    "enUS": "harm",
-    "zhTW": "傷害"
-  },
-  {
-    "enUS": "witch",
-    "zhTW": "女巫"
-  },
-  {
-    "enUS": "dinosaur",
-    "zhTW": "恐龍"
-  },
-  {
-    "enUS": "crack",
-    "zhTW": "裂縫"
-  },
-  {
-    "enUS": "reply",
-    "zhTW": "回覆"
-  },
-  {
-    "enUS": "hippopotamus",
-    "zhTW": "河馬"
-  },
-  {
-    "enUS": "children",
-    "zhTW": "小孩"
-  },
-  {
-    "enUS": "wonderful",
-    "zhTW": "美好的"
-  },
-  {
-    "enUS": "habit",
-    "zhTW": "習慣"
-  },
-  {
-    "enUS": "fact",
-    "zhTW": "事實"
-  },
-  {
-    "enUS": "shopping",
-    "zhTW": "購物"
-  },
-  {
-    "enUS": "milk shake",
-    "zhTW": "奶昔"
-  },
-  {
-    "enUS": "pie",
-    "zhTW": "派"
-  },
-  {
-    "enUS": "bakery",
-    "zhTW": "麵包店"
-  },
-  {
-    "enUS": "fresh",
-    "zhTW": "新鮮的"
-  },
-  {
-    "enUS": "dairy",
-    "zhTW": "乳製品"
-  },
-  {
-    "enUS": "sleepy",
-    "zhTW": "想睡的"
-  },
-  {
-    "enUS": "busy",
-    "zhTW": "忙碌的"
-  },
-  {
-    "enUS": "giant",
-    "zhTW": "巨人；巨大的"
-  },
-  {
-    "enUS": "o'clock",
-    "zhTW": "整點"
-  },
-  {
-    "enUS": "brush teeth",
-    "zhTW": "刷牙"
-  },
-  {
-    "enUS": "get dressed",
-    "zhTW": "穿衣服"
-  },
-  {
-    "enUS": "house work",
-    "zhTW": "家事"
-  },
-  {
-    "enUS": "yell",
-    "zhTW": "大叫"
-  },
-  {
-    "enUS": "tennis racket",
-    "zhTW": "網球拍"
-  },
-  {
-    "enUS": "naughty",
-    "zhTW": "頑皮的"
-  },
-  {
-    "enUS": "guess",
-    "zhTW": "猜"
-  },
-  {
-    "enUS": "equipment",
-    "zhTW": "設備"
-  },
-  {
-    "enUS": "stay",
-    "zhTW": "停留"
-  },
-  {
-    "enUS": "soft",
-    "zhTW": "柔軟的"
-  },
-  {
-    "enUS": "alien",
-    "zhTW": "外星人"
-  },
-  {
-    "enUS": "stuck",
-    "zhTW": "卡住的"
-  },
-  {
-    "enUS": "balloon",
-    "zhTW": "氣球"
-  },
-  {
-    "enUS": "horn",
-    "zhTW": "喇叭；角"
-  },
-  {
-    "enUS": "bounce",
-    "zhTW": "彈跳"
-  },
-  {
-    "enUS": "wheel",
-    "zhTW": "輪子"
-  },
-  {
-    "enUS": "board game",
-    "zhTW": "桌上遊戲"
-  },
-  {
-    "enUS": "move",
-    "zhTW": "移動"
-  },
-  {
-    "enUS": "double",
-    "zhTW": "兩倍"
-  },
-  {
-    "enUS": "heavy",
-    "zhTW": "重的"
-  },
-  {
-    "enUS": "radio",
-    "zhTW": "收音機"
-  },
-  {
-    "enUS": "straw",
-    "zhTW": "吸管"
-  },
-  {
-    "enUS": "complete",
-    "zhTW": "完成"
-  },
-  {
-    "enUS": "ugly",
-    "zhTW": "醜陋的"
-  },
-  {
-    "enUS": "keyboard",
-    "zhTW": "鍵盤"
-  },
-  {
-    "enUS": "fantastic",
-    "zhTW": "太棒了"
-  },
-  {
-    "enUS": "lorry",
-    "zhTW": "卡車"
-  },
-  {
-    "enUS": "chips",
-    "zhTW": "薯條"
-  },
-  {
-    "enUS": "wow",
-    "zhTW": "哇"
-  },
-  {
-    "enUS": "try",
-    "zhTW": "嘗試"
-  },
-  {
-    "enUS": "bin",
-    "zhTW": "垃圾桶"
-  },
-  {
-    "enUS": "house",
-    "zhTW": "房子"
-  },
-  {
-    "enUS": "classmate",
-    "zhTW": "同學"
-  },
-  {
-    "enUS": "shake",
-    "zhTW": "搖動"
-  },
-  {
-    "enUS": "giraffe",
-    "zhTW": "長頸鹿"
-  },
-  {
-    "enUS": "welldone",
-    "zhTW": "做得好"
-  },
-  {
-    "enUS": "helicopter",
-    "zhTW": "直升機"
   }
 ]
