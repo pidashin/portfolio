@@ -6,6 +6,8 @@ export const GET_WORDS = gql`
     words {
       enUS
       zhTW
+      label
+      templates
     }
   }
 `;

@@ -7,11 +7,20 @@ import GET_WORDS from '../gql/getWords';
 import { useQuery } from '@apollo/client';
 import Notice, { ColorVariant } from '../components/notice';
 
-type Word = { enUS: string; zhTW: string };
+type Word = {
+  enUS: string;
+  zhTW: string;
+  label?: string;
+  templates?: string[];
+};
 
 type Question = {
-  question: { enUS: string; zhTW: string };
-  options: { enUS: string; zhTW: string }[];
+  question: {
+    text: string; // The question string to display
+    answer: string; // The correct answer string
+  };
+  options: string[]; // Array of option strings
+  type?: 'template' | 'basic';
 };
 
 type WrongAnswer = {
@@ -101,26 +110,65 @@ const Summary = ({
   );
 };
 
-const genQuestions = (wordResource: Word[]): Question[] => {
-  // Prepare 10 random questions
-  const shuffledWords = [...wordResource]
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 10);
-  return shuffledWords.map((word) => {
-    // Generate options
-    const shuffledOptions = [...wordResource]
-      .filter((w) => w.enUS !== word.enUS)
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
-    shuffledOptions.push(word);
-    return {
-      question: word,
-      options: shuffledOptions.sort(() => 0.5 - Math.random()),
-    };
-  });
-};
+const TEMPLATE_QUESTION_RATIO = 0.4; // 30% template, 70% original
 
 const ENUS_QUESTION_WEIGHT = 0.6;
+
+const genQuestions = (wordResource: Word[]): Question[] => {
+  const shuffledWords = [...wordResource].sort(() => 0.5 - Math.random());
+  const templateCount = Math.round(10 * TEMPLATE_QUESTION_RATIO);
+  const basicCount = 10 - templateCount;
+
+  // Template-based questions (always use English for question and options)
+  const templateQuestions = shuffledWords
+    .filter((w) => w.templates && w.templates.length > 0 && w.label)
+    .slice(0, templateCount)
+    .map((word) => {
+      const template =
+        word.templates![Math.floor(Math.random() * word.templates!.length)];
+      const sameLabelOptions = wordResource
+        .filter((w) => w.label === word.label && w.enUS !== word.enUS)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+      const options = [...sameLabelOptions, word].sort(
+        () => 0.5 - Math.random(),
+      );
+      return {
+        question: { text: template, answer: word.enUS },
+        options: options.map((opt) => opt.enUS),
+        type: 'template' as const,
+      };
+    });
+
+  // Basic questions (randomly use eng or cht for question/options)
+  const basicQuestions = shuffledWords
+    .filter((w) => !templateQuestions.find((q) => q.question.answer === w.enUS))
+    .slice(0, basicCount)
+    .map((word) => {
+      const useEnUSAsQuestion = Math.random() < ENUS_QUESTION_WEIGHT;
+      const shuffledOptions = [...wordResource]
+        .filter((w) => w.enUS !== word.enUS)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+      shuffledOptions.push(word);
+
+      return {
+        question: {
+          text: useEnUSAsQuestion ? word.enUS : word.zhTW,
+          answer: useEnUSAsQuestion ? word.zhTW : word.enUS,
+        },
+        options: shuffledOptions
+          .sort(() => 0.5 - Math.random())
+          .map((opt) => (useEnUSAsQuestion ? opt.zhTW : opt.enUS)),
+        type: 'basic' as const,
+      };
+    });
+
+  // Shuffle the final questions
+  return [...templateQuestions, ...basicQuestions].sort(
+    () => 0.5 - Math.random(),
+  );
+};
 
 const ExamPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -133,10 +181,6 @@ const ExamPage = () => {
   const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
   const [showSummary, setShowSummary] = useState(false);
   const [showExitAlert, setShowExitAlert] = useState(false);
-
-  const [isReverse, setIsReverse] = useState(
-    Math.random() > ENUS_QUESTION_WEIGHT,
-  );
 
   const {
     data: data_get_words,
@@ -161,8 +205,8 @@ const ExamPage = () => {
 
     const currentQuestion = questions[currentQuestionIndex];
     const isAnswerCorrect =
-      currentQuestion.options[selectedOptionIdx].zhTW ===
-      currentQuestion.question.zhTW;
+      currentQuestion.options[selectedOptionIdx] ===
+      currentQuestion.question.answer;
     setIsCorrect(isAnswerCorrect);
 
     if (isAnswerCorrect) {
@@ -171,8 +215,8 @@ const ExamPage = () => {
       setWrongAnswers([
         ...wrongAnswers,
         {
-          word: currentQuestion.question.enUS,
-          correct: currentQuestion.question.zhTW,
+          word: currentQuestion.question.text,
+          correct: currentQuestion.question.answer,
         },
       ]);
     }
@@ -183,7 +227,6 @@ const ExamPage = () => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedOptionIdx(null);
       setIsCorrect(null);
-      setIsReverse(Math.random() > ENUS_QUESTION_WEIGHT);
     } else {
       setShowSummary(true);
     }
@@ -209,7 +252,6 @@ const ExamPage = () => {
     setWrongAnswers([]);
     setScore(0);
     setQuestions(genQuestions(data_get_words.words));
-    setIsReverse(Math.random() > ENUS_QUESTION_WEIGHT);
   };
 
   if (loading) {
@@ -260,14 +302,14 @@ const ExamPage = () => {
       <h1 className="text-2xl font-bold mb-6">
         Question {currentQuestionIndex + 1}
       </h1>
-      <p className="mb-4 text-3xl font-semibold capitalize">
-        {isReverse
-          ? currentQuestion?.question.zhTW
-          : currentQuestion?.question.enUS}
+      <p
+        className={`mb-4 text-3xl font-semibold ${currentQuestion.type === 'basic' ? 'capitalize' : ''}`}
+      >
+        {currentQuestion?.question.text}
       </p>
       <div className="mb-4">
         {currentQuestion?.options.map((option, index) => {
-          const isAnswerCorrect = option.zhTW === currentQuestion.question.zhTW;
+          const isAnswerCorrect = option === currentQuestion.question.answer;
 
           let btnClass =
             'block w-full p-2 mb-2 text-left border rounded-md transition-all duration-200 text-2xl';
@@ -288,7 +330,7 @@ const ExamPage = () => {
               className={btnClass}
               onClick={() => handleOptionSelect(index)}
             >
-              {isReverse ? option.enUS : option.zhTW}
+              {option}
             </button>
           );
         })}

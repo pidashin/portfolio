@@ -9,6 +9,8 @@ import { NextRequest } from 'next/server';
 interface Word {
   enUS: string;
   zhTW: string;
+  label?: string;
+  templates?: string[];
 }
 
 interface WordInput {
@@ -87,6 +89,8 @@ const typeDefs = gql`
   type Word {
     enUS: String!
     zhTW: String!
+    label: String
+    templates: [String!]
   }
 
   input WordInput {
