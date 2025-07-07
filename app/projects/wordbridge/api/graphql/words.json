@@ -170,161 +170,356 @@
       "Her dress is a ____ color."
     ]
   },
-  {
+{
     "enUS": "sleep",
-    "zhTW": "睡覺"
+    "zhTW": "睡覺",
+    "label": "verb",
+    "templates": [
+      "I ____ in my bed every night.",
+      "You need to ____ early for school."
+    ]
   },
   {
     "enUS": "night",
-    "zhTW": "夜晚"
+    "zhTW": "夜晚",
+    "label": "time",
+    "templates": [
+      "The stars come out at ____.",
+      "We read stories at ____."
+    ]
   },
   {
     "enUS": "grandma",
-    "zhTW": "奶奶"
+    "zhTW": "奶奶",
+    "label": "family",
+    "templates": [
+      "My ____ tells me funny stories.",
+      "I visit my ____ on weekends."
+    ]
   },
   {
     "enUS": "bake",
-    "zhTW": "烘焙"
+    "zhTW": "烘焙",
+    "label": "verb",
+    "templates": [
+      "We ____ cookies in the kitchen.",
+      "She likes to ____ cakes for birthdays."
+    ]
   },
   {
     "enUS": "cake",
-    "zhTW": "蛋糕"
+    "zhTW": "蛋糕",
+    "label": "food",
+    "templates": [
+      "I eat ____ on my birthday.",
+      "Chocolate ____ is my favorite."
+    ]
   },
   {
     "enUS": "lake",
-    "zhTW": "湖泊"
+    "zhTW": "湖泊",
+    "label": "place",
+    "templates": [
+      "We swim in the ____ during summer.",
+      "The ____ is surrounded by trees."
+    ]
   },
   {
     "enUS": "queen",
-    "zhTW": "皇后"
+    "zhTW": "皇后",
+    "label": "person",
+    "templates": [
+      "The ____ wears a shiny crown.",
+      "The ____ lives in a big castle."
+    ]
   },
   {
     "enUS": "king",
-    "zhTW": "國王"
+    "zhTW": "國王",
+    "label": "person",
+    "templates": [
+      "The ____ rules the kingdom.",
+      "The ____ sits on a golden throne."
+    ]
   },
   {
     "enUS": "dance",
-    "zhTW": "跳舞"
+    "zhTW": "跳舞",
+    "label": "verb",
+    "templates": [
+      "We ____ at the school party.",
+      "She likes to ____ to music."
+    ]
   },
   {
     "enUS": "sing",
-    "zhTW": "唱歌"
+    "zhTW": "唱歌",
+    "label": "verb",
+    "templates": [
+      "I ____ my favorite song.",
+      "Birds ____ in the morning."
+    ]
   },
   {
     "enUS": "song",
-    "zhTW": "歌曲"
+    "zhTW": "歌曲",
+    "label": "noun",
+    "templates": [
+      "This ____ is very catchy.",
+      "We learn a new ____ in music class."
+    ]
   },
   {
     "enUS": "swim",
-    "zhTW": "游泳"
+    "zhTW": "游泳",
+    "label": "verb",
+    "templates": [
+      "I ____ in the pool.",
+      "Fish ____ in the water."
+    ]
   },
   {
     "enUS": "train",
-    "zhTW": "火車"
+    "zhTW": "火車",
+    "label": "transport",
+    "templates": [
+      "The ____ arrives at the station.",
+      "We travel by ____ to the city."
+    ]
   },
   {
     "enUS": "hungry",
-    "zhTW": "餓"
+    "zhTW": "餓",
+    "label": "adjective",
+    "templates": [
+      "I feel ____ before lunch.",
+      "He is ____ after playing soccer."
+    ]
   },
   {
     "enUS": "feel",
-    "zhTW": "感覺"
+    "zhTW": "感覺",
+    "label": "verb",
+    "templates": [
+      "How do you ____ today?",
+      "I ____ happy when I play with friends."
+    ]
   },
   {
     "enUS": "roller-skate",
-    "zhTW": "溜冰"
+    "zhTW": "溜冰",
+    "label": "verb",
+    "templates": [
+      "I ____ at the park with friends.",
+      "She learned to ____ last year."
+    ]
   },
   {
     "enUS": "fast",
-    "zhTW": "快"
+    "zhTW": "快",
+    "label": "adjective",
+    "templates": [
+      "Cheetahs are very ____.",
+      "He runs ____ in the race."
+    ]
   },
   {
     "enUS": "faster",
-    "zhTW": "更快"
+    "zhTW": "更快",
+    "label": "adjective",
+    "templates": [
+      "She can run ____ than me.",
+      "The car goes ____ on the highway."
+    ]
   },
   {
     "enUS": "better",
-    "zhTW": "更好"
+    "zhTW": "更好",
+    "label": "adjective",
+    "templates": [
+      "Practice makes you ____.",
+      "He did ____ on the test this time."
+    ]
   },
   {
     "enUS": "very",
-    "zhTW": "非常"
+    "zhTW": "非常",
+    "label": "adverb",
+    "templates": [
+      "The soup is ____ hot.",
+      "She is ____ good at drawing."
+    ]
   },
   {
     "enUS": "where",
-    "zhTW": "哪裡"
+    "zhTW": "哪裡",
+    "label": "question",
+    "templates": [
+      "____ is my backpack?",
+      "____ do you live?"
+    ]
   },
   {
     "enUS": "under",
-    "zhTW": "下面"
+    "zhTW": "下面",
+    "label": "preposition",
+    "templates": [
+      "The cat is ____ the table.",
+      "My shoes are ____ the bed."
+    ]
   },
   {
     "enUS": "stair",
-    "zhTW": "樓梯"
+    "zhTW": "樓梯",
+    "label": "object",
+    "templates": [
+      "We walk up the ____ to the second floor.",
+      "Be careful on the ____."
+    ]
   },
   {
     "enUS": "kiwi",
-    "zhTW": "奇異果"
+    "zhTW": "奇異果",
+    "label": "food",
+    "templates": [
+      "I eat a ____ for breakfast.",
+      "The ____ is green inside."
+    ]
   },
   {
     "enUS": "bathroom",
-    "zhTW": "浴室"
+    "zhTW": "浴室",
+    "label": "place",
+    "templates": [
+      "I brush my teeth in the ____.",
+      "The ____ is next to my bedroom."
+    ]
   },
   {
     "enUS": "bath",
-    "zhTW": "洗澡"
+    "zhTW": "洗澡",
+    "label": "verb",
+    "templates": [
+      "I ____ every night.",
+      "He takes a ____ after playing outside."
+    ]
   },
   {
     "enUS": "room",
-    "zhTW": "房間"
+    "zhTW": "房間",
+    "label": "place",
+    "templates": [
+      "My ____ is tidy and clean.",
+      "I read books in my ____."
+    ]
   },
   {
     "enUS": "box",
-    "zhTW": "盒子"
+    "zhTW": "盒子",
+    "label": "object",
+    "templates": [
+      "The ____ is full of toys.",
+      "Put your shoes in the ____."
+    ]
   },
   {
     "enUS": "furry",
-    "zhTW": "毛茸茸"
+    "zhTW": "毛茸茸",
+    "label": "adjective",
+    "templates": [
+      "The puppy is ____ and soft.",
+      "I have a ____ blanket."
+    ]
   },
   {
     "enUS": "lick",
-    "zhTW": "舔"
+    "zhTW": "舔",
+    "label": "verb",
+    "templates": [
+      "Dogs ____ their paws.",
+      "I ____ my ice cream."
+    ]
   },
   {
     "enUS": "chase",
-    "zhTW": "追逐"
+    "zhTW": "追逐",
+    "label": "verb",
+    "templates": [
+      "The dog likes to ____ the ball.",
+      "We ____ each other in the playground."
+    ]
   },
   {
     "enUS": "drink",
-    "zhTW": "喝"
+    "zhTW": "喝",
+    "label": "verb",
+    "templates": [
+      "I ____ water after running.",
+      "She likes to ____ juice."
+    ]
   },
   {
     "enUS": "juice",
-    "zhTW": "果汁"
+    "zhTW": "果汁",
+    "label": "food",
+    "templates": [
+      "I have orange ____ for breakfast.",
+      "He spills his ____ on the table."
+    ]
   },
   {
     "enUS": "sharpen",
-    "zhTW": "削尖"
+    "zhTW": "削尖",
+    "label": "verb",
+    "templates": [
+      "I ____ my pencil before class.",
+      "She needs to ____ her colored pencils."
+    ]
   },
   {
     "enUS": "hate",
-    "zhTW": "討厭"
+    "zhTW": "討厭",
+    "label": "verb",
+    "templates": [
+      "I ____ getting up early.",
+      "He ____s broccoli."
+    ]
   },
   {
     "enUS": "love",
-    "zhTW": "愛"
+    "zhTW": "愛",
+    "label": "verb",
+    "templates": [
+      "I ____ my family.",
+      "She ____s to read books."
+    ]
   },
   {
     "enUS": "rain",
-    "zhTW": "雨"
+    "zhTW": "雨",
+    "label": "weather",
+    "templates": [
+      "The ____ is falling outside.",
+      "We need an umbrella when it ____s."
+    ]
   },
   {
     "enUS": "mice",
-    "zhTW": "老鼠"
+    "zhTW": "老鼠",
+    "label": "animal",
+    "templates": [
+      "____ like to eat cheese.",
+      "There are ____ in the field."
+    ]
   },
   {
     "enUS": "color",
-    "zhTW": "顏色"
+    "zhTW": "顏色",
+    "label": "noun",
+    "templates": [
+      "What ____ is your shirt?",
+      "Blue is my favorite ____."
+    ]
   },
   {
     "enUS": "orange",
