@@ -1114,5 +1114,321 @@
   {
     "enUS": "shell",
     "zhTW": "外殼"
+  },
+  {
+    "enUS": "hill",
+    "zhTW": "山丘"
+  },
+  {
+    "enUS": "station",
+    "zhTW": "車站"
+  },
+  {
+    "enUS": "tunnel",
+    "zhTW": "隧道"
+  },
+  {
+    "enUS": "singal",
+    "zhTW": "訊號；紅綠燈"
+  },
+  {
+    "enUS": "plantation",
+    "zhTW": "農園"
+  },
+  {
+    "enUS": "town",
+    "zhTW": "小鎮"
+  },
+  {
+    "enUS": "playground",
+    "zhTW": "遊樂場"
+  },
+  {
+    "enUS": "steam",
+    "zhTW": "蒸氣"
+  },
+  {
+    "enUS": "another",
+    "zhTW": "另一個"
+  },
+  {
+    "enUS": "journey",
+    "zhTW": "旅程"
+  },
+  {
+    "enUS": "ocean",
+    "zhTW": "海洋"
+  },
+  {
+    "enUS": "eel",
+    "zhTW": "鰻魚"
+  },
+  {
+    "enUS": "octopus",
+    "zhTW": "章魚"
+  },
+  {
+    "enUS": "rock",
+    "zhTW": "岩石"
+  },
+  {
+    "enUS": "seaweed",
+    "zhTW": "海藻"
+  },
+  {
+    "enUS": "coral",
+    "zhTW": "珊瑚"
+  },
+  {
+    "enUS": "lay",
+    "zhTW": "下蛋"
+  },
+  {
+    "enUS": "careful",
+    "zhTW": "小心的"
+  },
+  {
+    "enUS": "feed",
+    "zhTW": "餵食"
+  },
+  {
+    "enUS": "female",
+    "zhTW": "女性"
+  },
+  {
+    "enUS": "male",
+    "zhTW": "男性"
+  },
+  {
+    "enUS": "born",
+    "zhTW": "出生"
+  },
+  {
+    "enUS": "harm",
+    "zhTW": "傷害"
+  },
+  {
+    "enUS": "witch",
+    "zhTW": "女巫"
+  },
+  {
+    "enUS": "dinosaur",
+    "zhTW": "恐龍"
+  },
+  {
+    "enUS": "crack",
+    "zhTW": "裂縫"
+  },
+  {
+    "enUS": "reply",
+    "zhTW": "回覆"
+  },
+  {
+    "enUS": "hippopotamus",
+    "zhTW": "河馬"
+  },
+  {
+    "enUS": "children",
+    "zhTW": "小孩"
+  },
+  {
+    "enUS": "wonderful",
+    "zhTW": "美好的"
+  },
+  {
+    "enUS": "habit",
+    "zhTW": "習慣"
+  },
+  {
+    "enUS": "fact",
+    "zhTW": "事實"
+  },
+  {
+    "enUS": "shopping",
+    "zhTW": "購物"
+  },
+  {
+    "enUS": "milk shake",
+    "zhTW": "奶昔"
+  },
+  {
+    "enUS": "pie",
+    "zhTW": "派"
+  },
+  {
+    "enUS": "bakery",
+    "zhTW": "麵包店"
+  },
+  {
+    "enUS": "fresh",
+    "zhTW": "新鮮的"
+  },
+  {
+    "enUS": "dairy",
+    "zhTW": "乳製品"
+  },
+  {
+    "enUS": "sleepy",
+    "zhTW": "想睡的"
+  },
+  {
+    "enUS": "busy",
+    "zhTW": "忙碌的"
+  },
+  {
+    "enUS": "giant",
+    "zhTW": "巨人；巨大的"
+  },
+  {
+    "enUS": "o'clock",
+    "zhTW": "整點"
+  },
+  {
+    "enUS": "brush teeth",
+    "zhTW": "刷牙"
+  },
+  {
+    "enUS": "get dressed",
+    "zhTW": "穿衣服"
+  },
+  {
+    "enUS": "house work",
+    "zhTW": "家事"
+  },
+  {
+    "enUS": "yell",
+    "zhTW": "大叫"
+  },
+  {
+    "enUS": "tennis racket",
+    "zhTW": "網球拍"
+  },
+  {
+    "enUS": "naughty",
+    "zhTW": "頑皮的"
+  },
+  {
+    "enUS": "guess",
+    "zhTW": "猜"
+  },
+  {
+    "enUS": "equipment",
+    "zhTW": "設備"
+  },
+  {
+    "enUS": "stay",
+    "zhTW": "停留"
+  },
+  {
+    "enUS": "soft",
+    "zhTW": "柔軟的"
+  },
+  {
+    "enUS": "alien",
+    "zhTW": "外星人"
+  },
+  {
+    "enUS": "stuck",
+    "zhTW": "卡住的"
+  },
+  {
+    "enUS": "balloon",
+    "zhTW": "氣球"
+  },
+  {
+    "enUS": "horn",
+    "zhTW": "喇叭；角"
+  },
+  {
+    "enUS": "bounce",
+    "zhTW": "彈跳"
+  },
+  {
+    "enUS": "wheel",
+    "zhTW": "輪子"
+  },
+  {
+    "enUS": "board game",
+    "zhTW": "桌上遊戲"
+  },
+  {
+    "enUS": "move",
+    "zhTW": "移動"
+  },
+  {
+    "enUS": "double",
+    "zhTW": "兩倍"
+  },
+  {
+    "enUS": "heavy",
+    "zhTW": "重的"
+  },
+  {
+    "enUS": "radio",
+    "zhTW": "收音機"
+  },
+  {
+    "enUS": "straw",
+    "zhTW": "吸管"
+  },
+  {
+    "enUS": "complete",
+    "zhTW": "完成"
+  },
+  {
+    "enUS": "ugly",
+    "zhTW": "醜陋的"
+  },
+  {
+    "enUS": "keyboard",
+    "zhTW": "鍵盤"
+  },
+  {
+    "enUS": "fantastic",
+    "zhTW": "太棒了"
+  },
+  {
+    "enUS": "lorry",
+    "zhTW": "卡車"
+  },
+  {
+    "enUS": "chips",
+    "zhTW": "薯條"
+  },
+  {
+    "enUS": "wow",
+    "zhTW": "哇"
+  },
+  {
+    "enUS": "try",
+    "zhTW": "嘗試"
+  },
+  {
+    "enUS": "bin",
+    "zhTW": "垃圾桶"
+  },
+  {
+    "enUS": "house",
+    "zhTW": "房子"
+  },
+  {
+    "enUS": "classmate",
+    "zhTW": "同學"
+  },
+  {
+    "enUS": "shake",
+    "zhTW": "搖動"
+  },
+  {
+    "enUS": "giraffe",
+    "zhTW": "長頸鹿"
+  },
+  {
+    "enUS": "welldone",
+    "zhTW": "做得好"
+  },
+  {
+    "enUS": "helicopter",
+    "zhTW": "直升機"
   }
 ]
