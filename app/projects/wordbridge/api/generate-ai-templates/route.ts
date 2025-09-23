@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import { InferenceClient } from '@huggingface/inference';
+import { aiTemplateService } from '../../services/aiTemplateService';
 
 // Types
 interface Word {
@@ -66,67 +67,16 @@ async function saveAITemplates(templates: AITemplate[]): Promise<void> {
   console.log(`✅ Saved ${templates.length} AI templates to words_ai.json`);
 
   // Clear all caches to force refresh
-  clearGraphQLCache();
-  await clearAITemplateServiceCache();
-  clearAITemplatesCache();
-}
-
-// Clear GraphQL cache to force refresh
-function clearGraphQLCache() {
-  try {
-    // This will force the GraphQL resolver to re-read the AI templates file
-    // The cache is cleared by deleting the module cache entry
-    const graphqlPath = path.join(
-      process.cwd(),
-      'app',
-      'projects',
-      'wordbridge',
-      'api',
-      'graphql',
-      'route.ts',
-    );
-
-    // Clear the module cache to force re-evaluation
-    delete require.cache[require.resolve(graphqlPath)];
-    console.log('🔄 Cleared GraphQL cache to refresh AI template status');
-  } catch (error) {
-    console.error('❌ Failed to clear GraphQL cache:', error);
-  }
+  clearAITemplateServiceCache();
 }
 
 // Clear AI template service cache
-async function clearAITemplateServiceCache() {
+function clearAITemplateServiceCache() {
   try {
-    // Import and clear the AI template service cache
-    const { aiTemplateService } = await import(
-      '../../services/aiTemplateService'
-    );
     aiTemplateService.clearCache();
     console.log('🔄 Cleared AI template service cache');
   } catch (error) {
     console.error('❌ Failed to clear AI template service cache:', error);
-  }
-}
-
-// Clear AI templates cache in GraphQL
-function clearAITemplatesCache() {
-  try {
-    // Clear the AI templates cache by deleting the module cache entry
-    const graphqlPath = path.join(
-      process.cwd(),
-      'app',
-      'projects',
-      'wordbridge',
-      'api',
-      'graphql',
-      'route.ts',
-    );
-
-    // Clear the module cache to force re-evaluation
-    delete require.cache[require.resolve(graphqlPath)];
-    console.log('🔄 Cleared AI templates cache in GraphQL');
-  } catch (error) {
-    console.error('❌ Failed to clear AI templates cache:', error);
   }
 }
 
