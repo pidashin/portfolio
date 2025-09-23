@@ -57,7 +57,7 @@ function loadWords(): Word[] {
 }
 
 // Save AI templates to JSON file
-function saveAITemplates(templates: AITemplate[]): void {
+async function saveAITemplates(templates: AITemplate[]): Promise<void> {
   const templatesPath = path.join(
     process.cwd(),
     'app/projects/wordbridge/api/graphql/words_ai.json',
@@ -67,7 +67,7 @@ function saveAITemplates(templates: AITemplate[]): void {
 
   // Clear all caches to force refresh
   clearGraphQLCache();
-  clearAITemplateServiceCache();
+  await clearAITemplateServiceCache();
   clearAITemplatesCache();
 }
 
@@ -95,10 +95,12 @@ function clearGraphQLCache() {
 }
 
 // Clear AI template service cache
-function clearAITemplateServiceCache() {
+async function clearAITemplateServiceCache() {
   try {
     // Import and clear the AI template service cache
-    const { aiTemplateService } = require('../../services/aiTemplateService');
+    const { aiTemplateService } = await import(
+      '../../services/aiTemplateService'
+    );
     aiTemplateService.clearCache();
     console.log('🔄 Cleared AI template service cache');
   } catch (error) {
@@ -224,11 +226,13 @@ async function callHuggingFaceAPI(words: Word[]): Promise<AITemplate[]> {
 
         if (Array.isArray(parsed)) {
           console.log(`✅ Successfully parsed ${parsed.length} templates`);
-          return parsed.map((item: any) => ({
-            word: item.word || '',
-            sentence: item.sentence || '',
-            options: Array.isArray(item.options) ? item.options : [],
-            answer: item.answer || item.word || '',
+          return parsed.map((item: Record<string, unknown>) => ({
+            word: String(item.word || ''),
+            sentence: String(item.sentence || ''),
+            options: Array.isArray(item.options)
+              ? item.options.map(String)
+              : [],
+            answer: String(item.answer || item.word || ''),
           }));
         }
       }
@@ -439,7 +443,7 @@ async function generateAITemplates() {
         );
 
         // Save progress after each successful batch
-        saveAITemplates(allTemplates);
+        await saveAITemplates(allTemplates);
 
         // Small delay to avoid rate limiting
         await new Promise((resolve) => setTimeout(resolve, 2000));
