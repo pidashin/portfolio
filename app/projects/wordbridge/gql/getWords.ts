@@ -8,6 +8,7 @@ export const GET_WORDS = gql`
       zhTW
       label
       templates
+      hasAITemplate
     }
   }
 `;

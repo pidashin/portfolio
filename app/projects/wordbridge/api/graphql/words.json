@@ -39,10 +39,7 @@
     "enUS": "water",
     "zhTW": "水",
     "label": "liquid",
-    "templates": [
-      "Please drink some ____.",
-      "The glass is filled with ____."
-    ]
+    "templates": ["Please drink some ____.", "The glass is filled with ____."]
   },
   {
     "enUS": "talk",
@@ -57,19 +54,13 @@
     "enUS": "hand",
     "zhTW": "手",
     "label": "body",
-    "templates": [
-      "She raises her ____ in class.",
-      "I draw with my right ____."
-    ]
+    "templates": ["She raises her ____ in class.", "I draw with my right ____."]
   },
   {
     "enUS": "finger",
     "zhTW": "手指",
     "label": "body",
-    "templates": [
-      "He points with his ____.",
-      "I hurt my ____ while playing."
-    ]
+    "templates": ["He points with his ____.", "I hurt my ____ while playing."]
   },
   {
     "enUS": "arm",
@@ -84,19 +75,13 @@
     "enUS": "mouth",
     "zhTW": "嘴巴",
     "label": "body",
-    "templates": [
-      "Open your ____ and say 'Ah'.",
-      "He puts food in his ____."
-    ]
+    "templates": ["Open your ____ and say 'Ah'.", "He puts food in his ____."]
   },
   {
     "enUS": "eat",
     "zhTW": "吃",
     "label": "verb",
-    "templates": [
-      "I ____ lunch at noon.",
-      "We ____ apples and bananas."
-    ]
+    "templates": ["I ____ lunch at noon.", "We ____ apples and bananas."]
   },
   {
     "enUS": "sweet",
@@ -120,10 +105,7 @@
     "enUS": "ear",
     "zhTW": "耳朵",
     "label": "body",
-    "templates": [
-      "She wears earrings on her ____s.",
-      "I hear with my ____."
-    ]
+    "templates": ["She wears earrings on her ____s.", "I hear with my ____."]
   },
   {
     "enUS": "school",
@@ -165,10 +147,7 @@
     "enUS": "bright",
     "zhTW": "明亮",
     "label": "adjective",
-    "templates": [
-      "The sun is very ____ today.",
-      "Her dress is a ____ color."
-    ]
+    "templates": ["The sun is very ____ today.", "Her dress is a ____ color."]
   },
   {
     "enUS": "sleep",
@@ -183,10 +162,7 @@
     "enUS": "night",
     "zhTW": "夜晚",
     "label": "time",
-    "templates": [
-      "The stars come out at ____.",
-      "We read stories at ____."
-    ]
+    "templates": ["The stars come out at ____.", "We read stories at ____."]
   },
   {
     "enUS": "grandma",
@@ -246,19 +222,13 @@
     "enUS": "dance",
     "zhTW": "跳舞",
     "label": "verb",
-    "templates": [
-      "We ____ at the school party.",
-      "She likes to ____ to music."
-    ]
+    "templates": ["We ____ at the school party.", "She likes to ____ to music."]
   },
   {
     "enUS": "sing",
     "zhTW": "唱歌",
     "label": "verb",
-    "templates": [
-      "I ____ my favorite song.",
-      "Birds ____ in the morning."
-    ]
+    "templates": ["I ____ my favorite song.", "Birds ____ in the morning."]
   },
   {
     "enUS": "song",
@@ -273,10 +243,7 @@
     "enUS": "swim",
     "zhTW": "游泳",
     "label": "verb",
-    "templates": [
-      "I ____ in the pool.",
-      "Fish ____ in the water."
-    ]
+    "templates": ["I ____ in the pool.", "Fish ____ in the water."]
   },
   {
     "enUS": "train",
@@ -318,10 +285,7 @@
     "enUS": "fast",
     "zhTW": "快",
     "label": "adjective",
-    "templates": [
-      "Cheetahs are very ____.",
-      "He runs ____ in the race."
-    ]
+    "templates": ["Cheetahs are very ____.", "He runs ____ in the race."]
   },
   {
     "enUS": "faster",
@@ -345,28 +309,19 @@
     "enUS": "very",
     "zhTW": "非常",
     "label": "adverb",
-    "templates": [
-      "The soup is ____ hot.",
-      "She is ____ good at drawing."
-    ]
+    "templates": ["The soup is ____ hot.", "She is ____ good at drawing."]
   },
   {
     "enUS": "where",
     "zhTW": "哪裡",
     "label": "question",
-    "templates": [
-      "____ is my backpack?",
-      "____ do you live?"
-    ]
+    "templates": ["____ is my backpack?", "____ do you live?"]
   },
   {
     "enUS": "under",
     "zhTW": "下面",
     "label": "preposition",
-    "templates": [
-      "The cat is ____ the table.",
-      "My shoes are ____ the bed."
-    ]
+    "templates": ["The cat is ____ the table.", "My shoes are ____ the bed."]
   },
   {
     "enUS": "stair",
@@ -381,10 +336,7 @@
     "enUS": "kiwi",
     "zhTW": "奇異果",
     "label": "food",
-    "templates": [
-      "I eat a ____ for breakfast.",
-      "The ____ is green inside."
-    ]
+    "templates": ["I eat a ____ for breakfast.", "The ____ is green inside."]
   },
   {
     "enUS": "bathroom",
@@ -408,37 +360,25 @@
     "enUS": "room",
     "zhTW": "房間",
     "label": "place",
-    "templates": [
-      "My ____ is tidy and clean.",
-      "I read books in my ____."
-    ]
+    "templates": ["My ____ is tidy and clean.", "I read books in my ____."]
   },
   {
     "enUS": "box",
     "zhTW": "盒子",
     "label": "object",
-    "templates": [
-      "The ____ is full of toys.",
-      "Put your shoes in the ____."
-    ]
+    "templates": ["The ____ is full of toys.", "Put your shoes in the ____."]
   },
   {
     "enUS": "furry",
     "zhTW": "毛茸茸",
     "label": "adjective",
-    "templates": [
-      "The puppy is ____ and soft.",
-      "I have a ____ blanket."
-    ]
+    "templates": ["The puppy is ____ and soft.", "I have a ____ blanket."]
   },
   {
     "enUS": "lick",
     "zhTW": "舔",
     "label": "verb",
-    "templates": [
-      "Dogs ____ their paws.",
-      "I ____ my ice cream."
-    ]
+    "templates": ["Dogs ____ their paws.", "I ____ my ice cream."]
   },
   {
     "enUS": "chase",
@@ -453,10 +393,7 @@
     "enUS": "drink",
     "zhTW": "喝",
     "label": "verb",
-    "templates": [
-      "I ____ water after running.",
-      "She likes to ____ juice."
-    ]
+    "templates": ["I ____ water after running.", "She likes to ____ juice."]
   },
   {
     "enUS": "juice",
@@ -480,19 +417,13 @@
     "enUS": "hate",
     "zhTW": "討厭",
     "label": "verb",
-    "templates": [
-      "I ____ getting up early.",
-      "He ____s broccoli."
-    ]
+    "templates": ["I ____ getting up early.", "He ____s broccoli."]
   },
   {
     "enUS": "love",
     "zhTW": "愛",
     "label": "verb",
-    "templates": [
-      "I ____ my family.",
-      "She ____s to read books."
-    ]
+    "templates": ["I ____ my family.", "She ____s to read books."]
   },
   {
     "enUS": "rain",
@@ -507,55 +438,37 @@
     "enUS": "mice",
     "zhTW": "老鼠",
     "label": "animal",
-    "templates": [
-      "____ like to eat cheese.",
-      "There are ____ in the field."
-    ]
+    "templates": ["____ like to eat cheese.", "There are ____ in the field."]
   },
   {
     "enUS": "color",
     "zhTW": "顏色",
     "label": "noun",
-    "templates": [
-      "What ____ is your shirt?",
-      "Blue is my favorite ____."
-    ]
+    "templates": ["What ____ is your shirt?", "Blue is my favorite ____."]
   },
   {
     "enUS": "orange",
     "zhTW": "橙色",
     "label": "color",
-    "templates": [
-      "I have an ____ pencil.",
-      "Carrots are ____."
-    ]
+    "templates": ["I have an ____ pencil.", "Carrots are ____."]
   },
   {
     "enUS": "kite",
     "zhTW": "風箏",
     "label": "object",
-    "templates": [
-      "I fly my ____ in the park.",
-      "The ____ is high in the sky."
-    ]
+    "templates": ["I fly my ____ in the park.", "The ____ is high in the sky."]
   },
   {
     "enUS": "sky",
     "zhTW": "天空",
     "label": "nature",
-    "templates": [
-      "The ____ is blue today.",
-      "Birds fly in the ____."
-    ]
+    "templates": ["The ____ is blue today.", "Birds fly in the ____."]
   },
   {
     "enUS": "fly",
     "zhTW": "飛",
     "label": "verb",
-    "templates": [
-      "Birds ____ in the sky.",
-      "I want to ____ a kite."
-    ]
+    "templates": ["Birds ____ in the sky.", "I want to ____ a kite."]
   },
   {
     "enUS": "cloud",
@@ -570,82 +483,55 @@
     "enUS": "white",
     "zhTW": "白色",
     "label": "color",
-    "templates": [
-      "Snow is ____.",
-      "My shirt is ____."
-    ]
+    "templates": ["Snow is ____.", "My shirt is ____."]
   },
   {
     "enUS": "bag",
     "zhTW": "袋子",
     "label": "object",
-    "templates": [
-      "I put my books in my ____.",
-      "She carries a red ____."
-    ]
+    "templates": ["I put my books in my ____.", "She carries a red ____."]
   },
   {
     "enUS": "green",
     "zhTW": "綠色",
     "label": "color",
-    "templates": [
-      "Grass is ____.",
-      "My pencil case is ____."
-    ]
+    "templates": ["Grass is ____.", "My pencil case is ____."]
   },
   {
     "enUS": "leaves",
     "zhTW": "葉子",
     "label": "nature",
-    "templates": [
-      "The ____ fall in autumn.",
-      "Trees have many ____."
-    ]
+    "templates": ["The ____ fall in autumn.", "Trees have many ____."]
   },
   {
     "enUS": "leaf",
     "zhTW": "葉片",
     "label": "nature",
-    "templates": [
-      "A ____ is on the ground.",
-      "I draw a big ____."
-    ]
+    "templates": ["A ____ is on the ground.", "I draw a big ____."]
   },
   {
     "enUS": "yellow",
     "zhTW": "黃色",
     "label": "color",
-    "templates": [
-      "Bananas are ____.",
-      "The sun looks ____."
-    ]
+    "templates": ["Bananas are ____.", "The sun looks ____."]
   },
   {
     "enUS": "black",
     "zhTW": "黑色",
     "label": "color",
-    "templates": [
-      "The cat is ____.",
-      "I have a ____ backpack."
-    ]
+    "templates": ["The cat is ____.", "I have a ____ backpack."]
   },
   {
     "enUS": "gold",
     "zhTW": "金色",
     "label": "color",
-    "templates": [
-      "The trophy is ____.",
-      "She wears a ____ crown."
-    ]
+    "templates": ["The trophy is ____.", "She wears a ____ crown."]
   },
   {
     "enUS": "silver",
     "zhTW": "銀色",
     "label": "color",
-    "templates": [
-      "The coin is ____.",
-      "My bike has ____ wheels."
-    ]
+    "templates": ["The coin is ____.", "My bike has ____ wheels."]
   },
   {
     "enUS": "paint",
@@ -660,10 +546,7 @@
     "enUS": "picture",
     "zhTW": "圖片",
     "label": "noun",
-    "templates": [
-      "I drew a ____ of my family.",
-      "This ____ is very colorful."
-    ]
+    "templates": ["I drew a ____ of my family.", "This ____ is very colorful."]
   },
   {
     "enUS": "clean",
@@ -678,46 +561,31 @@
     "enUS": "homework",
     "zhTW": "功課",
     "label": "noun",
-    "templates": [
-      "I do my ____ after school.",
-      "Math ____ is sometimes hard."
-    ]
+    "templates": ["I do my ____ after school.", "Math ____ is sometimes hard."]
   },
   {
     "enUS": "dark",
     "zhTW": "黑暗",
     "label": "adjective",
-    "templates": [
-      "It is ____ at night.",
-      "Close your eyes and it is ____."
-    ]
+    "templates": ["It is ____ at night.", "Close your eyes and it is ____."]
   },
   {
     "enUS": "grey",
     "zhTW": "灰色",
     "label": "color",
-    "templates": [
-      "The clouds are ____ today.",
-      "My cat has ____ fur."
-    ]
+    "templates": ["The clouds are ____ today.", "My cat has ____ fur."]
   },
   {
     "enUS": "dress",
     "zhTW": "洋裝",
     "label": "clothing",
-    "templates": [
-      "She wears a blue ____.",
-      "The ____ has flowers on it."
-    ]
+    "templates": ["She wears a blue ____.", "The ____ has flowers on it."]
   },
   {
     "enUS": "crown",
     "zhTW": "皇冠",
     "label": "object",
-    "templates": [
-      "The king wears a ____.",
-      "The ____ is made of gold."
-    ]
+    "templates": ["The king wears a ____.", "The ____ is made of gold."]
   },
   {
     "enUS": "wear",
@@ -732,55 +600,37 @@
     "enUS": "purple",
     "zhTW": "紫色",
     "label": "color",
-    "templates": [
-      "Grapes are ____.",
-      "She has a ____ pencil."
-    ]
+    "templates": ["Grapes are ____.", "She has a ____ pencil."]
   },
   {
     "enUS": "blue",
     "zhTW": "藍色",
     "label": "color",
-    "templates": [
-      "The sky is ____.",
-      "My bag is ____."
-    ]
+    "templates": ["The sky is ____.", "My bag is ____."]
   },
   {
     "enUS": "red",
     "zhTW": "紅色",
     "label": "color",
-    "templates": [
-      "Apples are ____.",
-      "He wears a ____ shirt."
-    ]
+    "templates": ["Apples are ____.", "He wears a ____ shirt."]
   },
   {
     "enUS": "brown",
     "zhTW": "棕色",
     "label": "color",
-    "templates": [
-      "The bear is ____.",
-      "I have ____ shoes."
-    ]
+    "templates": ["The bear is ____.", "I have ____ shoes."]
   },
   {
     "enUS": "later",
     "zhTW": "稍後",
     "label": "adverb",
-    "templates": [
-      "I will do my homework ____.",
-      "See you ____ after class."
-    ]
+    "templates": ["I will do my homework ____.", "See you ____ after class."]
   },
   {
     "enUS": "practice",
     "zhTW": "練習",
     "label": "verb",
-    "templates": [
-      "I ____ piano every day.",
-      "We ____ English at school."
-    ]
+    "templates": ["I ____ piano every day.", "We ____ English at school."]
   },
   {
     "enUS": "piano",
@@ -795,208 +645,139 @@
     "enUS": "story",
     "zhTW": "故事",
     "label": "noun",
-    "templates": [
-      "I read a ____ before bed.",
-      "Grandpa tells a funny ____."
-    ]
+    "templates": ["I read a ____ before bed.", "Grandpa tells a funny ____."]
   },
   {
     "enUS": "tell",
     "zhTW": "講述",
     "label": "verb",
-    "templates": [
-      "Please ____ me the answer.",
-      "I will ____ you a secret."
-    ]
+    "templates": ["Please ____ me the answer.", "I will ____ you a secret."]
   },
   {
     "enUS": "know",
     "zhTW": "知道",
     "label": "verb",
-    "templates": [
-      "I ____ the answer.",
-      "Do you ____ her name?"
-    ]
+    "templates": ["I ____ the answer.", "Do you ____ her name?"]
   },
   {
     "enUS": "everyday",
     "zhTW": "每天",
     "label": "adverb",
-    "templates": [
-      "I brush my teeth ____.",
-      "We go to school ____."
-    ]
+    "templates": ["I brush my teeth ____.", "We go to school ____."]
   },
   {
     "enUS": "Monday",
     "zhTW": "星期一",
     "label": "day",
-    "templates": [
-      "School starts on ____.",
-      "We have English class on ____."
-    ]
+    "templates": ["School starts on ____.", "We have English class on ____."]
   },
   {
     "enUS": "Tuesday",
     "zhTW": "星期二",
     "label": "day",
-    "templates": [
-      "I have art class on ____.",
-      "____ comes after Monday."
-    ]
+    "templates": ["I have art class on ____.", "____ comes after Monday."]
   },
   {
     "enUS": "Wednesday",
     "zhTW": "星期三",
     "label": "day",
-    "templates": [
-      "____ is the middle of the week.",
-      "We play sports on ____."
-    ]
+    "templates": ["____ is the middle of the week.", "We play sports on ____."]
   },
   {
     "enUS": "Thursday",
     "zhTW": "星期四",
     "label": "day",
-    "templates": [
-      "Music class is on ____.",
-      "____ comes before Friday."
-    ]
+    "templates": ["Music class is on ____.", "____ comes before Friday."]
   },
   {
     "enUS": "Friday",
     "zhTW": "星期五",
     "label": "day",
-    "templates": [
-      "____ is the last school day.",
-      "We have a test on ____."
-    ]
+    "templates": ["____ is the last school day.", "We have a test on ____."]
   },
   {
     "enUS": "Saturday",
     "zhTW": "星期六",
     "label": "day",
-    "templates": [
-      "There is no school on ____.",
-      "I play with friends on ____."
-    ]
+    "templates": ["There is no school on ____.", "I play with friends on ____."]
   },
   {
     "enUS": "Sunday",
     "zhTW": "星期日",
     "label": "day",
-    "templates": [
-      "____ is a day to rest.",
-      "We visit grandma on ____."
-    ]
+    "templates": ["____ is a day to rest.", "We visit grandma on ____."]
   },
   {
     "enUS": "January",
     "zhTW": "一月",
     "label": "month",
-    "templates": [
-      "____ is the first month.",
-      "My birthday is in ____."
-    ]
+    "templates": ["____ is the first month.", "My birthday is in ____."]
   },
   {
     "enUS": "February",
     "zhTW": "二月",
     "label": "month",
-    "templates": [
-      "____ is the shortest month.",
-      "Valentine’s Day is in ____."
-    ]
+    "templates": ["____ is the shortest month.", "Valentine’s Day is in ____."]
   },
   {
     "enUS": "March",
     "zhTW": "三月",
     "label": "month",
-    "templates": [
-      "Spring begins in ____.",
-      "My sister was born in ____."
-    ]
+    "templates": ["Spring begins in ____.", "My sister was born in ____."]
   },
   {
     "enUS": "April",
     "zhTW": "四月",
     "label": "month",
-    "templates": [
-      "It often rains in ____.",
-      "April Fool’s Day is in ____."
-    ]
+    "templates": ["It often rains in ____.", "April Fool’s Day is in ____."]
   },
   {
     "enUS": "May",
     "zhTW": "五月",
     "label": "month",
-    "templates": [
-      "Mother’s Day is in ____.",
-      "Flowers bloom in ____."
-    ]
+    "templates": ["Mother’s Day is in ____.", "Flowers bloom in ____."]
   },
   {
     "enUS": "June",
     "zhTW": "六月",
     "label": "month",
-    "templates": [
-      "School ends in ____.",
-      "Summer starts in ____."
-    ]
+    "templates": ["School ends in ____.", "Summer starts in ____."]
   },
   {
     "enUS": "July",
     "zhTW": "七月",
     "label": "month",
-    "templates": [
-      "We go swimming in ____.",
-      "It is hot in ____."
-    ]
+    "templates": ["We go swimming in ____.", "It is hot in ____."]
   },
   {
     "enUS": "August",
     "zhTW": "八月",
     "label": "month",
-    "templates": [
-      "My family travels in ____.",
-      "School starts after ____."
-    ]
+    "templates": ["My family travels in ____.", "School starts after ____."]
   },
   {
     "enUS": "September",
     "zhTW": "九月",
     "label": "month",
-    "templates": [
-      "School begins in ____.",
-      "Leaves fall in ____."
-    ]
+    "templates": ["School begins in ____.", "Leaves fall in ____."]
   },
   {
     "enUS": "October",
     "zhTW": "十月",
     "label": "month",
-    "templates": [
-      "Halloween is in ____.",
-      "Pumpkins are orange in ____."
-    ]
+    "templates": ["Halloween is in ____.", "Pumpkins are orange in ____."]
   },
   {
     "enUS": "November",
     "zhTW": "十一月",
     "label": "month",
-    "templates": [
-      "It gets cold in ____.",
-      "Thanksgiving is in ____."
-    ]
+    "templates": ["It gets cold in ____.", "Thanksgiving is in ____."]
   },
   {
     "enUS": "December",
     "zhTW": "十二月",
     "label": "month",
-    "templates": [
-      "Christmas is in ____.",
-      "Snow falls in ____."
-    ]
+    "templates": ["Christmas is in ____.", "Snow falls in ____."]
   },
   {
     "enUS": "video-games",
@@ -1011,73 +792,49 @@
     "enUS": "book",
     "zhTW": "書",
     "label": "noun",
-    "templates": [
-      "I read a ____ every night.",
-      "The ____ is on the table."
-    ]
+    "templates": ["I read a ____ every night.", "The ____ is on the table."]
   },
   {
     "enUS": "square",
     "zhTW": "正方形",
     "label": "shape",
-    "templates": [
-      "A box is a ____.",
-      "Draw a big ____."
-    ]
+    "templates": ["A box is a ____.", "Draw a big ____."]
   },
   {
     "enUS": "circle",
     "zhTW": "圓形",
     "label": "shape",
-    "templates": [
-      "The sun is a ____.",
-      "Draw a ____ on your paper."
-    ]
+    "templates": ["The sun is a ____.", "Draw a ____ on your paper."]
   },
   {
     "enUS": "triangle",
     "zhTW": "三角形",
     "label": "shape",
-    "templates": [
-      "A pizza slice is a ____.",
-      "Draw a ____ with three sides."
-    ]
+    "templates": ["A pizza slice is a ____.", "Draw a ____ with three sides."]
   },
   {
     "enUS": "rectangle",
     "zhTW": "長方形",
     "label": "shape",
-    "templates": [
-      "The door is a ____.",
-      "Draw a ____ next to the square."
-    ]
+    "templates": ["The door is a ____.", "Draw a ____ next to the square."]
   },
   {
     "enUS": "surprise",
     "zhTW": "驚喜",
     "label": "noun",
-    "templates": [
-      "My friends gave me a ____ party.",
-      "I love birthday ____s."
-    ]
+    "templates": ["My friends gave me a ____ party.", "I love birthday ____s."]
   },
   {
     "enUS": "neck",
     "zhTW": "脖子",
     "label": "body",
-    "templates": [
-      "Giraffes have long ____s.",
-      "I wear a scarf around my ____."
-    ]
+    "templates": ["Giraffes have long ____s.", "I wear a scarf around my ____."]
   },
   {
     "enUS": "feet",
     "zhTW": "腳",
     "label": "body",
-    "templates": [
-      "I stand on my ____.",
-      "My ____ get tired after running."
-    ]
+    "templates": ["I stand on my ____.", "My ____ get tired after running."]
   },
   {
     "enUS": "end",
@@ -1101,28 +858,19 @@
     "enUS": "boiled-egg",
     "zhTW": "水煮蛋",
     "label": "food",
-    "templates": [
-      "I eat a ____ for breakfast.",
-      "A ____ is easy to make."
-    ]
+    "templates": ["I eat a ____ for breakfast.", "A ____ is easy to make."]
   },
   {
     "enUS": "funny",
     "zhTW": "有趣",
     "label": "adjective",
-    "templates": [
-      "That joke is very ____.",
-      "My friend tells ____ stories."
-    ]
+    "templates": ["That joke is very ____.", "My friend tells ____ stories."]
   },
   {
     "enUS": "elephant",
     "zhTW": "大象",
     "label": "animal",
-    "templates": [
-      "An ____ has a long trunk.",
-      "We saw an ____ at the zoo."
-    ]
+    "templates": ["An ____ has a long trunk.", "We saw an ____ at the zoo."]
   },
   {
     "enUS": "never",
@@ -1137,10 +885,7 @@
     "enUS": "always",
     "zhTW": "總是",
     "label": "adverb",
-    "templates": [
-      "He ____ brushes his teeth.",
-      "I ____ say thank you."
-    ]
+    "templates": ["He ____ brushes his teeth.", "I ____ say thank you."]
   },
   {
     "enUS": "sometimes",
@@ -1155,19 +900,13 @@
     "enUS": "often",
     "zhTW": "經常",
     "label": "adverb",
-    "templates": [
-      "We ____ go to the park.",
-      "He ____ reads books at night."
-    ]
+    "templates": ["We ____ go to the park.", "He ____ reads books at night."]
   },
   {
     "enUS": "forget",
     "zhTW": "忘記",
     "label": "verb",
-    "templates": [
-      "Don’t ____ your lunch.",
-      "I sometimes ____ my keys."
-    ]
+    "templates": ["Don’t ____ your lunch.", "I sometimes ____ my keys."]
   },
   {
     "enUS": "remember",
@@ -1182,19 +921,13 @@
     "enUS": "circus",
     "zhTW": "馬戲團",
     "label": "place",
-    "templates": [
-      "We saw clowns at the ____.",
-      "The ____ has many animals."
-    ]
+    "templates": ["We saw clowns at the ____.", "The ____ has many animals."]
   },
   {
     "enUS": "peanut",
     "zhTW": "花生",
     "label": "food",
-    "templates": [
-      "An elephant likes to eat ____s.",
-      "I am allergic to ____s."
-    ]
+    "templates": ["An elephant likes to eat ____s.", "I am allergic to ____s."]
   },
   {
     "enUS": "bread",
@@ -1209,28 +942,19 @@
     "enUS": "mistake",
     "zhTW": "錯誤",
     "label": "noun",
-    "templates": [
-      "I made a ____ on my test.",
-      "It’s okay to make a ____."
-    ]
+    "templates": ["I made a ____ on my test.", "It’s okay to make a ____."]
   },
   {
     "enUS": "lost",
     "zhTW": "迷路",
     "label": "adjective",
-    "templates": [
-      "I got ____ in the park.",
-      "He feels ____ in a new place."
-    ]
+    "templates": ["I got ____ in the park.", "He feels ____ in a new place."]
   },
   {
     "enUS": "family",
     "zhTW": "家庭",
     "label": "noun",
-    "templates": [
-      "I love my ____ very much.",
-      "My ____ eats dinner together."
-    ]
+    "templates": ["I love my ____ very much.", "My ____ eats dinner together."]
   },
   {
     "enUS": "cage",
@@ -1254,19 +978,13 @@
     "enUS": "lift",
     "zhTW": "舉起",
     "label": "verb",
-    "templates": [
-      "Can you ____ this box?",
-      "I ____ my hand to answer."
-    ]
+    "templates": ["Can you ____ this box?", "I ____ my hand to answer."]
   },
   {
     "enUS": "wave",
     "zhTW": "揮手",
     "label": "verb",
-    "templates": [
-      "I ____ goodbye to my friend.",
-      "Please ____ your hand."
-    ]
+    "templates": ["I ____ goodbye to my friend.", "Please ____ your hand."]
   },
   {
     "enUS": "shout",
@@ -1281,10 +999,7 @@
     "enUS": "special",
     "zhTW": "特別",
     "label": "adjective",
-    "templates": [
-      "Today is a ____ day.",
-      "My mom made a ____ cake."
-    ]
+    "templates": ["Today is a ____ day.", "My mom made a ____ cake."]
   },
   {
     "enUS": "buy",
@@ -1299,28 +1014,19 @@
     "enUS": "old",
     "zhTW": "老",
     "label": "adjective",
-    "templates": [
-      "My grandpa is very ____.",
-      "This is an ____ photo."
-    ]
+    "templates": ["My grandpa is very ____.", "This is an ____ photo."]
   },
   {
     "enUS": "young",
     "zhTW": "年輕",
     "label": "adjective",
-    "templates": [
-      "My sister is very ____.",
-      "The puppy is ____ and playful."
-    ]
+    "templates": ["My sister is very ____.", "The puppy is ____ and playful."]
   },
   {
     "enUS": "new",
     "zhTW": "新",
     "label": "adjective",
-    "templates": [
-      "I have a ____ backpack.",
-      "She wears ____ shoes."
-    ]
+    "templates": ["I have a ____ backpack.", "She wears ____ shoes."]
   },
   {
     "enUS": "friend",
@@ -1335,28 +1041,19 @@
     "enUS": "safe",
     "zhTW": "安全",
     "label": "adjective",
-    "templates": [
-      "Wear a helmet to be ____.",
-      "We feel ____ at home."
-    ]
+    "templates": ["Wear a helmet to be ____.", "We feel ____ at home."]
   },
   {
     "enUS": "drive",
     "zhTW": "駕駛",
     "label": "verb",
-    "templates": [
-      "My dad can ____ a car.",
-      "She will ____ to the store."
-    ]
+    "templates": ["My dad can ____ a car.", "She will ____ to the store."]
   },
   {
     "enUS": "climb",
     "zhTW": "爬",
     "label": "verb",
-    "templates": [
-      "I ____ the tree in my yard.",
-      "Monkeys ____ very well."
-    ]
+    "templates": ["I ____ the tree in my yard.", "Monkeys ____ very well."]
   },
   {
     "enUS": "garden",
@@ -1371,28 +1068,19 @@
     "enUS": "fence",
     "zhTW": "柵欄",
     "label": "object",
-    "templates": [
-      "The dog jumps over the ____.",
-      "Paint the ____ white."
-    ]
+    "templates": ["The dog jumps over the ____.", "Paint the ____ white."]
   },
   {
     "enUS": "walk",
     "zhTW": "走路",
     "label": "verb",
-    "templates": [
-      "I ____ to school every day.",
-      "Let’s ____ in the park."
-    ]
+    "templates": ["I ____ to school every day.", "Let’s ____ in the park."]
   },
   {
     "enUS": "across",
     "zhTW": "穿越",
     "label": "preposition",
-    "templates": [
-      "We walk ____ the street.",
-      "The bridge goes ____ the river."
-    ]
+    "templates": ["We walk ____ the street.", "The bridge goes ____ the river."]
   },
   {
     "enUS": "grass",
@@ -1407,10 +1095,7 @@
     "enUS": "start",
     "zhTW": "開始",
     "label": "verb",
-    "templates": [
-      "Let’s ____ the game.",
-      "School will ____ soon."
-    ]
+    "templates": ["Let’s ____ the game.", "School will ____ soon."]
   },
   {
     "enUS": "hide",
@@ -1425,19 +1110,13 @@
     "enUS": "drain",
     "zhTW": "排水",
     "label": "noun",
-    "templates": [
-      "Water goes down the ____.",
-      "Don’t drop things in the ____."
-    ]
+    "templates": ["Water goes down the ____.", "Don’t drop things in the ____."]
   },
   {
     "enUS": "look",
     "zhTW": "看",
     "label": "verb",
-    "templates": [
-      "____ at the board, please.",
-      "I ____ for my lost toy."
-    ]
+    "templates": ["____ at the board, please.", "I ____ for my lost toy."]
   },
   {
     "enUS": "peep",
@@ -1461,64 +1140,43 @@
     "enUS": "again",
     "zhTW": "再次",
     "label": "adverb",
-    "templates": [
-      "Please read the story ____.",
-      "Let’s play the game ____."
-    ]
+    "templates": ["Please read the story ____.", "Let’s play the game ____."]
   },
   {
     "enUS": "cross",
     "zhTW": "穿越",
     "label": "verb",
-    "templates": [
-      "____ the street carefully.",
-      "We ____ the river by boat."
-    ]
+    "templates": ["____ the street carefully.", "We ____ the river by boat."]
   },
   {
     "enUS": "river",
     "zhTW": "河流",
     "label": "nature",
-    "templates": [
-      "The ____ flows to the sea.",
-      "We fish in the ____."
-    ]
+    "templates": ["The ____ flows to the sea.", "We fish in the ____."]
   },
   {
     "enUS": "crocodile",
     "zhTW": "鱷魚",
     "label": "animal",
-    "templates": [
-      "A ____ has sharp teeth.",
-      "We saw a ____ at the zoo."
-    ]
+    "templates": ["A ____ has sharp teeth.", "We saw a ____ at the zoo."]
   },
   {
     "enUS": "tasty",
     "zhTW": "美味",
     "label": "adjective",
-    "templates": [
-      "This pizza is very ____.",
-      "She makes ____ cookies."
-    ]
+    "templates": ["This pizza is very ____.", "She makes ____ cookies."]
   },
   {
     "enUS": "bridge",
     "zhTW": "橋",
     "label": "object",
-    "templates": [
-      "We walk over the ____.",
-      "The ____ crosses the river."
-    ]
+    "templates": ["We walk over the ____.", "The ____ crosses the river."]
   },
   {
     "enUS": "snap",
     "zhTW": "咬",
     "label": "verb",
-    "templates": [
-      "The crocodile can ____ its jaws.",
-      "Don’t ____ your pencil."
-    ]
+    "templates": ["The crocodile can ____ its jaws.", "Don’t ____ your pencil."]
   },
   {
     "enUS": "creep",
@@ -1542,46 +1200,31 @@
     "enUS": "crawl",
     "zhTW": "爬",
     "label": "verb",
-    "templates": [
-      "The baby can ____ on the floor.",
-      "Ants ____ in a line."
-    ]
+    "templates": ["The baby can ____ on the floor.", "Ants ____ in a line."]
   },
   {
     "enUS": "leap",
     "zhTW": "跳躍",
     "label": "verb",
-    "templates": [
-      "The frog can ____ far.",
-      "He likes to ____ over puddles."
-    ]
+    "templates": ["The frog can ____ far.", "He likes to ____ over puddles."]
   },
   {
     "enUS": "grow-up",
     "zhTW": "長大",
     "label": "verb",
-    "templates": [
-      "I want to ____ to be a doctor.",
-      "We all ____ and change."
-    ]
+    "templates": ["I want to ____ to be a doctor.", "We all ____ and change."]
   },
   {
     "enUS": "astronaut",
     "zhTW": "太空人",
     "label": "person",
-    "templates": [
-      "An ____ travels to space.",
-      "I want to be an ____ one day."
-    ]
+    "templates": ["An ____ travels to space.", "I want to be an ____ one day."]
   },
   {
     "enUS": "space",
     "zhTW": "太空",
     "label": "place",
-    "templates": [
-      "The stars are in ____.",
-      "Astronauts travel to ____."
-    ]
+    "templates": ["The stars are in ____.", "Astronauts travel to ____."]
   },
   {
     "enUS": "policeman",
@@ -1650,10 +1293,7 @@
     "enUS": "fire-fighter",
     "zhTW": "消防員",
     "label": "person",
-    "templates": [
-      "A ____ puts out fires.",
-      "The ____ drives a big red truck."
-    ]
+    "templates": ["A ____ puts out fires.", "The ____ drives a big red truck."]
   },
   {
     "enUS": "save",
@@ -1713,10 +1353,7 @@
     "enUS": "papaya",
     "zhTW": "木瓜",
     "label": "food",
-    "templates": [
-      "I eat ____ for breakfast.",
-      "The ____ is orange inside."
-    ]
+    "templates": ["I eat ____ for breakfast.", "The ____ is orange inside."]
   },
   {
     "enUS": "tummy",
@@ -1731,28 +1368,19 @@
     "enUS": "durian",
     "zhTW": "榴槤",
     "label": "food",
-    "templates": [
-      "____ has a strong smell.",
-      "Some people love to eat ____."
-    ]
+    "templates": ["____ has a strong smell.", "Some people love to eat ____."]
   },
   {
     "enUS": "stinky",
     "zhTW": "臭",
     "label": "adjective",
-    "templates": [
-      "The garbage is ____.",
-      "My shoes are ____ after running."
-    ]
+    "templates": ["The garbage is ____.", "My shoes are ____ after running."]
   },
   {
     "enUS": "blanket",
     "zhTW": "毯子",
     "label": "object",
-    "templates": [
-      "I sleep with a warm ____.",
-      "The ____ is soft and blue."
-    ]
+    "templates": ["I sleep with a warm ____.", "The ____ is soft and blue."]
   },
   {
     "enUS": "doctor",
@@ -1767,19 +1395,13 @@
     "enUS": "morning",
     "zhTW": "早晨",
     "label": "time",
-    "templates": [
-      "I eat breakfast in the ____.",
-      "The sun rises in the ____."
-    ]
+    "templates": ["I eat breakfast in the ____.", "The sun rises in the ____."]
   },
   {
     "enUS": "fall",
     "zhTW": "秋天",
     "label": "season",
-    "templates": [
-      "Leaves fall from trees in ____.",
-      "It gets cooler in ____."
-    ]
+    "templates": ["Leaves fall from trees in ____.", "It gets cooler in ____."]
   },
   {
     "enUS": "beach",
@@ -1830,10 +1452,7 @@
     "enUS": "seashell",
     "zhTW": "貝殼",
     "label": "object",
-    "templates": [
-      "I found a ____ on the beach.",
-      "The ____ is white and pink."
-    ]
+    "templates": ["I found a ____ on the beach.", "The ____ is white and pink."]
   },
   {
     "enUS": "collect",
@@ -1929,19 +1548,13 @@
     "enUS": "taste",
     "zhTW": "品嚐",
     "label": "verb",
-    "templates": [
-      "I want to ____ the soup.",
-      "She likes to ____ new foods."
-    ]
+    "templates": ["I want to ____ the soup.", "She likes to ____ new foods."]
   },
   {
     "enUS": "draw",
     "zhTW": "畫畫",
     "label": "verb",
-    "templates": [
-      "I ____ a picture of my family.",
-      "Can you ____ a cat?"
-    ]
+    "templates": ["I ____ a picture of my family.", "Can you ____ a cat?"]
   },
   {
     "enUS": "boat",
@@ -1983,28 +1596,19 @@
     "enUS": "great",
     "zhTW": "很棒",
     "label": "adjective",
-    "templates": [
-      "You did a ____ job!",
-      "That was a ____ idea."
-    ]
+    "templates": ["You did a ____ job!", "That was a ____ idea."]
   },
   {
     "enUS": "stormy",
     "zhTW": "暴風雨",
     "label": "adjective",
-    "templates": [
-      "It is ____ outside today.",
-      "We stay inside on ____ days."
-    ]
+    "templates": ["It is ____ outside today.", "We stay inside on ____ days."]
   },
   {
     "enUS": "storm",
     "zhTW": "風暴",
     "label": "noun",
-    "templates": [
-      "The ____ made loud noises.",
-      "A big ____ is coming tonight."
-    ]
+    "templates": ["The ____ made loud noises.", "A big ____ is coming tonight."]
   },
   {
     "enUS": "weather",
@@ -2037,10 +1641,7 @@
     "enUS": "lightning",
     "zhTW": "閃電",
     "label": "noun",
-    "templates": [
-      "____ lights up the sky.",
-      "We saw ____ during the storm."
-    ]
+    "templates": ["____ lights up the sky.", "We saw ____ during the storm."]
   },
   {
     "enUS": "strike",
@@ -2109,10 +1710,7 @@
     "enUS": "dragon",
     "zhTW": "龍",
     "label": "animal",
-    "templates": [
-      "The ____ dance is fun to watch.",
-      "A ____ has a long tail."
-    ]
+    "templates": ["The ____ dance is fun to watch.", "A ____ has a long tail."]
   },
   {
     "enUS": "luck",
@@ -2145,10 +1743,7 @@
     "enUS": "noodle",
     "zhTW": "麵條",
     "label": "food",
-    "templates": [
-      "I eat ____s for lunch.",
-      "She likes soup with ____s."
-    ]
+    "templates": ["I eat ____s for lunch.", "She likes soup with ____s."]
   },
   {
     "enUS": "tradition",
@@ -2199,28 +1794,19 @@
     "enUS": "winter",
     "zhTW": "冬天",
     "label": "season",
-    "templates": [
-      "It snows in ____.",
-      "We wear coats in ____."
-    ]
+    "templates": ["It snows in ____.", "We wear coats in ____."]
   },
   {
     "enUS": "summer",
     "zhTW": "夏天",
     "label": "season",
-    "templates": [
-      "We go swimming in ____.",
-      "____ is hot and sunny."
-    ]
+    "templates": ["We go swimming in ____.", "____ is hot and sunny."]
   },
   {
     "enUS": "spring",
     "zhTW": "春天",
     "label": "season",
-    "templates": [
-      "Flowers bloom in ____.",
-      "____ is my favorite season."
-    ]
+    "templates": ["Flowers bloom in ____.", "____ is my favorite season."]
   },
   {
     "enUS": "bring",
@@ -2235,10 +1821,7 @@
     "enUS": "feast",
     "zhTW": "宴會",
     "label": "noun",
-    "templates": [
-      "We have a big ____ on holidays.",
-      "A ____ has lots of food."
-    ]
+    "templates": ["We have a big ____ on holidays.", "A ____ has lots of food."]
   },
   {
     "enUS": "juggle",
@@ -2271,19 +1854,13 @@
     "enUS": "float",
     "zhTW": "漂浮",
     "label": "verb",
-    "templates": [
-      "Leaves ____ on the water.",
-      "Can you ____ in the pool?"
-    ]
+    "templates": ["Leaves ____ on the water.", "Can you ____ in the pool?"]
   },
   {
     "enUS": "strange",
     "zhTW": "奇怪",
     "label": "adjective",
-    "templates": [
-      "That animal looks ____.",
-      "I heard a ____ noise last night."
-    ]
+    "templates": ["That animal looks ____.", "I heard a ____ noise last night."]
   },
   {
     "enUS": "upside down",
@@ -2307,10 +1884,7 @@
     "enUS": "boiled egg",
     "zhTW": "水煮蛋",
     "label": "food",
-    "templates": [
-      "I eat a ____ for breakfast.",
-      "A ____ is easy to make."
-    ]
+    "templates": ["I eat a ____ for breakfast.", "A ____ is easy to make."]
   },
   {
     "enUS": "stroke",
@@ -2325,10 +1899,7 @@
     "enUS": "look for",
     "zhTW": "尋找",
     "label": "verb",
-    "templates": [
-      "I ____ my lost pencil.",
-      "Let’s ____ clues in the game."
-    ]
+    "templates": ["I ____ my lost pencil.", "Let’s ____ clues in the game."]
   },
   {
     "enUS": "grow up",
@@ -2343,10 +1914,7 @@
     "enUS": "fire fighter",
     "zhTW": "消防員",
     "label": "person",
-    "templates": [
-      "A ____ puts out fires.",
-      "The ____ drives a big red truck."
-    ]
+    "templates": ["A ____ puts out fires.", "The ____ drives a big red truck."]
   },
   {
     "enUS": "arrive",
@@ -2370,10 +1938,7 @@
     "enUS": "sea shell",
     "zhTW": "貝殼",
     "label": "object",
-    "templates": [
-      "I found a ____ on the beach.",
-      "The ____ is white and pink."
-    ]
+    "templates": ["I found a ____ on the beach.", "The ____ is white and pink."]
   },
   {
     "enUS": "greedy",
@@ -2388,10 +1953,7 @@
     "enUS": "spider",
     "zhTW": "蜘蛛",
     "label": "animal",
-    "templates": [
-      "A ____ spins a web.",
-      "We saw a big ____ in the garden."
-    ]
+    "templates": ["A ____ spins a web.", "We saw a big ____ in the garden."]
   },
   {
     "enUS": "web",
@@ -2469,46 +2031,31 @@
     "enUS": "live",
     "zhTW": "生活",
     "label": "verb",
-    "templates": [
-      "I ____ in a big city.",
-      "Fish ____ in the water."
-    ]
+    "templates": ["I ____ in a big city.", "Fish ____ in the water."]
   },
   {
     "enUS": "shirt",
     "zhTW": "襯衫",
     "label": "clothing",
-    "templates": [
-      "He wears a blue ____ to school.",
-      "My ____ has buttons."
-    ]
+    "templates": ["He wears a blue ____ to school.", "My ____ has buttons."]
   },
   {
     "enUS": "pants",
     "zhTW": "褲子",
     "label": "clothing",
-    "templates": [
-      "I wear ____ when it is cold.",
-      "His ____ are too short."
-    ]
+    "templates": ["I wear ____ when it is cold.", "His ____ are too short."]
   },
   {
     "enUS": "feather",
     "zhTW": "羽毛",
     "label": "noun",
-    "templates": [
-      "A bird has many ____s.",
-      "The ____ is soft and light."
-    ]
+    "templates": ["A bird has many ____s.", "The ____ is soft and light."]
   },
   {
     "enUS": "shell",
     "zhTW": "外殼",
     "label": "noun",
-    "templates": [
-      "A turtle has a hard ____.",
-      "I found a ____ on the beach."
-    ]
+    "templates": ["A turtle has a hard ____.", "I found a ____ on the beach."]
   },
   {
     "enUS": "hill",
@@ -2568,10 +2115,7 @@
     "enUS": "playground",
     "zhTW": "遊樂場",
     "label": "place",
-    "templates": [
-      "We play tag at the ____.",
-      "The ____ has swings and slides."
-    ]
+    "templates": ["We play tag at the ____.", "The ____ has swings and slides."]
   },
   {
     "enUS": "steam",
@@ -2586,10 +2130,7 @@
     "enUS": "another",
     "zhTW": "另一個",
     "label": "adjective",
-    "templates": [
-      "May I have ____ cookie?",
-      "Let’s play ____ game."
-    ]
+    "templates": ["May I have ____ cookie?", "Let’s play ____ game."]
   },
   {
     "enUS": "journey",
@@ -2604,10 +2145,7 @@
     "enUS": "ocean",
     "zhTW": "海洋",
     "label": "nature",
-    "templates": [
-      "The ____ is deep and wide.",
-      "Fish swim in the ____."
-    ]
+    "templates": ["The ____ is deep and wide.", "Fish swim in the ____."]
   },
   {
     "enUS": "eel",
@@ -2622,10 +2160,7 @@
     "enUS": "octopus",
     "zhTW": "章魚",
     "label": "animal",
-    "templates": [
-      "An ____ has eight arms.",
-      "The ____ hides in the rocks."
-    ]
+    "templates": ["An ____ has eight arms.", "The ____ hides in the rocks."]
   },
   {
     "enUS": "rock",
@@ -2640,10 +2175,7 @@
     "enUS": "seaweed",
     "zhTW": "海藻",
     "label": "noun",
-    "templates": [
-      "Fish swim through the ____.",
-      "We found ____ on the beach."
-    ]
+    "templates": ["Fish swim through the ____.", "We found ____ on the beach."]
   },
   {
     "enUS": "coral",
@@ -2658,10 +2190,7 @@
     "enUS": "lay",
     "zhTW": "下蛋",
     "label": "verb",
-    "templates": [
-      "Hens ____ eggs every day.",
-      "Birds ____ eggs in nests."
-    ]
+    "templates": ["Hens ____ eggs every day.", "Birds ____ eggs in nests."]
   },
   {
     "enUS": "careful",
@@ -2703,19 +2232,13 @@
     "enUS": "born",
     "zhTW": "出生",
     "label": "verb",
-    "templates": [
-      "The baby was ____ last week.",
-      "I was ____ in July."
-    ]
+    "templates": ["The baby was ____ last week.", "I was ____ in July."]
   },
   {
     "enUS": "harm",
     "zhTW": "傷害",
     "label": "verb",
-    "templates": [
-      "Don’t ____ animals.",
-      "Too much sun can ____ your skin."
-    ]
+    "templates": ["Don’t ____ animals.", "Too much sun can ____ your skin."]
   },
   {
     "enUS": "witch",
@@ -2739,10 +2262,7 @@
     "enUS": "crack",
     "zhTW": "裂縫",
     "label": "noun",
-    "templates": [
-      "There is a ____ in the wall.",
-      "The egg has a small ____."
-    ]
+    "templates": ["There is a ____ in the wall.", "The egg has a small ____."]
   },
   {
     "enUS": "reply",
@@ -2757,10 +2277,7 @@
     "enUS": "hippopotamus",
     "zhTW": "河馬",
     "label": "animal",
-    "templates": [
-      "A ____ lives in the river.",
-      "The ____ has a big mouth."
-    ]
+    "templates": ["A ____ lives in the river.", "The ____ has a big mouth."]
   },
   {
     "enUS": "children",
@@ -2775,10 +2292,7 @@
     "enUS": "wonderful",
     "zhTW": "美好的",
     "label": "adjective",
-    "templates": [
-      "We had a ____ day at the zoo.",
-      "That is a ____ idea!"
-    ]
+    "templates": ["We had a ____ day at the zoo.", "That is a ____ idea!"]
   },
   {
     "enUS": "habit",
@@ -2802,10 +2316,7 @@
     "enUS": "shopping",
     "zhTW": "購物",
     "label": "noun",
-    "templates": [
-      "We go ____ on Saturdays.",
-      "Mom likes ____ for new clothes."
-    ]
+    "templates": ["We go ____ on Saturdays.", "Mom likes ____ for new clothes."]
   },
   {
     "enUS": "milk shake",
@@ -2856,19 +2367,13 @@
     "enUS": "sleepy",
     "zhTW": "想睡的",
     "label": "adjective",
-    "templates": [
-      "I feel ____ after lunch.",
-      "The cat looks ____ on the sofa."
-    ]
+    "templates": ["I feel ____ after lunch.", "The cat looks ____ on the sofa."]
   },
   {
     "enUS": "busy",
     "zhTW": "忙碌的",
     "label": "adjective",
-    "templates": [
-      "Dad is ____ at work today.",
-      "I am ____ with my homework."
-    ]
+    "templates": ["Dad is ____ at work today.", "I am ____ with my homework."]
   },
   {
     "enUS": "giant",
@@ -2883,10 +2388,7 @@
     "enUS": "o'clock",
     "zhTW": "整點",
     "label": "time",
-    "templates": [
-      "School starts at eight ____.",
-      "It is three ____ now."
-    ]
+    "templates": ["School starts at eight ____.", "It is three ____ now."]
   },
   {
     "enUS": "brush teeth",
@@ -2901,10 +2403,7 @@
     "enUS": "get dressed",
     "zhTW": "穿衣服",
     "label": "verb",
-    "templates": [
-      "I ____ after I wake up.",
-      "She ____ before going to school."
-    ]
+    "templates": ["I ____ after I wake up.", "She ____ before going to school."]
   },
   {
     "enUS": "house work",
@@ -2937,10 +2436,7 @@
     "enUS": "naughty",
     "zhTW": "頑皮的",
     "label": "adjective",
-    "templates": [
-      "The ____ puppy chewed my shoe.",
-      "Don’t be ____ in class."
-    ]
+    "templates": ["The ____ puppy chewed my shoe.", "Don’t be ____ in class."]
   },
   {
     "enUS": "guess",
@@ -2964,19 +2460,13 @@
     "enUS": "stay",
     "zhTW": "停留",
     "label": "verb",
-    "templates": [
-      "Please ____ in your seat.",
-      "We ____ at home on rainy days."
-    ]
+    "templates": ["Please ____ in your seat.", "We ____ at home on rainy days."]
   },
   {
     "enUS": "soft",
     "zhTW": "柔軟的",
     "label": "adjective",
-    "templates": [
-      "My pillow is very ____.",
-      "The kitten’s fur feels ____."
-    ]
+    "templates": ["My pillow is very ____.", "The kitten’s fur feels ____."]
   },
   {
     "enUS": "alien",
@@ -3027,19 +2517,13 @@
     "enUS": "wheel",
     "zhTW": "輪子",
     "label": "noun",
-    "templates": [
-      "A bike has two ____s.",
-      "The car needs a new ____."
-    ]
+    "templates": ["A bike has two ____s.", "The car needs a new ____."]
   },
   {
     "enUS": "board game",
     "zhTW": "桌上遊戲",
     "label": "noun",
-    "templates": [
-      "We play a ____ after dinner.",
-      "Chess is a fun ____."
-    ]
+    "templates": ["We play a ____ after dinner.", "Chess is a fun ____."]
   },
   {
     "enUS": "move",
@@ -3090,10 +2574,7 @@
     "enUS": "complete",
     "zhTW": "完成",
     "label": "verb",
-    "templates": [
-      "Please ____ your homework.",
-      "We ____ the puzzle together."
-    ]
+    "templates": ["Please ____ your homework.", "We ____ the puzzle together."]
   },
   {
     "enUS": "ugly",
@@ -3144,19 +2625,13 @@
     "enUS": "wow",
     "zhTW": "哇",
     "label": "interjection",
-    "templates": [
-      "____! That’s amazing!",
-      "____, you finished so quickly!"
-    ]
+    "templates": ["____! That’s amazing!", "____, you finished so quickly!"]
   },
   {
     "enUS": "try",
     "zhTW": "嘗試",
     "label": "verb",
-    "templates": [
-      "Let’s ____ a new game.",
-      "I will ____ my best."
-    ]
+    "templates": ["Let’s ____ a new game.", "I will ____ my best."]
   },
   {
     "enUS": "bin",
@@ -3171,10 +2646,7 @@
     "enUS": "house",
     "zhTW": "房子",
     "label": "noun",
-    "templates": [
-      "We live in a big ____.",
-      "The ____ has a red door."
-    ]
+    "templates": ["We live in a big ____.", "The ____ has a red door."]
   },
   {
     "enUS": "classmate",
@@ -3198,19 +2670,13 @@
     "enUS": "giraffe",
     "zhTW": "長頸鹿",
     "label": "animal",
-    "templates": [
-      "A ____ has a long neck.",
-      "We saw a ____ at the zoo."
-    ]
+    "templates": ["A ____ has a long neck.", "We saw a ____ at the zoo."]
   },
   {
     "enUS": "welldone",
     "zhTW": "做得好",
     "label": "interjection",
-    "templates": [
-      "____! You finished your homework.",
-      "____ on your drawing!"
-    ]
+    "templates": ["____! You finished your homework.", "____ on your drawing!"]
   },
   {
     "enUS": "helicopter",

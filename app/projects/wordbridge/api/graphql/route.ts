@@ -11,6 +11,15 @@ interface Word {
   zhTW: string;
   label?: string;
   templates?: string[];
+  hasAITemplate?: boolean;
+}
+
+// Define the shape of an AI template
+interface AITemplate {
+  word: string;
+  sentence: string;
+  options: string[];
+  answer: string;
 }
 
 interface WordInput {
@@ -31,7 +40,46 @@ const wordsFilePath =
     'words.json',
   );
 
+// Path to the words_ai.json file
+const wordsAIFilePath = path.join(
+  process.cwd(),
+  'app',
+  'projects',
+  'wordbridge',
+  'api',
+  'graphql',
+  'words_ai.json',
+);
+
 let wordsCache: Word[] | null = null;
+let aiTemplatesCache: AITemplate[] | null = null;
+
+// Load AI templates from file
+const loadAITemplates = (): AITemplate[] => {
+  if (aiTemplatesCache) return aiTemplatesCache;
+
+  try {
+    if (fs.existsSync(wordsAIFilePath)) {
+      const fileData = fs.readFileSync(wordsAIFilePath, 'utf-8');
+      aiTemplatesCache = JSON.parse(fileData);
+    } else {
+      aiTemplatesCache = [];
+    }
+  } catch (error) {
+    console.error('Error loading AI templates:', error);
+    aiTemplatesCache = [];
+  }
+
+  return aiTemplatesCache || [];
+};
+
+// Check if a word has AI template
+const checkAITemplateStatus = (word: string): boolean => {
+  const templates = loadAITemplates();
+  return templates.some(
+    (template) => template.word.toLowerCase() === word.toLowerCase(),
+  );
+};
 
 // Read the words from the JSON file
 const getWords = (): Word[] | null => {
@@ -91,6 +139,14 @@ const typeDefs = gql`
     zhTW: String!
     label: String
     templates: [String!]
+    hasAITemplate: Boolean
+  }
+
+  type AITemplate {
+    word: String!
+    sentence: String!
+    options: [String!]!
+    answer: String!
   }
 
   input WordInput {
@@ -100,6 +156,8 @@ const typeDefs = gql`
 
   type Query {
     words: [Word!]!
+    wordsWithAITemplates: [Word!]!
+    aiTemplates: [AITemplate!]!
   }
 
   type Mutation {
@@ -121,7 +179,31 @@ const resolvers = {
       if (!words) {
         return []; // Return empty array if words data is not found
       }
-      return words;
+
+      // Add AI template status to each word
+      return words.map((word) => ({
+        ...word,
+        hasAITemplate: checkAITemplateStatus(word.enUS),
+      }));
+    },
+
+    wordsWithAITemplates: (): Word[] | null => {
+      const words = getWords();
+      if (!words) {
+        return []; // Return empty array if words data is not found
+      }
+
+      // Filter words that have AI templates and add AI template data
+      return words
+        .filter((word) => checkAITemplateStatus(word.enUS))
+        .map((word) => ({
+          ...word,
+          hasAITemplate: true,
+        }));
+    },
+
+    aiTemplates: (): AITemplate[] => {
+      return loadAITemplates();
     },
   },
   Mutation: {

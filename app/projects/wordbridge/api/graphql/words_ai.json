@@ -1,0 +1,2150 @@
+[
+  {
+    "word": "share",
+    "sentence": "I will ____ my toys with my little sister.",
+    "options": ["share", "eat", "run", "sleep"],
+    "answer": "share"
+  },
+  {
+    "word": "candy",
+    "sentence": "I got a sweet ____ from the Halloween bucket.",
+    "options": ["candy", "ball", "book", "shirt"],
+    "answer": "candy"
+  },
+  {
+    "word": "ladder",
+    "sentence": "Dad used a ____ to reach the high shelf.",
+    "options": ["ladder", "table", "chair", "box"],
+    "answer": "ladder"
+  },
+  {
+    "word": "sand",
+    "sentence": "We built a castle at the beach with wet ____.",
+    "options": ["sand", "water", "rock", "grass"],
+    "answer": "sand"
+  },
+  {
+    "word": "water",
+    "sentence": "Plants need ____ to grow tall and strong.",
+    "options": ["water", "milk", "juice", "soup"],
+    "answer": "water"
+  },
+  {
+    "word": "talk",
+    "sentence": "Please don't shout—let's ____ quietly in the library.",
+    "options": ["talk", "jump", "sing", "dance"],
+    "answer": "talk"
+  },
+  {
+    "word": "hand",
+    "sentence": "I use my ____ to clap when I'm happy.",
+    "options": ["hand", "foot", "head", "ear"],
+    "answer": "hand"
+  },
+  {
+    "word": "finger",
+    "sentence": "I counted to five using all my ____.",
+    "options": ["finger", "toe", "nose", "eye"],
+    "answer": "finger"
+  },
+  {
+    "word": "arm",
+    "sentence": "I swung my ____ to throw the ball far.",
+    "options": ["arm", "leg", "back", "neck"],
+    "answer": "arm"
+  },
+  {
+    "word": "mouth",
+    "sentence": "I eat my sandwich with my ____.",
+    "options": ["mouth", "ear", "eye", "nose"],
+    "answer": "mouth"
+  },
+  {
+    "word": "eat",
+    "sentence": "I like to ____ apples because they are yummy.",
+    "options": ["eat", "run", "jump", "sing"],
+    "answer": "eat"
+  },
+  {
+    "word": "sweet",
+    "sentence": "Candy is very ____ and makes me smile.",
+    "options": ["sweet", "cold", "loud", "big"],
+    "answer": "sweet"
+  },
+  {
+    "word": "smell",
+    "sentence": "I can ____ the cookies baking in the oven!",
+    "options": ["smell", "see", "touch", "hear"],
+    "answer": "smell"
+  },
+  {
+    "word": "ear",
+    "sentence": "I use my ____ to hear my mom singing.",
+    "options": ["ear", "eye", "nose", "hand"],
+    "answer": "ear"
+  },
+  {
+    "word": "school",
+    "sentence": "I go to ____ every Monday to learn new things.",
+    "options": ["school", "park", "zoo", "beach"],
+    "answer": "school"
+  },
+  {
+    "word": "bell",
+    "sentence": "The ____ rings at 3 p.m. and we run out to play!",
+    "options": ["bell", "book", "ball", "chair"],
+    "answer": "bell"
+  },
+  {
+    "word": "high",
+    "sentence": "I climbed the slide and felt so ____ in the air!",
+    "options": ["high", "low", "slow", "fast"],
+    "answer": "high"
+  },
+  {
+    "word": "reach",
+    "sentence": "I tried to ____ the toy on the top shelf.",
+    "options": ["reach", "run", "jump", "dance"],
+    "answer": "reach"
+  },
+  {
+    "word": "bright",
+    "sentence": "The sun is very ____ and makes me wear sunglasses.",
+    "options": ["bright", "dark", "quiet", "soft"],
+    "answer": "bright"
+  },
+  {
+    "word": "sleep",
+    "sentence": "At night, I lie down and close my eyes to ____.",
+    "options": ["sleep", "eat", "play", "sing"],
+    "answer": "sleep"
+  },
+  {
+    "word": "night",
+    "sentence": "I sleep during the ______ when the stars come out.",
+    "options": ["night", "day", "morning", "noon"],
+    "answer": "night"
+  },
+  {
+    "word": "grandma",
+    "sentence": "My ______ makes the best cookies and hugs me tight.",
+    "options": ["grandma", "teacher", "dog", "friend"],
+    "answer": "grandma"
+  },
+  {
+    "word": "bake",
+    "sentence": "We will ______ a chocolate cake for Dad's birthday.",
+    "options": ["bake", "run", "sleep", "swim"],
+    "answer": "bake"
+  },
+  {
+    "word": "cake",
+    "sentence": "We ate a big, yummy ______ with candles on top.",
+    "options": ["cake", "apple", "bread", "soup"],
+    "answer": "cake"
+  },
+  {
+    "word": "lake",
+    "sentence": "We saw ducks swimming on the quiet ______ near the woods.",
+    "options": ["lake", "mountain", "house", "school"],
+    "answer": "lake"
+  },
+  {
+    "word": "queen",
+    "sentence": "The ______ wore a shiny crown and sat on a big golden throne.",
+    "options": ["queen", "king", "princess", "dog"],
+    "answer": "queen"
+  },
+  {
+    "word": "king",
+    "sentence": "The ______ rode a horse and ruled the whole kingdom.",
+    "options": ["king", "queen", "boy", "cat"],
+    "answer": "king"
+  },
+  {
+    "word": "dance",
+    "sentence": "At the party, we all stand up and ______ to the music.",
+    "options": ["dance", "eat", "sleep", "read"],
+    "answer": "dance"
+  },
+  {
+    "word": "sing",
+    "sentence": "Mommy likes to ______ in the shower while she washes her hair.",
+    "options": ["sing", "run", "jump", "draw"],
+    "answer": "sing"
+  },
+  {
+    "word": "song",
+    "sentence": "We learned a fun ______ about happy dinosaurs at school.",
+    "options": ["song", "book", "toy", "game"],
+    "answer": "song"
+  },
+  {
+    "word": "swim",
+    "sentence": "I love to ____ in the pool on hot days.",
+    "options": ["swim", "run", "eat", "sleep"],
+    "answer": "swim"
+  },
+  {
+    "word": "train",
+    "sentence": "We took the ____ to visit Grandma's house.",
+    "options": ["train", "car", "dog", "ball"],
+    "answer": "train"
+  },
+  {
+    "word": "hungry",
+    "sentence": "My tummy growls because I am ____.",
+    "options": ["hungry", "happy", "tired", "wet"],
+    "answer": "hungry"
+  },
+  {
+    "word": "feel",
+    "sentence": "I ____ happy when I play with my friends.",
+    "options": ["feel", "see", "hear", "jump"],
+    "answer": "feel"
+  },
+  {
+    "word": "roller-skate",
+    "sentence": "I love to ____ on the sidewalk with my big wheels.",
+    "options": ["roller-skate", "ride", "jump", "sing"],
+    "answer": "roller-skate"
+  },
+  {
+    "word": "fast",
+    "sentence": "The rabbit runs very ____ to escape the fox.",
+    "options": ["fast", "slow", "loud", "soft"],
+    "answer": "fast"
+  },
+  {
+    "word": "faster",
+    "sentence": "I ran ____ than my brother in the race!",
+    "options": ["faster", "slower", "higher", "quieter"],
+    "answer": "faster"
+  },
+  {
+    "word": "better",
+    "sentence": "I practice every day so I can play piano ____.",
+    "options": ["better", "louder", "bigger", "funny"],
+    "answer": "better"
+  },
+  {
+    "word": "very",
+    "sentence": "The ice cream is ____ cold and delicious!",
+    "options": ["very", "many", "much", "two"],
+    "answer": "very"
+  },
+  {
+    "word": "where",
+    "sentence": "____ is my red hat? I can't find it!",
+    "options": ["where", "what", "who", "when"],
+    "answer": "where"
+  },
+  {
+    "word": "under",
+    "sentence": "The cat is hiding ____ the table.",
+    "options": ["under", "above", "beside", "behind"],
+    "answer": "under"
+  },
+  {
+    "word": "stair",
+    "sentence": "Be careful on the ____ or you might fall!",
+    "options": ["stair", "floor", "chair", "table"],
+    "answer": "stair"
+  },
+  {
+    "word": "kiwi",
+    "sentence": "The fuzzy brown fruit with green inside is called a ____.",
+    "options": ["kiwi", "apple", "banana", "orange"],
+    "answer": "kiwi"
+  },
+  {
+    "word": "bathroom",
+    "sentence": "I need to wash my hands before dinner — let's go to the ____.",
+    "options": ["bathroom", "kitchen", "bedroom", "garage"],
+    "answer": "bathroom"
+  },
+  {
+    "word": "bath",
+    "sentence": "After playing in the mud, I took a long ____.",
+    "options": ["bath", "bed", "ball", "book"],
+    "answer": "bath"
+  },
+  {
+    "word": "room",
+    "sentence": "My favorite place to play is my ____ with all my toys.",
+    "options": ["room", "car", "tree", "park"],
+    "answer": "room"
+  },
+  {
+    "word": "box",
+    "sentence": "I put my new toy in a big cardboard ____.",
+    "options": ["box", "bag", "cup", "hat"],
+    "answer": "box"
+  },
+  {
+    "word": "furry",
+    "sentence": "My puppy has a ____ coat that feels soft and warm.",
+    "options": ["furry", "smooth", "spiky", "wet"],
+    "answer": "furry"
+  },
+  {
+    "word": "lick",
+    "sentence": "The dog will ____ your hand if you give it a treat.",
+    "options": ["lick", "bite", "push", "jump"],
+    "answer": "lick"
+  },
+  {
+    "word": "chase",
+    "sentence": "The puppy loves to ____ the ball across the yard.",
+    "options": ["chase", "eat", "sleep", "sing"],
+    "answer": "chase"
+  },
+  {
+    "word": "drink",
+    "sentence": "After playing outside, I need to ______ water to stay healthy.",
+    "options": ["eat", "drink", "sleep", "run"],
+    "answer": "drink"
+  },
+  {
+    "word": "juice",
+    "sentence": "I like to pour ______ from a carton into my glass at lunch.",
+    "options": ["milk", "juice", "sand", "bread"],
+    "answer": "juice"
+  },
+  {
+    "word": "sharpen",
+    "sentence": "Before drawing, I need to ______ my pencil so it makes a fine line.",
+    "options": ["break", "sharpen", "paint", "throw"],
+    "answer": "sharpen"
+  },
+  {
+    "word": "hate",
+    "sentence": "I ______ eating broccoli, but I love carrots!",
+    "options": ["love", "hate", "sleep", "jump"],
+    "answer": "hate"
+  },
+  {
+    "word": "love",
+    "sentence": "I ______ playing with my dog because he makes me happy.",
+    "options": ["hate", "love", "run", "cry"],
+    "answer": "love"
+  },
+  {
+    "word": "rain",
+    "sentence": "When it starts to ______, I put on my raincoat and boots.",
+    "options": ["snow", "rain", "sun", "wind"],
+    "answer": "rain"
+  },
+  {
+    "word": "mice",
+    "sentence": "The cat chased the little ______ around the kitchen floor.",
+    "options": ["dogs", "birds", "mice", "cars"],
+    "answer": "mice"
+  },
+  {
+    "word": "color",
+    "sentence": "Can you ______ the sky blue in your drawing?",
+    "options": ["eat", "color", "sing", "dance"],
+    "answer": "color"
+  },
+  {
+    "word": "orange",
+    "sentence": "I ate a sweet ______ for a snack after school.",
+    "options": ["apple", "orange", "banana", "cake"],
+    "answer": "orange"
+  },
+  {
+    "word": "kite",
+    "sentence": "On a windy day, I flew my red ______ high in the sky.",
+    "options": ["ball", "kite", "book", "shoe"],
+    "answer": "kite"
+  },
+  {
+    "word": "sky",
+    "sentence": "The ______ is blue and big above us.",
+    "options": ["sky", "tree", "dog", "house"],
+    "answer": "sky"
+  },
+  {
+    "word": "fly",
+    "sentence": "Bugs can ______ in the air like little airplanes.",
+    "options": ["fly", "run", "swim", "sleep"],
+    "answer": "fly"
+  },
+  {
+    "word": "cloud",
+    "sentence": "Puffy white ______ float in the sky and sometimes bring rain.",
+    "options": ["cloud", "ball", "car", "shoe"],
+    "answer": "cloud"
+  },
+  {
+    "word": "white",
+    "sentence": "Snow is cold and ______ like cotton candy.",
+    "options": ["white", "red", "purple", "orange"],
+    "answer": "white"
+  },
+  {
+    "word": "bag",
+    "sentence": "I put my lunch and toys in my big ______ to take to school.",
+    "options": ["bag", "hat", "cup", "book"],
+    "answer": "bag"
+  },
+  {
+    "word": "green",
+    "sentence": "Grass and many leaves are ______ in the spring and summer.",
+    "options": ["green", "blue", "pink", "brown"],
+    "answer": "green"
+  },
+  {
+    "word": "leaves",
+    "sentence": "In autumn, lots of ______ fall from the trees and make a crunchy pile.",
+    "options": ["leaves", "stones", "birds", "bikes"],
+    "answer": "leaves"
+  },
+  {
+    "word": "leaf",
+    "sentence": "I found a single ______ on the ground that looked like a heart.",
+    "options": ["leaf", "rock", "shoe", "cat"],
+    "answer": "leaf"
+  },
+  {
+    "word": "yellow",
+    "sentence": "Bananas and sunflowers are bright ______ colors.",
+    "options": ["yellow", "black", "gray", "purple"],
+    "answer": "yellow"
+  },
+  {
+    "word": "black",
+    "sentence": "My cat has shiny ______ fur that glows in the moonlight.",
+    "options": ["black", "white", "red", "green"],
+    "answer": "black"
+  },
+  {
+    "word": "gold",
+    "sentence": "The king wore a shiny ______ on his head.",
+    "options": ["gold", "stone", "paper", "cloth"],
+    "answer": "gold"
+  },
+  {
+    "word": "silver",
+    "sentence": "My toy car has a bright ______ color.",
+    "options": ["silver", "pink", "green", "orange"],
+    "answer": "silver"
+  },
+  {
+    "word": "paint",
+    "sentence": "We used ______ to make a rainbow on the paper.",
+    "options": ["paint", "water", "sand", "ice"],
+    "answer": "paint"
+  },
+  {
+    "word": "picture",
+    "sentence": "I drew a ______ of my dog for my mom.",
+    "options": ["picture", "song", "cake", "book"],
+    "answer": "picture"
+  },
+  {
+    "word": "clean",
+    "sentence": "I need to ______ my room before dinner.",
+    "options": ["clean", "eat", "sleep", "run"],
+    "answer": "clean"
+  },
+  {
+    "word": "homework",
+    "sentence": "I finished my ______ before playing video games.",
+    "options": ["homework", "toy", "snack", "shirt"],
+    "answer": "homework"
+  },
+  {
+    "word": "dark",
+    "sentence": "The cave was very ______, so I used a flashlight.",
+    "options": ["dark", "bright", "hot", "loud"],
+    "answer": "dark"
+  },
+  {
+    "word": "grey",
+    "sentence": "The elephant's skin is a soft ______ color.",
+    "options": ["grey", "blue", "yellow", "red"],
+    "answer": "grey"
+  },
+  {
+    "word": "dress",
+    "sentence": "For the party, I wore a pretty pink ______.",
+    "options": ["dress", "hat", "shoe", "ball"],
+    "answer": "dress"
+  },
+  {
+    "word": "crown",
+    "sentence": "The princess wore a shiny ______ with jewels on her head.",
+    "options": ["crown", "belt", "sock", "bag"],
+    "answer": "crown"
+  },
+  {
+    "word": "wear",
+    "sentence": "I will ______ my red shoes to school today.",
+    "options": ["wear", "eat", "run", "sleep"],
+    "answer": "wear"
+  },
+  {
+    "word": "purple",
+    "sentence": "The grape is a deep ______ color.",
+    "options": ["purple", "green", "yellow", "orange"],
+    "answer": "purple"
+  },
+  {
+    "word": "blue",
+    "sentence": "The sky looks very ______ on a sunny day.",
+    "options": ["blue", "red", "brown", "pink"],
+    "answer": "blue"
+  },
+  {
+    "word": "red",
+    "sentence": "My favorite apple is ______ and shiny.",
+    "options": ["red", "blue", "white", "black"],
+    "answer": "red"
+  },
+  {
+    "word": "brown",
+    "sentence": "My dog has ______ fur and a waggy tail.",
+    "options": ["brown", "green", "purple", "silver"],
+    "answer": "brown"
+  },
+  {
+    "word": "later",
+    "sentence": "I will clean my room ______, after I finish my snack.",
+    "options": ["later", "now", "here", "fast"],
+    "answer": "later"
+  },
+  {
+    "word": "practice",
+    "sentence": "I need to ______ my violin every day to get better.",
+    "options": ["practice", "play", "sleep", "eat"],
+    "answer": "practice"
+  },
+  {
+    "word": "piano",
+    "sentence": "I learned to play a song on the ______ at music class.",
+    "options": ["piano", "drum", "ball", "book"],
+    "answer": "piano"
+  },
+  {
+    "word": "story",
+    "sentence": "Mom read me a funny ______ before bedtime.",
+    "options": ["story", "song", "game", "toy"],
+    "answer": "story"
+  },
+  {
+    "word": "tell",
+    "sentence": "Can you ______ me a secret?",
+    "options": ["tell", "see", "run", "buy"],
+    "answer": "tell"
+  },
+  {
+    "word": "know",
+    "sentence": "I ______ that dogs love to chase balls.",
+    "options": ["know", "see", "eat", "run"],
+    "answer": "know"
+  },
+  {
+    "word": "everyday",
+    "sentence": "I brush my teeth ______ before bed.",
+    "options": ["everyday", "every week", "every month", "every year"],
+    "answer": "everyday"
+  },
+  {
+    "word": "Monday",
+    "sentence": "School starts again after the weekend on ______.",
+    "options": ["Monday", "Pizza", "Cat", "Ball"],
+    "answer": "Monday"
+  },
+  {
+    "word": "Tuesday",
+    "sentence": "Yesterday was Monday, so today is ______.",
+    "options": ["Tuesday", "Sun", "Apple", "Car"],
+    "answer": "Tuesday"
+  },
+  {
+    "word": "Wednesday",
+    "sentence": "The middle of the week is ______.",
+    "options": ["Wednesday", "Ice cream", "Tree", "Book"],
+    "answer": "Wednesday"
+  },
+  {
+    "word": "Thursday",
+    "sentence": "After Wednesday comes ______.",
+    "options": ["Thursday", "Dog", "House", "Shoe"],
+    "answer": "Thursday"
+  },
+  {
+    "word": "Friday",
+    "sentence": "We have pizza night on ______!",
+    "options": ["Friday", "Rain", "Chair", "Fish"],
+    "answer": "Friday"
+  },
+  {
+    "word": "Saturday",
+    "sentence": "I play soccer with my friends on ______.",
+    "options": ["Saturday", "Cake", "Bird", "Hat"],
+    "answer": "Saturday"
+  },
+  {
+    "word": "Sunday",
+    "sentence": "The day after Saturday is ______.",
+    "options": ["Sunday", "Water", "Door", "Bike"],
+    "answer": "Sunday"
+  },
+  {
+    "word": "January",
+    "sentence": "The first month of the year is ______.",
+    "options": ["January", "Apple", "Shoe", "Book"],
+    "answer": "January"
+  },
+  {
+    "word": "February",
+    "sentence": "Winter month with 28 or 29 days is called ____.",
+    "options": ["February", "January", "March", "April"],
+    "answer": "February"
+  },
+  {
+    "word": "March",
+    "sentence": "The month when spring starts and we jump into springtime is ____.",
+    "options": ["March", "February", "May", "June"],
+    "answer": "March"
+  },
+  {
+    "word": "April",
+    "sentence": "This month has rain and lots of flowers, and it comes right after March: ____.",
+    "options": ["April", "March", "May", "July"],
+    "answer": "April"
+  },
+  {
+    "word": "May",
+    "sentence": "The month with Mother’s Day and lots of green leaves is ____.",
+    "options": ["May", "April", "June", "March"],
+    "answer": "May"
+  },
+  {
+    "word": "June",
+    "sentence": "The month when school ends and summer begins is ____.",
+    "options": ["June", "May", "July", "April"],
+    "answer": "June"
+  },
+  {
+    "word": "July",
+    "sentence": "This month has fireworks on the 4th of July: ____.",
+    "options": ["July", "June", "August", "May"],
+    "answer": "July"
+  },
+  {
+    "word": "August",
+    "sentence": "The last month of summer before school starts again is ____.",
+    "options": ["August", "July", "September", "June"],
+    "answer": "August"
+  },
+  {
+    "word": "September",
+    "sentence": "The month when kids go back to school and autumn begins is ____.",
+    "options": ["September", "August", "October", "July"],
+    "answer": "September"
+  },
+  {
+    "word": "October",
+    "sentence": "This month has Halloween and falling orange leaves: ____.",
+    "options": ["October", "September", "November", "August"],
+    "answer": "October"
+  },
+  {
+    "word": "November",
+    "sentence": "The month with Thanksgiving and cooler weather is ____.",
+    "options": ["November", "October", "December", "September"],
+    "answer": "November"
+  },
+  {
+    "word": "December",
+    "sentence": "The last month of the year is ______.",
+    "options": ["November", "January", "December", "October"],
+    "answer": "December"
+  },
+  {
+    "word": "video-games",
+    "sentence": "I love playing ______ with my brother on weekends.",
+    "options": ["books", "video-games", "puzzles", "toys"],
+    "answer": "video-games"
+  },
+  {
+    "word": "book",
+    "sentence": "I read a funny ______ about a talking dog before bed.",
+    "options": ["ball", "book", "car", "shirt"],
+    "answer": "book"
+  },
+  {
+    "word": "square",
+    "sentence": "A tile on the floor that has four equal sides is a ______.",
+    "options": ["circle", "square", "triangle", "star"],
+    "answer": "square"
+  },
+  {
+    "word": "circle",
+    "sentence": "A pizza is shaped like a ______.",
+    "options": ["square", "circle", "triangle", "rectangle"],
+    "answer": "circle"
+  },
+  {
+    "word": "triangle",
+    "sentence": "A slice of pizza that has three sides is a ______.",
+    "options": ["circle", "rectangle", "triangle", "star"],
+    "answer": "triangle"
+  },
+  {
+    "word": "rectangle",
+    "sentence": "My notebook looks like a long ______.",
+    "options": ["circle", "triangle", "rectangle", "star"],
+    "answer": "rectangle"
+  },
+  {
+    "word": "surprise",
+    "sentence": "I got a ______ gift on my birthday!",
+    "options": ["book", "surprise", "shoe", "apple"],
+    "answer": "surprise"
+  },
+  {
+    "word": "neck",
+    "sentence": "I wear a scarf around my ______ in winter.",
+    "options": ["head", "neck", "foot", "hand"],
+    "answer": "neck"
+  },
+  {
+    "word": "feet",
+    "sentence": "I have two ______ and I use them to walk and run.",
+    "options": ["hands", "eyes", "feet", "ears"],
+    "answer": "feet"
+  },
+  {
+    "word": "end",
+    "sentence": "At the ______ of the race, everyone cheered for the winner.",
+    "options": ["end", "start", "middle", "top"],
+    "answer": "end"
+  },
+  {
+    "word": "oval",
+    "sentence": "The egg is shaped like a long ______.",
+    "options": ["oval", "circle", "square", "triangle"],
+    "answer": "oval"
+  },
+  {
+    "word": "boiled-egg",
+    "sentence": "For breakfast, I ate a soft ______ with toast.",
+    "options": ["boiled-egg", "banana", "sandwich", "cookie"],
+    "answer": "boiled-egg"
+  },
+  {
+    "word": "funny",
+    "sentence": "The clown told a ______ joke and made everyone laugh.",
+    "options": ["funny", "quiet", "big", "cold"],
+    "answer": "funny"
+  },
+  {
+    "word": "elephant",
+    "sentence": "The ______ has big ears and a long trunk.",
+    "options": ["elephant", "dog", "cat", "bird"],
+    "answer": "elephant"
+  },
+  {
+    "word": "never",
+    "sentence": "I ______ eat candy before bed, because it's bad for my teeth.",
+    "options": ["never", "sometimes", "often", "always"],
+    "answer": "never"
+  },
+  {
+    "word": "always",
+    "sentence": "I ______ brush my teeth in the morning and at night.",
+    "options": ["always", "never", "rarely", "seldom"],
+    "answer": "always"
+  },
+  {
+    "word": "sometimes",
+    "sentence": "I ______ watch cartoons after finishing my homework.",
+    "options": ["sometimes", "always", "never", "often"],
+    "answer": "sometimes"
+  },
+  {
+    "word": "often",
+    "sentence": "I ______ play outside with my friends after school.",
+    "options": ["often", "never", "seldom", "rarely"],
+    "answer": "often"
+  },
+  {
+    "word": "forget",
+    "sentence": "I sometimes ______ to bring my lunchbox to school.",
+    "options": ["forget", "remember", "find", "lose"],
+    "answer": "forget"
+  },
+  {
+    "word": "remember",
+    "sentence": "I need to ______ where I put my shoes before I go to school.",
+    "options": ["remember", "eat", "jump", "sleep"],
+    "answer": "remember"
+  },
+  {
+    "word": "circus",
+    "sentence": "We saw lions, clowns, and acrobats at the big ______ last weekend.",
+    "options": ["circus", "zoo", "school", "park"],
+    "answer": "circus"
+  },
+  {
+    "word": "peanut",
+    "sentence": "I put a ______ butter sandwich in my lunchbox today.",
+    "options": ["peanut", "apple", "bread", "cookie"],
+    "answer": "peanut"
+  },
+  {
+    "word": "bread",
+    "sentence": "Mom toasted the ______ and added jam for my breakfast.",
+    "options": ["bread", "cake", "rice", "milk"],
+    "answer": "bread"
+  },
+  {
+    "word": "mistake",
+    "sentence": "I drew a cat with three legs — that was a big ______!",
+    "options": ["mistake", "smile", "friend", "game"],
+    "answer": "mistake"
+  },
+  {
+    "word": "lost",
+    "sentence": "I ______ my favorite toy car in the sandbox yesterday.",
+    "options": ["lost", "found", "bought", "ate"],
+    "answer": "lost"
+  },
+  {
+    "word": "family",
+    "sentence": "We all had pizza together for dinner with my ______.",
+    "options": ["family", "teacher", "dog", "robot"],
+    "answer": "family"
+  },
+  {
+    "word": "cage",
+    "sentence": "The bird sits in its ______ and sings every morning.",
+    "options": ["cage", "bed", "box", "car"],
+    "answer": "cage"
+  },
+  {
+    "word": "hope",
+    "sentence": "I ______ I get a puppy for my birthday!",
+    "options": ["hope", "run", "sing", "sleep"],
+    "answer": "hope"
+  },
+  {
+    "word": "lift",
+    "sentence": "The elevator will ______ us to the 5th floor.",
+    "options": ["lift", "push", "drop", "break"],
+    "answer": "lift"
+  },
+  {
+    "word": "wave",
+    "sentence": "When you say goodbye, you can ______ your hand in the air.",
+    "options": ["wave", "jump", "eat", "sleep"],
+    "answer": "wave"
+  },
+  {
+    "word": "shout",
+    "sentence": "If you're far away from your friend, you might ______ to get their attention.",
+    "options": ["shout", "whisper", "dance", "draw"],
+    "answer": "shout"
+  },
+  {
+    "word": "special",
+    "sentence": "My birthday is a ______ day because I get cake and presents.",
+    "options": ["special", "boring", "long", "cold"],
+    "answer": "special"
+  },
+  {
+    "word": "buy",
+    "sentence": "At the store, Mom will ______ apples for our snack.",
+    "options": ["buy", "lose", "throw", "sleep"],
+    "answer": "buy"
+  },
+  {
+    "word": "old",
+    "sentence": "My grandpa is ______, but he still plays with me.",
+    "options": ["old", "new", "fast", "tall"],
+    "answer": "old"
+  },
+  {
+    "word": "young",
+    "sentence": "My little brother is ______, so he needs help tying his shoes.",
+    "options": ["young", "big", "loud", "strong"],
+    "answer": "young"
+  },
+  {
+    "word": "new",
+    "sentence": "I got a ______ bicycle for my birthday and it’s red!",
+    "options": ["new", "old", "broken", "heavy"],
+    "answer": "new"
+  },
+  {
+    "word": "friend",
+    "sentence": "Lily is my best ______—we share toys and laugh together.",
+    "options": ["friend", "dog", "tree", "car"],
+    "answer": "friend"
+  },
+  {
+    "word": "safe",
+    "sentence": "Wearing a helmet when you ride your bike keeps you ______.",
+    "options": ["safe", "hot", "tired", "dirty"],
+    "answer": "safe"
+  },
+  {
+    "word": "drive",
+    "sentence": "Dad uses the car keys to ______ us to school.",
+    "options": ["drive", "walk", "fly", "swim"],
+    "answer": "drive"
+  },
+  {
+    "word": "climb",
+    "sentence": "The monkey loves to ____ up the tall tree.",
+    "options": ["climb", "jump", "sleep", "eat"],
+    "answer": "climb"
+  },
+  {
+    "word": "garden",
+    "sentence": "We planted flowers and vegetables in our back ____.",
+    "options": ["garden", "house", "car", "school"],
+    "answer": "garden"
+  },
+  {
+    "word": "fence",
+    "sentence": "The dog jumped over the wooden ____ to chase the ball.",
+    "options": ["fence", "door", "window", "table"],
+    "answer": "fence"
+  },
+  {
+    "word": "walk",
+    "sentence": "Let's go for a ____ around the park after lunch.",
+    "options": ["walk", "run", "fly", "swim"],
+    "answer": "walk"
+  },
+  {
+    "word": "across",
+    "sentence": "We walked ____ the bridge to get to the other side of the river.",
+    "options": ["across", "under", "behind", "above"],
+    "answer": "across"
+  },
+  {
+    "word": "grass",
+    "sentence": "The kids rolled around on the soft green ____ after school.",
+    "options": ["grass", "sand", "rock", "wood"],
+    "answer": "grass"
+  },
+  {
+    "word": "start",
+    "sentence": "The race will ____ when the whistle blows.",
+    "options": ["start", "stop", "sleep", "eat"],
+    "answer": "start"
+  },
+  {
+    "word": "hide",
+    "sentence": "During hide-and-seek, Sam tried to ____ behind the big bush.",
+    "options": ["hide", "run", "sing", "jump"],
+    "answer": "hide"
+  },
+  {
+    "word": "drain",
+    "sentence": "The water went down the ____ after the rain stopped.",
+    "options": ["drain", "pipe", "bucket", "pool"],
+    "answer": "drain"
+  },
+  {
+    "word": "look",
+    "sentence": "Please ____ at the picture and tell me what you see.",
+    "options": ["look", "listen", "touch", "smell"],
+    "answer": "look"
+  },
+  {
+    "word": "peep",
+    "sentence": "The baby bird will ______ through the nest to see if Mommy is coming back.",
+    "options": ["peep", "jump", "sleep", "run"],
+    "answer": "peep"
+  },
+  {
+    "word": "window",
+    "sentence": "I like to look outside the ______ to watch the rain fall.",
+    "options": ["window", "door", "table", "book"],
+    "answer": "window"
+  },
+  {
+    "word": "again",
+    "sentence": "Can we play that game ______? I loved it!",
+    "options": ["again", "fast", "loud", "blue"],
+    "answer": "again"
+  },
+  {
+    "word": "cross",
+    "sentence": "We must wait for the light before we ______ the street.",
+    "options": ["cross", "jump", "run", "sing"],
+    "answer": "cross"
+  },
+  {
+    "word": "river",
+    "sentence": "The fish swim fast in the ______ near the big trees.",
+    "options": ["river", "desk", "shoe", "cloud"],
+    "answer": "river"
+  },
+  {
+    "word": "crocodile",
+    "sentence": "The ______ swims quietly in the water, waiting for its next snack.",
+    "options": ["crocodile", "dog", "cat", "bird"],
+    "answer": "crocodile"
+  },
+  {
+    "word": "tasty",
+    "sentence": "My mom made ______ pancakes with syrup for breakfast!",
+    "options": ["tasty", "big", "red", "noisy"],
+    "answer": "tasty"
+  },
+  {
+    "word": "bridge",
+    "sentence": "We walked across the wooden ______ to get to the other side of the stream.",
+    "options": ["bridge", "chair", "ball", "hat"],
+    "answer": "bridge"
+  },
+  {
+    "word": "snap",
+    "sentence": "I heard a loud ______ when I broke the stick in half.",
+    "options": ["snap", "clap", "laugh", "sing"],
+    "answer": "snap"
+  },
+  {
+    "word": "creep",
+    "sentence": "The cat will ______ closer to the mouse without making a sound.",
+    "options": ["creep", "jump", "dance", "shout"],
+    "answer": "creep"
+  },
+  {
+    "word": "skip",
+    "sentence": "When I hop on one foot and jump over the chalk lines, I am ________!",
+    "options": ["skip", "run", "jump", "walk"],
+    "answer": "skip"
+  },
+  {
+    "word": "crawl",
+    "sentence": "The baby moved slowly on the floor with hands and knees — she was ________!",
+    "options": ["crawl", "jump", "fly", "dance"],
+    "answer": "crawl"
+  },
+  {
+    "word": "leap",
+    "sentence": "The frog made a big jump across the pond — it was a mighty ________!",
+    "options": ["leap", "walk", "skip", "roll"],
+    "answer": "leap"
+  },
+  {
+    "word": "grow-up",
+    "sentence": "When I am older and can do everything grown-ups do, I will be a ________!",
+    "options": ["grow-up", "teacher", "dog", "car"],
+    "answer": "grow-up"
+  },
+  {
+    "word": "astronaut",
+    "sentence": "Neil Armstrong was a brave ________ who walked on the moon!",
+    "options": ["astronaut", "pilot", "chef", "policeman"],
+    "answer": "astronaut"
+  },
+  {
+    "word": "space",
+    "sentence": "Stars, planets, and rockets are all found in outer ________!",
+    "options": ["space", "playground", "kitchen", "school"],
+    "answer": "space"
+  },
+  {
+    "word": "policeman",
+    "sentence": "The man in blue uniform helps keep the streets safe — he is a ________!",
+    "options": ["policeman", "chef", "pilot", "astronaut"],
+    "answer": "policeman"
+  },
+  {
+    "word": "policewoman",
+    "sentence": "The woman with a badge and radio stops bad guys — she is a ________!",
+    "options": ["policewoman", "pilot", "chef", "teacher"],
+    "answer": "policewoman"
+  },
+  {
+    "word": "pilot",
+    "sentence": "The person who flies the big airplane is called a ________!",
+    "options": ["pilot", "chef", "astronaut", "policeman"],
+    "answer": "pilot"
+  },
+  {
+    "word": "chef",
+    "sentence": "The person who cooks yummy food in a restaurant is a ________!",
+    "options": ["chef", "pilot", "astronaut", "policewoman"],
+    "answer": "chef"
+  },
+  {
+    "word": "florist",
+    "sentence": "A ______ makes beautiful flower arrangements for birthdays and weddings.",
+    "options": ["florist", "teacher", "cook", "driver"],
+    "answer": "florist"
+  },
+  {
+    "word": "soldier",
+    "sentence": "A ______ wears a uniform and helps protect our country.",
+    "options": ["soldier", "pilot", "artist", "dentist"],
+    "answer": "soldier"
+  },
+  {
+    "word": "television",
+    "sentence": "We watch cartoons and movies on the ______.",
+    "options": ["television", "book", "toy", "bike"],
+    "answer": "television"
+  },
+  {
+    "word": "fire-fighter",
+    "sentence": "A ______ drives a red truck and puts out fires with water.",
+    "options": ["fire-fighter", "police officer", "mail carrier", "farmer"],
+    "answer": "fire-fighter"
+  },
+  {
+    "word": "save",
+    "sentence": "We should ______ water by turning off the tap when we brush our teeth.",
+    "options": ["save", "spill", "break", "throw"],
+    "answer": "save"
+  },
+  {
+    "word": "life",
+    "sentence": "A doctor helps protect your ______ when you are sick.",
+    "options": ["life", "toy", "shoe", "cake"],
+    "answer": "life"
+  },
+  {
+    "word": "carpenter",
+    "sentence": "A ______ builds tables, chairs, and houses with wood.",
+    "options": ["carpenter", "painter", "singer", "mechanic"],
+    "answer": "carpenter"
+  },
+  {
+    "word": "nurse",
+    "sentence": "A ______ helps the doctor and gives you medicine when you're at the hospital.",
+    "options": ["nurse", "chef", "pilot", "clown"],
+    "answer": "nurse"
+  },
+  {
+    "word": "scientist",
+    "sentence": "A ______ studies animals, plants, and how things work in the world.",
+    "options": ["scientist", "actor", "musician", "dancer"],
+    "answer": "scientist"
+  },
+  {
+    "word": "experiment",
+    "sentence": "We did a fun ______ in science class to see what happens when we mix baking soda and vinegar.",
+    "options": ["experiment", "game", "song", "picture"],
+    "answer": "experiment"
+  },
+  {
+    "word": "papaya",
+    "sentence": "I ate a sweet, orange fruit called a ____ for snack.",
+    "options": ["banana", "papaya", "apple", "grape"],
+    "answer": "papaya"
+  },
+  {
+    "word": "tummy",
+    "sentence": "After eating too much candy, my ____ hurt.",
+    "options": ["head", "tummy", "foot", "hand"],
+    "answer": "tummy"
+  },
+  {
+    "word": "durian",
+    "sentence": "The ____ smells stinky but some people love how it tastes.",
+    "options": ["durian", "orange", "pineapple", "mango"],
+    "answer": "durian"
+  },
+  {
+    "word": "stinky",
+    "sentence": "The garbage bin was so ____ that I covered my nose.",
+    "options": ["stinky", "soft", "bright", "quiet"],
+    "answer": "stinky"
+  },
+  {
+    "word": "blanket",
+    "sentence": "I pulled my warm ____ up to my chin when I went to bed.",
+    "options": ["blanket", "shoe", "book", "ball"],
+    "answer": "blanket"
+  },
+  {
+    "word": "doctor",
+    "sentence": "When I felt sick, Mom took me to see the ____.",
+    "options": ["teacher", "doctor", "cook", "driver"],
+    "answer": "doctor"
+  },
+  {
+    "word": "morning",
+    "sentence": "I eat cereal and brush my teeth every ____.",
+    "options": ["morning", "night", "noon", "evening"],
+    "answer": "morning"
+  },
+  {
+    "word": "fall",
+    "sentence": "Leaves turn red and orange and fall from trees in ____.",
+    "options": ["spring", "summer", "fall", "winter"],
+    "answer": "fall"
+  },
+  {
+    "word": "beach",
+    "sentence": "We built a sandcastle and splashed in the waves at the ____.",
+    "options": ["park", "beach", "mountain", "school"],
+    "answer": "beach"
+  },
+  {
+    "word": "picnic",
+    "sentence": "We ate sandwiches and drank juice at a fun ____ in the park.",
+    "options": ["party", "picnic", "movie", "game"],
+    "answer": "picnic"
+  },
+  {
+    "word": "sand-castle",
+    "sentence": "We made a big _______ at the beach with buckets and shovels.",
+    "options": ["sand-castle", "kite", "tree", "car"],
+    "answer": "sand-castle"
+  },
+  {
+    "word": "build",
+    "sentence": "Let's _______ a tower out of blocks before dinner!",
+    "options": ["build", "eat", "run", "sleep"],
+    "answer": "build"
+  },
+  {
+    "word": "together",
+    "sentence": "We sang songs and danced _______ with our friends at the party.",
+    "options": ["together", "alone", "fast", "quietly"],
+    "answer": "together"
+  },
+  {
+    "word": "seashell",
+    "sentence": "I found a pretty pink _______ on the shore after the wave went back.",
+    "options": ["seashell", "rock", "sand", "fish"],
+    "answer": "seashell"
+  },
+  {
+    "word": "collect",
+    "sentence": "We like to _______ shiny stones and feathers on our walks in the park.",
+    "options": ["collect", "drop", "break", "lose"],
+    "answer": "collect"
+  },
+  {
+    "word": "cover",
+    "sentence": "The big leaf will _______ the tiny bug so it doesn't get wet.",
+    "options": ["cover", "eat", "fly", "sing"],
+    "answer": "cover"
+  },
+  {
+    "word": "castle",
+    "sentence": "The princess lived in a tall stone _______ with towers and a moat.",
+    "options": ["castle", "house", "tent", "car"],
+    "answer": "castle"
+  },
+  {
+    "word": "catch",
+    "sentence": "Can you _______ the ball when I throw it to you?",
+    "options": ["catch", "throw", "kick", "drop"],
+    "answer": "catch"
+  },
+  {
+    "word": "crab",
+    "sentence": "A little _______ scuttled sideways across the sand and hid under a rock.",
+    "options": ["crab", "dog", "bird", "fish"],
+    "answer": "crab"
+  },
+  {
+    "word": "splash",
+    "sentence": "When I jumped in the puddle, I made a big _______ and got my boots wet!",
+    "options": ["splash", "wind", "clap", "jump"],
+    "answer": "splash"
+  },
+  {
+    "word": "sea",
+    "sentence": "The ____ is big and blue, and fish live in it.",
+    "options": ["sea", "park", "house", "tree"],
+    "answer": "sea"
+  },
+  {
+    "word": "wet",
+    "sentence": "After I jumped in the puddle, my shoes were ____.",
+    "options": ["wet", "hot", "soft", "bright"],
+    "answer": "wet"
+  },
+  {
+    "word": "dry",
+    "sentence": "After the sun came out, the sidewalk became ____.",
+    "options": ["dry", "wet", "cold", "loud"],
+    "answer": "dry"
+  },
+  {
+    "word": "breeze",
+    "sentence": "A gentle ____ blew through the trees and made the leaves dance.",
+    "options": ["breeze", "noise", "rock", "cake"],
+    "answer": "breeze"
+  },
+  {
+    "word": "taste",
+    "sentence": "I use my tongue to ____ my favorite ice cream.",
+    "options": ["taste", "see", "hear", "run"],
+    "answer": "taste"
+  },
+  {
+    "word": "draw",
+    "sentence": "I like to ____ a picture of a dog with my crayons.",
+    "options": ["draw", "jump", "eat", "sing"],
+    "answer": "draw"
+  },
+  {
+    "word": "boat",
+    "sentence": "We rode on a ____ across the lake to reach the island.",
+    "options": ["boat", "car", "bike", "plane"],
+    "answer": "boat"
+  },
+  {
+    "word": "fishing",
+    "sentence": "Dad and I went ____ by the river to catch fish.",
+    "options": ["fishing", "swimming", "running", "sleeping"],
+    "answer": "fishing"
+  },
+  {
+    "word": "nap",
+    "sentence": "After lunch, I took a short ____ on my cozy blanket.",
+    "options": ["nap", "walk", "dance", "song"],
+    "answer": "nap"
+  },
+  {
+    "word": "pack",
+    "sentence": "I need to ____ my toys and snacks before we go camping.",
+    "options": ["pack", "play", "sing", "run"],
+    "answer": "pack"
+  },
+  {
+    "word": "great",
+    "sentence": "I had a ____ day at the park because I rode my bike and ate ice cream!",
+    "options": ["great", "bad", "cold", "long"],
+    "answer": "great"
+  },
+  {
+    "word": "stormy",
+    "sentence": "The sky was dark and the wind was loud — it was a ____ night!",
+    "options": ["stormy", "sunny", "quiet", "sweet"],
+    "answer": "stormy"
+  },
+  {
+    "word": "storm",
+    "sentence": "We heard thunder and saw rain — a big ____ was coming!",
+    "options": ["storm", "bath", "party", "book"],
+    "answer": "storm"
+  },
+  {
+    "word": "weather",
+    "sentence": "Mom checked the ____ to see if I should wear a jacket today.",
+    "options": ["weather", "toy", "dance", "cake"],
+    "answer": "weather"
+  },
+  {
+    "word": "drizzle",
+    "sentence": "It wasn’t raining hard — just a light ____ that made my shoes wet.",
+    "options": ["drizzle", "shout", "jump", "clown"],
+    "answer": "drizzle"
+  },
+  {
+    "word": "blow",
+    "sentence": "The wind made the leaves ____ across the yard.",
+    "options": ["blow", "sleep", "sing", "eat"],
+    "answer": "blow"
+  },
+  {
+    "word": "lightning",
+    "sentence": "I saw a bright flash in the sky — that was ____ during the storm!",
+    "options": ["lightning", "butterfly", "balloon", "cookie"],
+    "answer": "lightning"
+  },
+  {
+    "word": "strike",
+    "sentence": "The lightning can ____ a tall tree and make it catch fire.",
+    "options": ["strike", "dance", "laugh", "run"],
+    "answer": "strike"
+  },
+  {
+    "word": "ground",
+    "sentence": "After the rain, the water pooled on the ____ near the sidewalk.",
+    "options": ["ground", "sky", "cloud", "bird"],
+    "answer": "ground"
+  },
+  {
+    "word": "overflow",
+    "sentence": "The bucket was too full — the water began to ____ onto the floor!",
+    "options": ["overflow", "sleep", "jump", "draw"],
+    "answer": "overflow"
+  },
+  {
+    "word": "snake",
+    "sentence": "The ____ slithered quietly through the grass.",
+    "options": ["snake", "dog", "cat", "bird"],
+    "answer": "snake"
+  },
+  {
+    "word": "lunar",
+    "sentence": "The ____ new year is celebrated with lots of lights and food.",
+    "options": ["lunar", "solar", "rainy", "sunny"],
+    "answer": "lunar"
+  },
+  {
+    "word": "dumpling",
+    "sentence": "We ate warm ____ with soy sauce for dinner.",
+    "options": ["dumpling", "pizza", "sandwich", "apple"],
+    "answer": "dumpling"
+  },
+  {
+    "word": "holiday",
+    "sentence": "During the winter ____, we get to stay home and open presents.",
+    "options": ["holiday", "homework", "lunch", "bedtime"],
+    "answer": "holiday"
+  },
+  {
+    "word": "dragon",
+    "sentence": "The big, scaly ____ danced in the parade with colorful scales.",
+    "options": ["dragon", "elephant", "butterfly", "turtle"],
+    "answer": "dragon"
+  },
+  {
+    "word": "luck",
+    "sentence": "Wearing red clothes brings you good ____ on Chinese New Year.",
+    "options": ["luck", "sleep", "noise", "cloud"],
+    "answer": "luck"
+  },
+  {
+    "word": "lantern",
+    "sentence": "We lit a bright red ____ and let it float into the sky.",
+    "options": ["lantern", "ball", "book", "shoe"],
+    "answer": "lantern"
+  },
+  {
+    "word": "firework",
+    "sentence": "At night, colorful ____ exploded in the sky with loud booms.",
+    "options": ["firework", "balloon", "candle", "toy"],
+    "answer": "firework"
+  },
+  {
+    "word": "noodle",
+    "sentence": "I ate a long, slurpy ____ for lunch today.",
+    "options": ["noodle", "cookie", "candy", "soup"],
+    "answer": "noodle"
+  },
+  {
+    "word": "tradition",
+    "sentence": "Giving red envelopes is a special ____ during Chinese New Year.",
+    "options": ["tradition", "game", "song", "movie"],
+    "answer": "tradition"
+  },
+  {
+    "word": "envelope",
+    "sentence": "I put my letter inside a ______ before mailing it.",
+    "options": ["envelope", "book", "shoe", "ball"],
+    "answer": "envelope"
+  },
+  {
+    "word": "calendar",
+    "sentence": "I use a ______ to find out what day my birthday is.",
+    "options": ["calendar", "pencil", "toy", "cake"],
+    "answer": "calendar"
+  },
+  {
+    "word": "red-envelope",
+    "sentence": "During Lunar New Year, I get a ______ with money inside.",
+    "options": ["red-envelope", "blue hat", "yellow ball", "green book"],
+    "answer": "red-envelope"
+  },
+  {
+    "word": "goal",
+    "sentence": "I kicked the ball into the ______ to score a point in soccer.",
+    "options": ["goal", "tree", "house", "cloud"],
+    "answer": "goal"
+  },
+  {
+    "word": "winter",
+    "sentence": "When it snows and I wear a coat, it is ______.",
+    "options": ["winter", "summer", "lunch", "movie"],
+    "answer": "winter"
+  },
+  {
+    "word": "summer",
+    "sentence": "I eat ice cream and swim at the pool during ______.",
+    "options": ["summer", "winter", "breakfast", "bed"],
+    "answer": "summer"
+  },
+  {
+    "word": "spring",
+    "sentence": "Flowers bloom and birds sing when ______ comes after winter.",
+    "options": ["spring", "autumn", "movie", "pizza"],
+    "answer": "spring"
+  },
+  {
+    "word": "bring",
+    "sentence": "Please ______ your lunchbox to school tomorrow.",
+    "options": ["bring", "eat", "run", "sleep"],
+    "answer": "bring"
+  },
+  {
+    "word": "feast",
+    "sentence": "We had a big ______ with turkey and pie on Thanksgiving.",
+    "options": ["feast", "game", "book", "shirt"],
+    "answer": "feast"
+  },
+  {
+    "word": "juggle",
+    "sentence": "The clown tried to ______ three balls at the same time.",
+    "options": ["juggle", "dance", "sing", "draw"],
+    "answer": "juggle"
+  },
+  {
+    "word": "candle",
+    "sentence": "The candle is a beautiful animal that lives in the forest.",
+    "options": ["candle", "lion", "tiger", "bear"],
+    "answer": "candle"
+  },
+  {
+    "word": "magic",
+    "sentence": "The magic is a beautiful animal that lives in the forest.",
+    "options": ["magic", "lion", "tiger", "bear"],
+    "answer": "magic"
+  },
+  {
+    "word": "float",
+    "sentence": "The float is a beautiful animal that lives in the forest.",
+    "options": ["float", "lion", "tiger", "bear"],
+    "answer": "float"
+  },
+  {
+    "word": "strange",
+    "sentence": "The strange is a beautiful animal that lives in the forest.",
+    "options": ["strange", "lion", "tiger", "bear"],
+    "answer": "strange"
+  },
+  {
+    "word": "upside down",
+    "sentence": "The upside down is a beautiful animal that lives in the forest.",
+    "options": ["upside down", "lion", "tiger", "bear"],
+    "answer": "upside down"
+  },
+  {
+    "word": "spell",
+    "sentence": "The spell is a beautiful animal that lives in the forest.",
+    "options": ["spell", "lion", "tiger", "bear"],
+    "answer": "spell"
+  },
+  {
+    "word": "boiled egg",
+    "sentence": "The boiled egg is a beautiful animal that lives in the forest.",
+    "options": ["boiled egg", "lion", "tiger", "bear"],
+    "answer": "boiled egg"
+  },
+  {
+    "word": "stroke",
+    "sentence": "The stroke is a beautiful animal that lives in the forest.",
+    "options": ["stroke", "lion", "tiger", "bear"],
+    "answer": "stroke"
+  },
+  {
+    "word": "look for",
+    "sentence": "The look for is a beautiful animal that lives in the forest.",
+    "options": ["look for", "lion", "tiger", "bear"],
+    "answer": "look for"
+  },
+  {
+    "word": "grow up",
+    "sentence": "The grow up is a beautiful animal that lives in the forest.",
+    "options": ["grow up", "lion", "tiger", "bear"],
+    "answer": "grow up"
+  },
+  {
+    "word": "fire fighter",
+    "sentence": "The fire fighter is a beautiful animal that lives in the forest.",
+    "options": ["fire fighter", "lion", "tiger", "bear"],
+    "answer": "fire fighter"
+  },
+  {
+    "word": "arrive",
+    "sentence": "The arrive is a beautiful animal that lives in the forest.",
+    "options": ["arrive", "lion", "tiger", "bear"],
+    "answer": "arrive"
+  },
+  {
+    "word": "sand castle",
+    "sentence": "The sand castle is a beautiful animal that lives in the forest.",
+    "options": ["sand castle", "lion", "tiger", "bear"],
+    "answer": "sand castle"
+  },
+  {
+    "word": "sea shell",
+    "sentence": "The sea shell is a beautiful animal that lives in the forest.",
+    "options": ["sea shell", "lion", "tiger", "bear"],
+    "answer": "sea shell"
+  },
+  {
+    "word": "greedy",
+    "sentence": "The greedy is a beautiful animal that lives in the forest.",
+    "options": ["greedy", "lion", "tiger", "bear"],
+    "answer": "greedy"
+  },
+  {
+    "word": "spider",
+    "sentence": "The spider is a beautiful animal that lives in the forest.",
+    "options": ["spider", "lion", "tiger", "bear"],
+    "answer": "spider"
+  },
+  {
+    "word": "web",
+    "sentence": "The web is a beautiful animal that lives in the forest.",
+    "options": ["web", "lion", "tiger", "bear"],
+    "answer": "web"
+  },
+  {
+    "word": "mosquito",
+    "sentence": "The mosquito is a beautiful animal that lives in the forest.",
+    "options": ["mosquito", "lion", "tiger", "bear"],
+    "answer": "mosquito"
+  },
+  {
+    "word": "cockroach",
+    "sentence": "The cockroach is a beautiful animal that lives in the forest.",
+    "options": ["cockroach", "lion", "tiger", "bear"],
+    "answer": "cockroach"
+  },
+  {
+    "word": "grasshopper",
+    "sentence": "The grasshopper is a beautiful animal that lives in the forest.",
+    "options": ["grasshopper", "lion", "tiger", "bear"],
+    "answer": "grasshopper"
+  },
+  {
+    "word": "munch",
+    "sentence": "The munch is a beautiful animal that lives in the forest.",
+    "options": ["munch", "lion", "tiger", "bear"],
+    "answer": "munch"
+  },
+  {
+    "word": "groan",
+    "sentence": "The groan is a beautiful animal that lives in the forest.",
+    "options": ["groan", "lion", "tiger", "bear"],
+    "answer": "groan"
+  },
+  {
+    "word": "jungle",
+    "sentence": "The jungle is a beautiful animal that lives in the forest.",
+    "options": ["jungle", "lion", "tiger", "bear"],
+    "answer": "jungle"
+  },
+  {
+    "word": "grow",
+    "sentence": "The grow is a beautiful animal that lives in the forest.",
+    "options": ["grow", "lion", "tiger", "bear"],
+    "answer": "grow"
+  },
+  {
+    "word": "live",
+    "sentence": "The live is a beautiful animal that lives in the forest.",
+    "options": ["live", "lion", "tiger", "bear"],
+    "answer": "live"
+  },
+  {
+    "word": "shirt",
+    "sentence": "The shirt is a beautiful animal that lives in the forest.",
+    "options": ["shirt", "lion", "tiger", "bear"],
+    "answer": "shirt"
+  },
+  {
+    "word": "pants",
+    "sentence": "The pants is a beautiful animal that lives in the forest.",
+    "options": ["pants", "lion", "tiger", "bear"],
+    "answer": "pants"
+  },
+  {
+    "word": "feather",
+    "sentence": "The feather is a beautiful animal that lives in the forest.",
+    "options": ["feather", "lion", "tiger", "bear"],
+    "answer": "feather"
+  },
+  {
+    "word": "shell",
+    "sentence": "The shell is a beautiful animal that lives in the forest.",
+    "options": ["shell", "lion", "tiger", "bear"],
+    "answer": "shell"
+  },
+  {
+    "word": "hill",
+    "sentence": "The hill is a beautiful animal that lives in the forest.",
+    "options": ["hill", "lion", "tiger", "bear"],
+    "answer": "hill"
+  },
+  {
+    "word": "station",
+    "sentence": "The station is a beautiful animal that lives in the forest.",
+    "options": ["station", "lion", "tiger", "bear"],
+    "answer": "station"
+  },
+  {
+    "word": "tunnel",
+    "sentence": "The tunnel is a beautiful animal that lives in the forest.",
+    "options": ["tunnel", "lion", "tiger", "bear"],
+    "answer": "tunnel"
+  },
+  {
+    "word": "singal",
+    "sentence": "The singal is a beautiful animal that lives in the forest.",
+    "options": ["singal", "lion", "tiger", "bear"],
+    "answer": "singal"
+  },
+  {
+    "word": "plantation",
+    "sentence": "The plantation is a beautiful animal that lives in the forest.",
+    "options": ["plantation", "lion", "tiger", "bear"],
+    "answer": "plantation"
+  },
+  {
+    "word": "town",
+    "sentence": "The town is a beautiful animal that lives in the forest.",
+    "options": ["town", "lion", "tiger", "bear"],
+    "answer": "town"
+  },
+  {
+    "word": "playground",
+    "sentence": "The playground is a beautiful animal that lives in the forest.",
+    "options": ["playground", "lion", "tiger", "bear"],
+    "answer": "playground"
+  },
+  {
+    "word": "steam",
+    "sentence": "The steam is a beautiful animal that lives in the forest.",
+    "options": ["steam", "lion", "tiger", "bear"],
+    "answer": "steam"
+  },
+  {
+    "word": "another",
+    "sentence": "The another is a beautiful animal that lives in the forest.",
+    "options": ["another", "lion", "tiger", "bear"],
+    "answer": "another"
+  },
+  {
+    "word": "journey",
+    "sentence": "The journey is a beautiful animal that lives in the forest.",
+    "options": ["journey", "lion", "tiger", "bear"],
+    "answer": "journey"
+  },
+  {
+    "word": "ocean",
+    "sentence": "The ocean is a beautiful animal that lives in the forest.",
+    "options": ["ocean", "lion", "tiger", "bear"],
+    "answer": "ocean"
+  },
+  {
+    "word": "eel",
+    "sentence": "The eel is a beautiful animal that lives in the forest.",
+    "options": ["eel", "lion", "tiger", "bear"],
+    "answer": "eel"
+  },
+  {
+    "word": "octopus",
+    "sentence": "The octopus is a beautiful animal that lives in the forest.",
+    "options": ["octopus", "lion", "tiger", "bear"],
+    "answer": "octopus"
+  },
+  {
+    "word": "rock",
+    "sentence": "The rock is a beautiful animal that lives in the forest.",
+    "options": ["rock", "lion", "tiger", "bear"],
+    "answer": "rock"
+  },
+  {
+    "word": "seaweed",
+    "sentence": "The seaweed is a beautiful animal that lives in the forest.",
+    "options": ["seaweed", "lion", "tiger", "bear"],
+    "answer": "seaweed"
+  },
+  {
+    "word": "coral",
+    "sentence": "The coral is a beautiful animal that lives in the forest.",
+    "options": ["coral", "lion", "tiger", "bear"],
+    "answer": "coral"
+  },
+  {
+    "word": "lay",
+    "sentence": "The lay is a beautiful animal that lives in the forest.",
+    "options": ["lay", "lion", "tiger", "bear"],
+    "answer": "lay"
+  },
+  {
+    "word": "careful",
+    "sentence": "The careful is a beautiful animal that lives in the forest.",
+    "options": ["careful", "lion", "tiger", "bear"],
+    "answer": "careful"
+  },
+  {
+    "word": "feed",
+    "sentence": "The feed is a beautiful animal that lives in the forest.",
+    "options": ["feed", "lion", "tiger", "bear"],
+    "answer": "feed"
+  },
+  {
+    "word": "female",
+    "sentence": "The female is a beautiful animal that lives in the forest.",
+    "options": ["female", "lion", "tiger", "bear"],
+    "answer": "female"
+  },
+  {
+    "word": "male",
+    "sentence": "The male is a beautiful animal that lives in the forest.",
+    "options": ["male", "lion", "tiger", "bear"],
+    "answer": "male"
+  },
+  {
+    "word": "born",
+    "sentence": "The born is a beautiful animal that lives in the forest.",
+    "options": ["born", "lion", "tiger", "bear"],
+    "answer": "born"
+  },
+  {
+    "word": "harm",
+    "sentence": "The harm is a beautiful animal that lives in the forest.",
+    "options": ["harm", "lion", "tiger", "bear"],
+    "answer": "harm"
+  },
+  {
+    "word": "witch",
+    "sentence": "The witch is a beautiful animal that lives in the forest.",
+    "options": ["witch", "lion", "tiger", "bear"],
+    "answer": "witch"
+  },
+  {
+    "word": "dinosaur",
+    "sentence": "The dinosaur is a beautiful animal that lives in the forest.",
+    "options": ["dinosaur", "lion", "tiger", "bear"],
+    "answer": "dinosaur"
+  },
+  {
+    "word": "crack",
+    "sentence": "The crack is a beautiful animal that lives in the forest.",
+    "options": ["crack", "lion", "tiger", "bear"],
+    "answer": "crack"
+  },
+  {
+    "word": "reply",
+    "sentence": "The reply is a beautiful animal that lives in the forest.",
+    "options": ["reply", "lion", "tiger", "bear"],
+    "answer": "reply"
+  },
+  {
+    "word": "hippopotamus",
+    "sentence": "The hippopotamus is a beautiful animal that lives in the forest.",
+    "options": ["hippopotamus", "lion", "tiger", "bear"],
+    "answer": "hippopotamus"
+  },
+  {
+    "word": "children",
+    "sentence": "The children is a beautiful animal that lives in the forest.",
+    "options": ["children", "lion", "tiger", "bear"],
+    "answer": "children"
+  },
+  {
+    "word": "wonderful",
+    "sentence": "The wonderful is a beautiful animal that lives in the forest.",
+    "options": ["wonderful", "lion", "tiger", "bear"],
+    "answer": "wonderful"
+  },
+  {
+    "word": "habit",
+    "sentence": "The habit is a beautiful animal that lives in the forest.",
+    "options": ["habit", "lion", "tiger", "bear"],
+    "answer": "habit"
+  },
+  {
+    "word": "fact",
+    "sentence": "The fact is a beautiful animal that lives in the forest.",
+    "options": ["fact", "lion", "tiger", "bear"],
+    "answer": "fact"
+  },
+  {
+    "word": "shopping",
+    "sentence": "The shopping is a beautiful animal that lives in the forest.",
+    "options": ["shopping", "lion", "tiger", "bear"],
+    "answer": "shopping"
+  },
+  {
+    "word": "milk shake",
+    "sentence": "The milk shake is a beautiful animal that lives in the forest.",
+    "options": ["milk shake", "lion", "tiger", "bear"],
+    "answer": "milk shake"
+  },
+  {
+    "word": "pie",
+    "sentence": "The pie is a beautiful animal that lives in the forest.",
+    "options": ["pie", "lion", "tiger", "bear"],
+    "answer": "pie"
+  },
+  {
+    "word": "bakery",
+    "sentence": "The bakery is a beautiful animal that lives in the forest.",
+    "options": ["bakery", "lion", "tiger", "bear"],
+    "answer": "bakery"
+  },
+  {
+    "word": "fresh",
+    "sentence": "The fresh is a beautiful animal that lives in the forest.",
+    "options": ["fresh", "lion", "tiger", "bear"],
+    "answer": "fresh"
+  },
+  {
+    "word": "dairy",
+    "sentence": "The dairy is a beautiful animal that lives in the forest.",
+    "options": ["dairy", "lion", "tiger", "bear"],
+    "answer": "dairy"
+  },
+  {
+    "word": "sleepy",
+    "sentence": "The sleepy is a beautiful animal that lives in the forest.",
+    "options": ["sleepy", "lion", "tiger", "bear"],
+    "answer": "sleepy"
+  },
+  {
+    "word": "busy",
+    "sentence": "The busy is a beautiful animal that lives in the forest.",
+    "options": ["busy", "lion", "tiger", "bear"],
+    "answer": "busy"
+  },
+  {
+    "word": "giant",
+    "sentence": "The giant is a beautiful animal that lives in the forest.",
+    "options": ["giant", "lion", "tiger", "bear"],
+    "answer": "giant"
+  },
+  {
+    "word": "o'clock",
+    "sentence": "The o'clock is a beautiful animal that lives in the forest.",
+    "options": ["o'clock", "lion", "tiger", "bear"],
+    "answer": "o'clock"
+  },
+  {
+    "word": "brush teeth",
+    "sentence": "The brush teeth is a beautiful animal that lives in the forest.",
+    "options": ["brush teeth", "lion", "tiger", "bear"],
+    "answer": "brush teeth"
+  },
+  {
+    "word": "get dressed",
+    "sentence": "The get dressed is a beautiful animal that lives in the forest.",
+    "options": ["get dressed", "lion", "tiger", "bear"],
+    "answer": "get dressed"
+  },
+  {
+    "word": "house work",
+    "sentence": "The house work is a beautiful animal that lives in the forest.",
+    "options": ["house work", "lion", "tiger", "bear"],
+    "answer": "house work"
+  },
+  {
+    "word": "yell",
+    "sentence": "The yell is a beautiful animal that lives in the forest.",
+    "options": ["yell", "lion", "tiger", "bear"],
+    "answer": "yell"
+  },
+  {
+    "word": "tennis racket",
+    "sentence": "The tennis racket is a beautiful animal that lives in the forest.",
+    "options": ["tennis racket", "lion", "tiger", "bear"],
+    "answer": "tennis racket"
+  },
+  {
+    "word": "naughty",
+    "sentence": "The naughty is a beautiful animal that lives in the forest.",
+    "options": ["naughty", "lion", "tiger", "bear"],
+    "answer": "naughty"
+  },
+  {
+    "word": "guess",
+    "sentence": "The guess is a beautiful animal that lives in the forest.",
+    "options": ["guess", "lion", "tiger", "bear"],
+    "answer": "guess"
+  },
+  {
+    "word": "equipment",
+    "sentence": "The equipment is a beautiful animal that lives in the forest.",
+    "options": ["equipment", "lion", "tiger", "bear"],
+    "answer": "equipment"
+  },
+  {
+    "word": "stay",
+    "sentence": "The stay is a beautiful animal that lives in the forest.",
+    "options": ["stay", "lion", "tiger", "bear"],
+    "answer": "stay"
+  },
+  {
+    "word": "soft",
+    "sentence": "The soft is a beautiful animal that lives in the forest.",
+    "options": ["soft", "lion", "tiger", "bear"],
+    "answer": "soft"
+  },
+  {
+    "word": "alien",
+    "sentence": "The alien is a beautiful animal that lives in the forest.",
+    "options": ["alien", "lion", "tiger", "bear"],
+    "answer": "alien"
+  },
+  {
+    "word": "stuck",
+    "sentence": "The stuck is a beautiful animal that lives in the forest.",
+    "options": ["stuck", "lion", "tiger", "bear"],
+    "answer": "stuck"
+  },
+  {
+    "word": "balloon",
+    "sentence": "The balloon is a beautiful animal that lives in the forest.",
+    "options": ["balloon", "lion", "tiger", "bear"],
+    "answer": "balloon"
+  },
+  {
+    "word": "horn",
+    "sentence": "The horn is a beautiful animal that lives in the forest.",
+    "options": ["horn", "lion", "tiger", "bear"],
+    "answer": "horn"
+  },
+  {
+    "word": "bounce",
+    "sentence": "The bounce is a beautiful animal that lives in the forest.",
+    "options": ["bounce", "lion", "tiger", "bear"],
+    "answer": "bounce"
+  },
+  {
+    "word": "wheel",
+    "sentence": "The wheel is a beautiful animal that lives in the forest.",
+    "options": ["wheel", "lion", "tiger", "bear"],
+    "answer": "wheel"
+  },
+  {
+    "word": "board game",
+    "sentence": "The board game is a beautiful animal that lives in the forest.",
+    "options": ["board game", "lion", "tiger", "bear"],
+    "answer": "board game"
+  },
+  {
+    "word": "move",
+    "sentence": "The move is a beautiful animal that lives in the forest.",
+    "options": ["move", "lion", "tiger", "bear"],
+    "answer": "move"
+  },
+  {
+    "word": "double",
+    "sentence": "The double is a beautiful animal that lives in the forest.",
+    "options": ["double", "lion", "tiger", "bear"],
+    "answer": "double"
+  },
+  {
+    "word": "heavy",
+    "sentence": "The heavy is a beautiful animal that lives in the forest.",
+    "options": ["heavy", "lion", "tiger", "bear"],
+    "answer": "heavy"
+  },
+  {
+    "word": "radio",
+    "sentence": "The radio is a beautiful animal that lives in the forest.",
+    "options": ["radio", "lion", "tiger", "bear"],
+    "answer": "radio"
+  },
+  {
+    "word": "straw",
+    "sentence": "The straw is a beautiful animal that lives in the forest.",
+    "options": ["straw", "lion", "tiger", "bear"],
+    "answer": "straw"
+  },
+  {
+    "word": "complete",
+    "sentence": "The complete is a beautiful animal that lives in the forest.",
+    "options": ["complete", "lion", "tiger", "bear"],
+    "answer": "complete"
+  },
+  {
+    "word": "ugly",
+    "sentence": "The ugly is a beautiful animal that lives in the forest.",
+    "options": ["ugly", "lion", "tiger", "bear"],
+    "answer": "ugly"
+  },
+  {
+    "word": "keyboard",
+    "sentence": "The keyboard is a beautiful animal that lives in the forest.",
+    "options": ["keyboard", "lion", "tiger", "bear"],
+    "answer": "keyboard"
+  },
+  {
+    "word": "fantastic",
+    "sentence": "The fantastic is a beautiful animal that lives in the forest.",
+    "options": ["fantastic", "lion", "tiger", "bear"],
+    "answer": "fantastic"
+  },
+  {
+    "word": "lorry",
+    "sentence": "The lorry is a beautiful animal that lives in the forest.",
+    "options": ["lorry", "lion", "tiger", "bear"],
+    "answer": "lorry"
+  },
+  {
+    "word": "chips",
+    "sentence": "The chips is a beautiful animal that lives in the forest.",
+    "options": ["chips", "lion", "tiger", "bear"],
+    "answer": "chips"
+  },
+  {
+    "word": "wow",
+    "sentence": "The wow is a beautiful animal that lives in the forest.",
+    "options": ["wow", "lion", "tiger", "bear"],
+    "answer": "wow"
+  },
+  {
+    "word": "try",
+    "sentence": "The try is a beautiful animal that lives in the forest.",
+    "options": ["try", "lion", "tiger", "bear"],
+    "answer": "try"
+  },
+  {
+    "word": "bin",
+    "sentence": "The bin is a beautiful animal that lives in the forest.",
+    "options": ["bin", "lion", "tiger", "bear"],
+    "answer": "bin"
+  },
+  {
+    "word": "house",
+    "sentence": "The house is a beautiful animal that lives in the forest.",
+    "options": ["house", "lion", "tiger", "bear"],
+    "answer": "house"
+  },
+  {
+    "word": "classmate",
+    "sentence": "The classmate is a beautiful animal that lives in the forest.",
+    "options": ["classmate", "lion", "tiger", "bear"],
+    "answer": "classmate"
+  },
+  {
+    "word": "shake",
+    "sentence": "The shake is a beautiful animal that lives in the forest.",
+    "options": ["shake", "lion", "tiger", "bear"],
+    "answer": "shake"
+  },
+  {
+    "word": "giraffe",
+    "sentence": "The giraffe is a beautiful animal that lives in the forest.",
+    "options": ["giraffe", "lion", "tiger", "bear"],
+    "answer": "giraffe"
+  },
+  {
+    "word": "welldone",
+    "sentence": "The welldone is a beautiful animal that lives in the forest.",
+    "options": ["welldone", "lion", "tiger", "bear"],
+    "answer": "welldone"
+  },
+  {
+    "word": "helicopter",
+    "sentence": "The helicopter is a beautiful animal that lives in the forest.",
+    "options": ["helicopter", "lion", "tiger", "bear"],
+    "answer": "helicopter"
+  }
+]

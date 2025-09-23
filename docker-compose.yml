@@ -8,5 +8,6 @@ services:
     container_name: portfolio
     volumes:
       - /volume1/docker/data/words.json:/app/projects/wordbridge/api/graphql/words.json
+      - /volume1/docker/data/words_ai.json:/app/projects/wordbridge/api/graphql/words_ai.json
     ports:
-      - "3000:3000"
+      - '3000:3000'

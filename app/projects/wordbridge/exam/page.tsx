@@ -6,12 +6,14 @@ import { FiX } from 'react-icons/fi'; // Icon for exit button
 import GET_WORDS from '../gql/getWords';
 import { useQuery } from '@apollo/client';
 import Notice, { ColorVariant } from '../components/notice';
+import { aiTemplateService, AITemplate } from '../services/aiTemplateService';
 
 type Word = {
   enUS: string;
   zhTW: string;
   label?: string;
   templates?: string[];
+  hasAITemplate?: boolean;
 };
 
 type Question = {
@@ -114,31 +116,60 @@ const TEMPLATE_QUESTION_RATIO = 0.4; // 30% template, 70% original
 
 const ENUS_QUESTION_WEIGHT = 0.6;
 
-const genQuestions = (wordResource: Word[]): Question[] => {
-  const shuffledWords = [...wordResource].sort(() => 0.5 - Math.random());
+const genQuestions = async (
+  words: Word[],
+  aiTemplates: AITemplate[],
+): Promise<Question[]> => {
+  const shuffledWords = [...words].sort(() => 0.5 - Math.random());
   const templateCount = Math.round(10 * TEMPLATE_QUESTION_RATIO);
   const basicCount = 10 - templateCount;
 
-  // Template-based questions (always use English for question and options)
-  const templateQuestions = shuffledWords
-    .filter((w) => w.templates && w.templates.length > 0 && w.label)
-    .slice(0, templateCount)
-    .map((word) => {
-      const template =
-        word.templates![Math.floor(Math.random() * word.templates!.length)];
-      const sameLabelOptions = wordResource
+  // Template-based questions (try AI templates first, fallback to hardcoded)
+  const templateQuestions: Question[] = [];
+  const wordsWithTemplates = shuffledWords.filter((w) => w.label);
+
+  for (let i = 0; i < Math.min(templateCount, wordsWithTemplates.length); i++) {
+    const word = wordsWithTemplates[i];
+
+    // Try AI template first - use the passed aiTemplates array
+    const aiTemplate = aiTemplates.find(
+      (t) => t.word.toLowerCase() === word.enUS.toLowerCase(),
+    );
+
+    if (aiTemplate) {
+      // Use AI template
+      const sameLabelOptions = words
         .filter((w) => w.label === word.label && w.enUS !== word.enUS)
         .sort(() => 0.5 - Math.random())
         .slice(0, 3);
       const options = [...sameLabelOptions, word].sort(
         () => 0.5 - Math.random(),
       );
-      return {
+
+      templateQuestions.push({
+        question: { text: aiTemplate.sentence, answer: word.enUS },
+        options: options.map((opt) => opt.enUS),
+        type: 'template' as const,
+      });
+    } else if (word.templates && word.templates.length > 0) {
+      // Fallback to hardcoded templates
+      const template =
+        word.templates![Math.floor(Math.random() * word.templates!.length)];
+      const sameLabelOptions = words
+        .filter((w) => w.label === word.label && w.enUS !== word.enUS)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+      const options = [...sameLabelOptions, word].sort(
+        () => 0.5 - Math.random(),
+      );
+
+      templateQuestions.push({
         question: { text: template, answer: word.enUS },
         options: options.map((opt) => opt.enUS),
         type: 'template' as const,
-      };
-    });
+      });
+    }
+  }
 
   // Basic questions (randomly use eng or cht for question/options)
   const basicQuestions = shuffledWords
@@ -146,7 +177,7 @@ const genQuestions = (wordResource: Word[]): Question[] => {
     .slice(0, basicCount)
     .map((word) => {
       const useEnUSAsQuestion = Math.random() < ENUS_QUESTION_WEIGHT;
-      const shuffledOptions = [...wordResource]
+      const shuffledOptions = [...words]
         .filter((w) => w.enUS !== word.enUS)
         .sort(() => 0.5 - Math.random())
         .slice(0, 3);
@@ -181,14 +212,25 @@ const ExamPage = () => {
   const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
   const [showSummary, setShowSummary] = useState(false);
   const [showExitAlert, setShowExitAlert] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure we're on the client side before generating questions
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const {
     data: data_get_words,
     loading,
     error,
   } = useQuery(GET_WORDS, {
-    onCompleted: (data) => {
-      setQuestions(genQuestions(data.words));
+    skip: !isClient, // Only run query on client side
+    onCompleted: async (data) => {
+      if (isClient) {
+        const aiTemplates = await aiTemplateService.getAllTemplates();
+        const generatedQuestions = await genQuestions(data.words, aiTemplates);
+        setQuestions(generatedQuestions);
+      }
     },
   });
 
@@ -244,17 +286,24 @@ const ExamPage = () => {
     }
   };
 
-  const handleRetry = () => {
+  const handleRetry = async () => {
     setCurrentQuestionIndex(0);
     setSelectedOptionIdx(null);
     setIsCorrect(null);
     setShowSummary(false);
     setWrongAnswers([]);
     setScore(0);
-    setQuestions(genQuestions(data_get_words.words));
+    if (isClient && data_get_words?.words) {
+      const aiTemplates = await aiTemplateService.getAllTemplates();
+      const generatedQuestions = await genQuestions(
+        data_get_words.words,
+        aiTemplates,
+      );
+      setQuestions(generatedQuestions);
+    }
   };
 
-  if (loading) {
+  if (!isClient || loading) {
     return (
       <Notice
         colorVariant={ColorVariant.Loading}
