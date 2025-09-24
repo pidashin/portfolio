@@ -41,15 +41,17 @@ const wordsFilePath =
   );
 
 // Path to the words_ai.json file
-const wordsAIFilePath = path.join(
-  process.cwd(),
-  'app',
-  'projects',
-  'wordbridge',
-  'api',
-  'graphql',
-  'words_ai.json',
-);
+const wordsAIFilePath =
+  process.env.WORDS_AI_JSON_PATH ||
+  path.join(
+    process.cwd(),
+    'app',
+    'projects',
+    'wordbridge',
+    'api',
+    'graphql',
+    'words_ai.json',
+  );
 
 let wordsCache: Word[] | null = null;
 let aiTemplatesCache: AITemplate[] | null = null;

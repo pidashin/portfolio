@@ -6,6 +6,9 @@ services:
       dockerfile: Dockerfile
     image: portfolio
     container_name: portfolio
+    environment:
+      - WORDS_JSON_PATH=/app/projects/wordbridge/api/graphql/words.json
+      - WORDS_AI_JSON_PATH=/app/projects/wordbridge/api/graphql/words_ai.json
     volumes:
       - /volume1/docker/data/words.json:/app/projects/wordbridge/api/graphql/words.json
       - /volume1/docker/data/words_ai.json:/app/projects/wordbridge/api/graphql/words_ai.json
