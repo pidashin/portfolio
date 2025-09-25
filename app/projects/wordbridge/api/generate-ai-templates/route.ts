@@ -67,7 +67,7 @@ async function saveAITemplates(templates: AITemplate[]): Promise<void> {
   fs.writeFileSync(templatesPath, JSON.stringify(templates, null, 2));
   console.log(`✅ Saved ${templates.length} AI templates to words_ai.json`);
 
-  // Clear all caches to force refresh
+  // Clear AI template service cache
   clearAITemplateServiceCache();
 }
 

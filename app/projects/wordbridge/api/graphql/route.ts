@@ -55,21 +55,56 @@ const wordsAIFilePath =
 
 let wordsCache: Word[] | null = null;
 let aiTemplatesCache: AITemplate[] | null = null;
+let wordsLastModified: number | null = null;
+let aiTemplatesLastModified: number | null = null;
+
+// Clear cache function
+const clearCache = () => {
+  wordsCache = null;
+  aiTemplatesCache = null;
+  wordsLastModified = null;
+  aiTemplatesLastModified = null;
+  console.log('🔄 GraphQL cache cleared');
+};
 
 // Load AI templates from file
 const loadAITemplates = (): AITemplate[] => {
-  if (aiTemplatesCache) return aiTemplatesCache;
+  // Check if file has been modified since last cache
+  const fileExists = fs.existsSync(wordsAIFilePath);
+  if (fileExists) {
+    const stats = fs.statSync(wordsAIFilePath);
+    const lastModified = stats.mtime.getTime();
 
-  try {
-    if (fs.existsSync(wordsAIFilePath)) {
+    // If file has been modified since last cache, clear cache
+    if (
+      aiTemplatesLastModified !== null &&
+      lastModified > aiTemplatesLastModified
+    ) {
+      console.log('🔄 AI templates file updated, clearing cache');
+      aiTemplatesCache = null;
+    }
+
+    // If we have valid cache, return it
+    if (aiTemplatesCache && aiTemplatesLastModified === lastModified) {
+      return aiTemplatesCache;
+    }
+
+    // Load fresh data from file
+    try {
+      console.log('Loading AI templates from:', wordsAIFilePath);
       const fileData = fs.readFileSync(wordsAIFilePath, 'utf-8');
       aiTemplatesCache = JSON.parse(fileData);
-    } else {
+      aiTemplatesLastModified = lastModified;
+      console.log('Loaded', aiTemplatesCache?.length || 0, 'AI templates');
+    } catch (error) {
+      console.error('Error loading AI templates:', error);
       aiTemplatesCache = [];
+      aiTemplatesLastModified = lastModified;
     }
-  } catch (error) {
-    console.error('Error loading AI templates:', error);
+  } else {
+    console.log('AI templates file does not exist');
     aiTemplatesCache = [];
+    aiTemplatesLastModified = null;
   }
 
   return aiTemplatesCache || [];
@@ -85,24 +120,49 @@ const checkAITemplateStatus = (word: string): boolean => {
 
 // Read the words from the JSON file
 const getWords = (): Word[] | null => {
-  // Cache the words file to avoid reading from disk on every request
-  if (wordsCache) return wordsCache;
+  // Check if file has been modified since last cache
+  const fileExists = fs.existsSync(wordsFilePath);
+  if (fileExists) {
+    const stats = fs.statSync(wordsFilePath);
+    const lastModified = stats.mtime.getTime();
 
-  try {
-    // Check if the file exists, and create it if it doesn't
-    if (!fs.existsSync(wordsFilePath)) {
-      // If the file doesn't exist, create an empty file
-      fs.writeFileSync(wordsFilePath, JSON.stringify([]));
-      wordsCache = [];
-    } else {
+    // If file has been modified since last cache, clear cache
+    if (wordsLastModified !== null && lastModified > wordsLastModified) {
+      console.log('🔄 Words file updated, clearing cache');
+      wordsCache = null;
+    }
+
+    // If we have valid cache, return it
+    if (wordsCache && wordsLastModified === lastModified) {
+      return wordsCache;
+    }
+
+    // Load fresh data from file
+    try {
+      console.log('Loading words from:', wordsFilePath);
       const fileData = fs.readFileSync(wordsFilePath, 'utf-8');
       wordsCache = JSON.parse(fileData);
+      wordsLastModified = lastModified;
+      console.log('Loaded', wordsCache?.length || 0, 'words');
+    } catch (error) {
+      console.error('Error reading the words.json file:', error);
+      wordsCache = [];
+      wordsLastModified = lastModified;
     }
-    return wordsCache;
-  } catch (error) {
-    console.error('Error reading the words.json file:', error);
-    return null; // Return null if file read fails
+  } else {
+    // If the file doesn't exist, create an empty file
+    try {
+      console.log('Words file does not exist, creating empty file');
+      fs.writeFileSync(wordsFilePath, JSON.stringify([]));
+      wordsCache = [];
+      wordsLastModified = Date.now();
+    } catch (error) {
+      console.error('Error creating words.json file:', error);
+      return null;
+    }
   }
+
+  return wordsCache;
 };
 
 // Save the updated words to the JSON file
@@ -160,6 +220,7 @@ const typeDefs = gql`
     words: [Word!]!
     wordsWithAITemplates: [Word!]!
     aiTemplates: [AITemplate!]!
+    clearCache: Boolean!
   }
 
   type Mutation {
@@ -206,6 +267,11 @@ const resolvers = {
 
     aiTemplates: (): AITemplate[] => {
       return loadAITemplates();
+    },
+
+    clearCache: (): boolean => {
+      clearCache();
+      return true;
     },
   },
   Mutation: {
