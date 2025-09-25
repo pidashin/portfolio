@@ -49,20 +49,21 @@ let generationStatus: GenerationStatus = {
 
 // Load words from JSON file
 function loadWords(): Word[] {
-  const wordsPath = path.join(
-    process.cwd(),
-    'app/projects/wordbridge/api/graphql/words.json',
-  );
+  const wordsPath =
+    process.env.WORDS_JSON_PATH ||
+    path.join(process.cwd(), 'app/projects/wordbridge/api/graphql/words.json');
   const wordsData = fs.readFileSync(wordsPath, 'utf8');
   return JSON.parse(wordsData);
 }
 
 // Save AI templates to JSON file
 async function saveAITemplates(templates: AITemplate[]): Promise<void> {
-  const templatesPath = path.join(
-    process.cwd(),
-    'app/projects/wordbridge/api/graphql/words_ai.json',
-  );
+  const templatesPath =
+    process.env.WORDS_AI_JSON_PATH ||
+    path.join(
+      process.cwd(),
+      'app/projects/wordbridge/api/graphql/words_ai.json',
+    );
   fs.writeFileSync(templatesPath, JSON.stringify(templates, null, 2));
   console.log(`✅ Saved ${templates.length} AI templates to words_ai.json`);
 
@@ -82,10 +83,12 @@ function clearAITemplateServiceCache() {
 
 // Load existing AI templates
 function loadAITemplates(): AITemplate[] {
-  const templatesPath = path.join(
-    process.cwd(),
-    'app/projects/wordbridge/api/graphql/words_ai.json',
-  );
+  const templatesPath =
+    process.env.WORDS_AI_JSON_PATH ||
+    path.join(
+      process.cwd(),
+      'app/projects/wordbridge/api/graphql/words_ai.json',
+    );
   if (fs.existsSync(templatesPath)) {
     const templatesData = fs.readFileSync(templatesPath, 'utf8');
     return JSON.parse(templatesData);
