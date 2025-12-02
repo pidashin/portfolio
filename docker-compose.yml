@@ -9,8 +9,10 @@ services:
     environment:
       - WORDS_JSON_PATH=/app/projects/wordbridge/api/graphql/words.json
       - WORDS_AI_JSON_PATH=/app/projects/wordbridge/api/graphql/words_ai.json
+      - OCR_RESULTS_PATH=/app/projects/quiz-viewer/data/ocr-results.json
     volumes:
       - /volume1/docker/data/words.json:/app/projects/wordbridge/api/graphql/words.json
       - /volume1/docker/data/words_ai.json:/app/projects/wordbridge/api/graphql/words_ai.json
+      - /volume1/docker/data/ocr-results.json:/app/projects/quiz-viewer/data/ocr-results.json
     ports:
       - '3000:3000'
