@@ -2,25 +2,13 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-// Define the shape of OCR data
-interface OcrData {
+// Define the shape of a question
+interface Question {
   subject: string;
-  questionStem?: string;
+  stem: string;
   options?: string[];
   blanks?: string[];
   imageDescription?: string;
-  [key: string]: any;
-}
-
-// Define the shape of a question
-interface Question {
-  id: string;
-  timestamp: string;
-  subject: string;
-  userId: string;
-  imagePath: string;
-  ocrData: OcrData;
-  status: string;
 }
 
 // Path to the ocr-results.json file

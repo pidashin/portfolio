@@ -3,23 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-interface OcrData {
+interface Question {
   subject: string;
-  questionStem?: string;
+  stem: string;
   options?: string[];
   blanks?: string[];
   imageDescription?: string;
-  [key: string]: any;
-}
-
-interface Question {
-  id: string;
-  timestamp: string;
-  subject: string;
-  userId: string;
-  imagePath: string;
-  ocrData: OcrData;
-  status: string;
 }
 
 interface ApiResponse {
@@ -96,7 +85,6 @@ const QuizViewer = () => {
   }
 
   const currentQuestion = questions[currentIndex];
-  const { ocrData } = currentQuestion;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
@@ -120,35 +108,26 @@ const QuizViewer = () => {
           {/* Subject Badge */}
           <div className="mb-6">
             <span className="inline-block px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-full text-sm">
-              {ocrData.subject}
-            </span>
-            <span className="ml-3 text-gray-500 text-sm">
-              {new Date(currentQuestion.timestamp).toLocaleDateString('zh-TW', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
+              {currentQuestion.subject}
             </span>
           </div>
 
           {/* Question Stem */}
-          {ocrData.questionStem && (
+          {currentQuestion.stem && (
             <div className="mb-6">
               <h2 className="text-xl font-bold text-gray-800 mb-3">Question</h2>
               <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                {ocrData.questionStem}
+                {currentQuestion.stem}
               </p>
             </div>
           )}
 
           {/* Options */}
-          {ocrData.options && ocrData.options.length > 0 && (
+          {currentQuestion.options && currentQuestion.options.length > 0 && (
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-3">Options</h3>
               <div className="space-y-2">
-                {ocrData.options.map((option, idx) => (
+                {currentQuestion.options.map((option, idx) => (
                   <div
                     key={idx}
                     className="p-3 bg-gray-50 rounded-md border border-gray-200 hover:bg-gray-100 transition"
@@ -164,11 +143,11 @@ const QuizViewer = () => {
           )}
 
           {/* Blanks */}
-          {ocrData.blanks && ocrData.blanks.length > 0 && (
+          {currentQuestion.blanks && currentQuestion.blanks.length > 0 && (
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-3">Fill in the Blanks</h3>
               <div className="space-y-2">
-                {ocrData.blanks.map((blank, idx) => (
+                {currentQuestion.blanks.map((blank, idx) => (
                   <div key={idx} className="p-3 bg-yellow-50 rounded-md border border-yellow-200">
                     <span className="font-medium text-yellow-700 mr-2">Blank {idx + 1}:</span>
                     <span className="text-gray-700">{blank}</span>
@@ -179,18 +158,18 @@ const QuizViewer = () => {
           )}
 
           {/* Image Description */}
-          {ocrData.imageDescription && (
+          {currentQuestion.imageDescription && (
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-3">Image Description</h3>
               <p className="text-gray-600 italic bg-blue-50 p-4 rounded-md border border-blue-200">
-                {ocrData.imageDescription}
+                {currentQuestion.imageDescription}
               </p>
             </div>
           )}
 
-          {/* Question ID */}
+          {/* Question Index */}
           <div className="text-xs text-gray-400 mt-6 pt-4 border-t border-gray-200">
-            Question ID: {currentQuestion.id}
+            Question {currentIndex + 1} of {questions.length}
           </div>
         </div>
 
