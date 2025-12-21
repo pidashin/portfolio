@@ -33,7 +33,7 @@ const QuizViewer = () => {
       setLoading(true);
       const response = await fetch('/projects/quiz-viewer/api/questions');
       const data: ApiResponse = await response.json();
-      
+
       if (data.success && data.questions.length > 0) {
         setQuestions(data.questions);
         setError(null);
@@ -71,8 +71,12 @@ const QuizViewer = () => {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="text-center p-8 bg-white shadow-xl rounded-lg border border-indigo-200 max-w-md">
-          <h1 className="text-3xl font-bold text-indigo-600 mb-4">Quiz Viewer</h1>
-          <p className="text-gray-600 mb-6">{error || 'No questions available yet'}</p>
+          <h1 className="text-3xl font-bold text-indigo-600 mb-4">
+            Quiz Viewer
+          </h1>
+          <p className="text-gray-600 mb-6">
+            {error || 'No questions available yet'}
+          </p>
           <Link
             className="px-6 py-3 bg-indigo-500 text-white font-semibold rounded-md hover:bg-indigo-600 transition inline-block"
             href="/projects"
@@ -125,7 +129,9 @@ const QuizViewer = () => {
           {/* Options */}
           {currentQuestion.options && currentQuestion.options.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">Options</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                Options
+              </h3>
               <div className="space-y-2">
                 {currentQuestion.options.map((option, idx) => (
                   <div
@@ -145,11 +151,18 @@ const QuizViewer = () => {
           {/* Blanks */}
           {currentQuestion.blanks && currentQuestion.blanks.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">Fill in the Blanks</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                Fill in the Blanks
+              </h3>
               <div className="space-y-2">
                 {currentQuestion.blanks.map((blank, idx) => (
-                  <div key={idx} className="p-3 bg-yellow-50 rounded-md border border-yellow-200">
-                    <span className="font-medium text-yellow-700 mr-2">Blank {idx + 1}:</span>
+                  <div
+                    key={idx}
+                    className="p-3 bg-yellow-50 rounded-md border border-yellow-200"
+                  >
+                    <span className="font-medium text-yellow-700 mr-2">
+                      Blank {idx + 1}:
+                    </span>
                     <span className="text-gray-700">{blank}</span>
                   </div>
                 ))}
@@ -160,7 +173,9 @@ const QuizViewer = () => {
           {/* Image Description */}
           {currentQuestion.imageDescription && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">Image Description</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                Image Description
+              </h3>
               <p className="text-gray-600 italic bg-blue-50 p-4 rounded-md border border-blue-200">
                 {currentQuestion.imageDescription}
               </p>
@@ -182,11 +197,11 @@ const QuizViewer = () => {
           >
             ← Previous
           </button>
-          
+
           <div className="text-gray-600 font-medium">
             Question {currentIndex + 1} of {questions.length}
           </div>
-          
+
           <button
             onClick={handleNext}
             className="px-6 py-3 bg-indigo-500 text-white font-semibold rounded-md hover:bg-indigo-600 transition shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"

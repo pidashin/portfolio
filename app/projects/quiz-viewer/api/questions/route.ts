@@ -30,13 +30,16 @@ let questionsLastModified: number | null = null;
 const getQuestions = (): Question[] => {
   // Check if file exists
   const fileExists = fs.existsSync(ocrResultsFilePath);
-  
+
   if (fileExists) {
     const stats = fs.statSync(ocrResultsFilePath);
     const lastModified = stats.mtime.getTime();
 
     // If file has been modified since last cache, clear cache
-    if (questionsLastModified !== null && lastModified > questionsLastModified) {
+    if (
+      questionsLastModified !== null &&
+      lastModified > questionsLastModified
+    ) {
       console.log('🔄 OCR results file updated, clearing cache');
       questionsCache = null;
     }
@@ -78,21 +81,21 @@ const getQuestions = (): Question[] => {
 export async function GET() {
   try {
     const questions = getQuestions();
-    
+
     return NextResponse.json({
       success: true,
       count: questions.length,
-      questions
+      questions,
     });
   } catch (error) {
     console.error('❌ Error in GET /api/questions:', error);
     return NextResponse.json(
-      { 
-        success: false, 
+      {
+        success: false,
         error: 'Failed to load questions',
-        questions: []
+        questions: [],
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
