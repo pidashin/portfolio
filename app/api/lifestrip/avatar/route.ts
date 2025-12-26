@@ -17,68 +17,67 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    let finalPrompt = '';
+    const contents = [];
+    let prompt = '';
 
     if (image) {
       const base64Data = image.split(',')[1];
       const mimeType = image.split(';')[0].split(':')[1];
 
-      const analysisPrompt = `
-        Analyze this photo and create a detailed Shonen Manga character design prompt for a person named ${name}.
-        Keep the character's facial features, hairstyle, and clothing style consistent with the photo but reimaged in manga style.
-        User's extra context: "${description || 'None'}"
-        
-        Requirements for the prompt you generate:
-        - It must start with: "A high-quality vibrant COLOR Shonen manga character portrait, ${name},"
-        - Include details about hair, eyes, expression, and outfit based on the photo.
-        - Ends with: "dynamic cell shading, clean line art, high contrast, white background, masterpiece, trending on pixiv."
-        
-        Return ONLY the prompt string. No other text.
-      `;
+      prompt = `Transform the person in this photo into a vibrant COLOR Shonen Manga character portrait named "${name}".
+      Consistency: Keep their hairstyle and facial features consistent with the photo.
+      Extra context: ${description || 'None'}
+      Style: Dynamic cell shading, clean line art, high contrast, white background.
+      Output: Generate the image directly.`;
 
-      const analysisResult = await client.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: [
+      contents.push({
+        role: 'user',
+        parts: [
+          { text: prompt },
           {
-            role: 'user',
-            parts: [
-              { text: analysisPrompt },
-              {
-                inlineData: {
-                  data: base64Data,
-                  mimeType: mimeType,
-                },
-              },
-            ],
+            inlineData: {
+              data: base64Data,
+              mimeType: mimeType,
+            },
           },
         ],
       });
-
-      finalPrompt = analysisResult.text?.trim() || '';
     } else {
-      finalPrompt = `A high-quality vibrant COLOR Shonen manga character portrait, ${name}, ${description}, dynamic cell shading, clean line art, high contrast, white background, masterpiece, trending on pixiv.`;
-    }
+      prompt = `Generate a vibrant COLOR Shonen Manga character portrait named "${name}".
+      Description: ${description}
+      Style: Dynamic cell shading, clean line art, high contrast, white background.
+      Output: Generate the image directly.`;
 
-    // Image generation Stage
-    // We use the imagen-3.0-generate-002 as the target model
-    const imageResult = await client.models.generateImages({
-      model: 'imagen-3.0-generate-002',
-      prompt: finalPrompt,
-      config: {
-        numberOfImages: 1,
-        includeRaiReason: true,
-      },
-    });
-
-    const imageData = imageResult.generatedImages?.[0]?.image?.imageBytes;
-    if (imageData) {
-      return NextResponse.json({
-        avatarUrl: `data:image/png;base64,${imageData}`,
-        promptUsed: finalPrompt,
+      contents.push({
+        role: 'user',
+        parts: [{ text: prompt }],
       });
     }
 
-    throw new Error('Gemini returned no image data');
+    const result = await client.models.generateContent({
+      model: 'gemini-2.5-flash-image',
+      contents: contents,
+    });
+
+    // Extract image data from the response parts
+    const imagePart = result.candidates?.[0]?.content?.parts?.find(
+      (p) => p.inlineData,
+    );
+
+    if (imagePart?.inlineData?.data) {
+      return NextResponse.json({
+        avatarUrl: `data:${imagePart.inlineData.mimeType || 'image/png'};base64,${imagePart.inlineData.data}`,
+        promptUsed: prompt,
+      });
+    }
+
+    console.error(
+      "Gemini didn't return an image part. Result:",
+      JSON.stringify(result, null, 2),
+    );
+    throw new Error(
+      'Gemini failed to generate an image. It might have returned text instead.',
+    );
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     console.error('LifeStrip Avatar Error:', error);
