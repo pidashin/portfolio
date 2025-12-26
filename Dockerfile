@@ -17,5 +17,6 @@ RUN npm run build
 # Expose the application port
 EXPOSE 3000
 
+ENTRYPOINT []
 # Start the application
 CMD ["npm", "start"]
