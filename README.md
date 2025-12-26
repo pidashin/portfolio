@@ -46,4 +46,10 @@ To run this project locally:
 docker-compose up -d --build
 ```
 
+### force rebuild (no cache)
+
+```sh
+docker-compose down && docker-compose build --no-cache && docker-compose up -d
+```
+
 🚀 _Thank you for visiting my portfolio! Feel free to explore and contribute._
