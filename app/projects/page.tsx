@@ -8,6 +8,8 @@ export default function ProjectsPage() {
       <Link href="/projects/wordbridge">WordBridge</Link>
       <br />
       <Link href="/projects/quiz-viewer">Quiz Viewer</Link>
+      <br />
+      <Link href="/projects/lifestrip">LifeStrip (AI Comic Diary)</Link>
     </main>
   );
 }
