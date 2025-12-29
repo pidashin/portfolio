@@ -16,12 +16,17 @@ type Word = {
   hasAITemplate?: boolean;
 };
 
+type Option = {
+  text: string;
+  translation: string;
+};
+
 type Question = {
   question: {
     text: string; // The question string to display
     answer: string; // The correct answer string
   };
-  options: string[]; // Array of option strings
+  options: Option[]; // Array of option objects
   type?: 'template' | 'basic';
 };
 
@@ -148,7 +153,10 @@ const genQuestions = async (
 
       templateQuestions.push({
         question: { text: aiTemplate.sentence, answer: word.enUS },
-        options: options.map((opt) => opt.enUS),
+        options: options.map((opt) => ({
+          text: opt.enUS,
+          translation: opt.zhTW,
+        })),
         type: 'template' as const,
       });
     } else if (word.templates && word.templates.length > 0) {
@@ -165,7 +173,10 @@ const genQuestions = async (
 
       templateQuestions.push({
         question: { text: template, answer: word.enUS },
-        options: options.map((opt) => opt.enUS),
+        options: options.map((opt) => ({
+          text: opt.enUS,
+          translation: opt.zhTW,
+        })),
         type: 'template' as const,
       });
     }
@@ -190,7 +201,10 @@ const genQuestions = async (
         },
         options: shuffledOptions
           .sort(() => 0.5 - Math.random())
-          .map((opt) => (useEnUSAsQuestion ? opt.zhTW : opt.enUS)),
+          .map((opt) => ({
+            text: useEnUSAsQuestion ? opt.zhTW : opt.enUS,
+            translation: useEnUSAsQuestion ? opt.enUS : opt.zhTW,
+          })),
         type: 'basic' as const,
       };
     });
@@ -247,7 +261,7 @@ const ExamPage = () => {
 
     const currentQuestion = questions[currentQuestionIndex];
     const isAnswerCorrect =
-      currentQuestion.options[selectedOptionIdx] ===
+      currentQuestion.options[selectedOptionIdx].text ===
       currentQuestion.question.answer;
     setIsCorrect(isAnswerCorrect);
 
@@ -358,7 +372,8 @@ const ExamPage = () => {
       </p>
       <div className="mb-4">
         {currentQuestion?.options.map((option, index) => {
-          const isAnswerCorrect = option === currentQuestion.question.answer;
+          const isAnswerCorrect =
+            option.text === currentQuestion.question.answer;
 
           let btnClass =
             'block w-full p-2 mb-2 text-left border rounded-md transition-all duration-200 text-2xl';
@@ -379,7 +394,14 @@ const ExamPage = () => {
               className={btnClass}
               onClick={() => handleOptionSelect(index)}
             >
-              {option}
+              <div className="flex items-baseline gap-3">
+                <span>{option.text}</span>
+                {isCorrect !== null && (
+                  <span className="text-slate-400 font-normal italic">
+                    ({option.translation})
+                  </span>
+                )}
+              </div>
             </button>
           );
         })}
