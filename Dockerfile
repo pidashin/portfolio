@@ -14,9 +14,15 @@ COPY . .
 # Build the app
 RUN npm run build
 
+# --- Security Hardening ---
+# Ensure the app directory is owned by the node user
+RUN chown -R node:node /app
+
+# Switch to non-root user
+USER node
+
 # Expose the application port
 EXPOSE 3000
 
-ENTRYPOINT []
 # Start the application
 CMD ["npm", "start"]
