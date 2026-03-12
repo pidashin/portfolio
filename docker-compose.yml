@@ -2,10 +2,12 @@ version: '3'
 services:
   webapp:
     build:
-      context: https://github.com/pidashin/portfolio.git
+      context: .
       dockerfile: Dockerfile
     image: portfolio
     container_name: portfolio
+    env_file:
+      - .env.local
     environment:
       - WORDS_JSON_PATH=/app/projects/wordbridge/api/graphql/words.json
       - WORDS_AI_JSON_PATH=/app/projects/wordbridge/api/graphql/words_ai.json
