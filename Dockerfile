@@ -16,7 +16,7 @@ RUN npm run build
 
 # --- Security Hardening ---
 # Ensure the app directory is owned by the node user
-RUN chown -R node:node /app
+RUN mkdir -p /app/data && chown -R node:node /app /app/data
 
 # Switch to non-root user
 USER node
