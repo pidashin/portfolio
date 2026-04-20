@@ -256,7 +256,12 @@ const ExamPage = () => {
 
   React.useEffect(() => {
     const initQuestions = async () => {
-      if (isClient && selectedMode && data_get_words?.words && questions.length === 0) {
+      if (
+        isClient &&
+        selectedMode &&
+        data_get_words?.words &&
+        questions.length === 0
+      ) {
         const aiTemplates = await aiTemplateService.getAllTemplates();
         const generatedQuestions = await genQuestions(
           data_get_words.words,
@@ -350,7 +355,9 @@ const ExamPage = () => {
         >
           <FiX size={24} />
         </button>
-        <h1 className="text-3xl font-bold mb-8 text-center">Choose Exam Mode</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center">
+          Choose Exam Mode
+        </h1>
         <div className="space-y-4">
           <button
             className="w-full p-6 text-xl font-semibold border-2 border-blue-500 rounded-xl hover:bg-blue-50 transition-colors flex flex-col items-center"
