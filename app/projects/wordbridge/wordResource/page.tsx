@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { FiTrash, FiPlus, FiZap, FiRefreshCw } from 'react-icons/fi';
+import { FiTrash, FiPlus, FiZap, FiRefreshCw, FiShield } from 'react-icons/fi';
 import { useQuery, useMutation } from '@apollo/client';
 import ADD_WORDS_MUTATION from '../gql/addWords';
 import DELETE_WORDS_MUTATION from '../gql/deleteWords';
@@ -217,6 +217,56 @@ const WordGrid: React.FC = () => {
     }
   };
 
+  const handleValidateAndClean = async () => {
+    const invalidWords = wordGroups.filter((word) => {
+      const en = word.enUS.toLowerCase();
+      const zh = word.zhTW.toLowerCase();
+      // Invalid if zhTW is exactly enUS or enUS wrapped in brackets
+      return zh === en || zh === `[${en}]`;
+    });
+
+    if (invalidWords.length === 0) {
+      alert('No invalid words found.');
+      return;
+    }
+
+    if (
+      !confirm(
+        `Found ${invalidWords.length} invalid words (where translation matches English or is [English]). Do you want to remove them?`,
+      )
+    ) {
+      return;
+    }
+
+    const enUsKeysToDelete = invalidWords
+      .filter((w) => !w.isNew)
+      .map((w) => w.enUS);
+
+    try {
+      if (enUsKeysToDelete.length > 0) {
+        await deleteWordsMutation({
+          variables: { enUsKeys: enUsKeysToDelete },
+        });
+      }
+
+      // Update local state to remove all invalid words (both saved and new)
+      setWordGroups((prev) =>
+        prev.filter((word) => {
+          const en = word.enUS.toLowerCase();
+          const zh = word.zhTW.toLowerCase();
+          return !(zh === en || zh === `[${en}]`);
+        }),
+      );
+
+      alert(`Successfully removed ${invalidWords.length} invalid words.`);
+    } catch (error) {
+      console.error('Error cleaning words:', error);
+      setErrMsg(
+        'Failed to clean invalid words. Please check console for details.',
+      );
+    }
+  };
+
   if (loading) {
     return (
       <Notice
@@ -277,8 +327,18 @@ const WordGrid: React.FC = () => {
             <button
               className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
               onClick={() => setIsJsonInputModalOpen(true)}
+              title="Import JSON"
             >
               <TbJson size={24} /> {/* Use TbJson icon for JSON import */}
+            </button>
+
+            {/* Button to validate and clean invalid translations */}
+            <button
+              className="p-2 bg-teal-600 text-white rounded-md hover:bg-teal-700"
+              onClick={handleValidateAndClean}
+              title="Validate & Clean Translations"
+            >
+              <FiShield size={24} />
             </button>
 
             {/* Button to open modal for adding a single word */}
