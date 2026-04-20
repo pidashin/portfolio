@@ -68,10 +68,12 @@ const Summary = ({
   score,
   wrongAnswers,
   onRetry,
+  onChangeMode,
 }: {
   score: number;
   wrongAnswers: WrongAnswer[];
   onRetry: () => void;
+  onChangeMode: () => void;
 }) => {
   const handleExit = () => {
     window.location.href = '/projects/wordbridge';
@@ -99,15 +101,21 @@ const Summary = ({
       ) : (
         <p>Perfect score! Well done!</p>
       )}
-      <div className="mt-12 w-full flex">
+      <div className="mt-12 w-full flex flex-col gap-4">
         <button
-          className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-md mr-8"
+          className="w-full px-4 py-3 bg-blue-500 text-white rounded-xl font-semibold shadow-md hover:bg-blue-600 transition-colors"
           onClick={onRetry}
         >
-          Retry
+          Retry Same Mode
         </button>
         <button
-          className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-md"
+          className="w-full px-4 py-3 bg-purple-500 text-white rounded-xl font-semibold shadow-md hover:bg-purple-600 transition-colors"
+          onClick={onChangeMode}
+        >
+          Change Mode
+        </button>
+        <button
+          className="w-full px-4 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-colors"
           onClick={handleExit}
         >
           Exit
@@ -121,12 +129,16 @@ const TEMPLATE_QUESTION_RATIO = 0.4; // 30% template, 70% original
 
 const ENUS_QUESTION_WEIGHT = 0.6;
 
+type ExamMode = 'mixed' | 'translation';
+
 const genQuestions = async (
   words: Word[],
   aiTemplates: AITemplate[],
+  mode: ExamMode = 'mixed',
 ): Promise<Question[]> => {
   const shuffledWords = [...words].sort(() => 0.5 - Math.random());
-  const templateCount = Math.round(10 * TEMPLATE_QUESTION_RATIO);
+  const templateCount =
+    mode === 'mixed' ? Math.round(10 * TEMPLATE_QUESTION_RATIO) : 0;
   const basicCount = 10 - templateCount;
 
   // Template-based questions (try AI templates first, fallback to hardcoded)
@@ -216,6 +228,7 @@ const genQuestions = async (
 };
 
 const ExamPage = () => {
+  const [selectedMode, setSelectedMode] = useState<ExamMode | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>(
@@ -238,15 +251,23 @@ const ExamPage = () => {
     loading,
     error,
   } = useQuery(GET_WORDS, {
-    skip: !isClient, // Only run query on client side
-    onCompleted: async (data) => {
-      if (isClient) {
+    skip: !isClient || !selectedMode, // Only run query on client side and when mode is selected
+  });
+
+  React.useEffect(() => {
+    const initQuestions = async () => {
+      if (isClient && selectedMode && data_get_words?.words && questions.length === 0) {
         const aiTemplates = await aiTemplateService.getAllTemplates();
-        const generatedQuestions = await genQuestions(data.words, aiTemplates);
+        const generatedQuestions = await genQuestions(
+          data_get_words.words,
+          aiTemplates,
+          selectedMode,
+        );
         setQuestions(generatedQuestions);
       }
-    },
-  });
+    };
+    initQuestions();
+  }, [isClient, selectedMode, data_get_words, questions.length]);
 
   const handleOptionSelect = (idx: number) => {
     if (isCorrect === null) {
@@ -307,17 +328,54 @@ const ExamPage = () => {
     setShowSummary(false);
     setWrongAnswers([]);
     setScore(0);
-    if (isClient && data_get_words?.words) {
-      const aiTemplates = await aiTemplateService.getAllTemplates();
-      const generatedQuestions = await genQuestions(
-        data_get_words.words,
-        aiTemplates,
-      );
-      setQuestions(generatedQuestions);
-    }
+    setQuestions([]); // Trigger useEffect
+  };
+  const handleChangeMode = () => {
+    setSelectedMode(null);
+    setShowSummary(false);
+    setCurrentQuestionIndex(0);
+    setSelectedOptionIdx(null);
+    setIsCorrect(null);
+    setWrongAnswers([]);
+    setScore(0);
+    setQuestions([]);
   };
 
-  if (!isClient || loading) {
+  if (!selectedMode) {
+    return (
+      <div className="p-8 h-[80vh] flex flex-col justify-center relative">
+        <button
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          onClick={confirmExit}
+        >
+          <FiX size={24} />
+        </button>
+        <h1 className="text-3xl font-bold mb-8 text-center">Choose Exam Mode</h1>
+        <div className="space-y-4">
+          <button
+            className="w-full p-6 text-xl font-semibold border-2 border-blue-500 rounded-xl hover:bg-blue-50 transition-colors flex flex-col items-center"
+            onClick={() => setSelectedMode('translation')}
+          >
+            <span className="text-2xl mb-1">Translation Only</span>
+            <span className="text-sm font-normal text-gray-500 text-center">
+              Basic English ↔ Traditional Chinese translation questions
+            </span>
+          </button>
+          <button
+            className="w-full p-6 text-xl font-semibold border-2 border-purple-500 rounded-xl hover:bg-purple-50 transition-colors flex flex-col items-center"
+            onClick={() => setSelectedMode('mixed')}
+          >
+            <span className="text-2xl mb-1">Mixed Mode</span>
+            <span className="text-sm font-normal text-gray-500 text-center">
+              Combination of translation and fill-in-the-blank sentences
+            </span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (loading || (selectedMode && questions.length === 0)) {
     return (
       <Notice
         colorVariant={ColorVariant.Loading}
@@ -340,6 +398,7 @@ const ExamPage = () => {
         score={score}
         wrongAnswers={wrongAnswers}
         onRetry={handleRetry}
+        onChangeMode={handleChangeMode}
       />
     );
   }
