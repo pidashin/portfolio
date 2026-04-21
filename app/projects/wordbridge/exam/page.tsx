@@ -137,31 +137,42 @@ const genQuestions = async (
   mode: ExamMode = 'mixed',
 ): Promise<Question[]> => {
   const shuffledWords = [...words].sort(() => 0.5 - Math.random());
-  const templateCount =
+  const targetTemplateCount =
     mode === 'mixed' ? Math.round(10 * TEMPLATE_QUESTION_RATIO) : 0;
-  const basicCount = 10 - templateCount;
 
   // Template-based questions (try AI templates first, fallback to hardcoded)
   const templateQuestions: Question[] = [];
-  const wordsWithTemplates = shuffledWords.filter((w) => w.label);
 
-  for (let i = 0; i < Math.min(templateCount, wordsWithTemplates.length); i++) {
-    const word = wordsWithTemplates[i];
+  // Find words that have either an AI template or hardcoded templates
+  const wordsForTemplates = shuffledWords.filter(
+    (w) =>
+      aiTemplates.some((t) => t.word.toLowerCase() === w.enUS.toLowerCase()) ||
+      (w.templates && w.templates.length > 0),
+  );
 
-    // Try AI template first - use the passed aiTemplates array
+  for (
+    let i = 0;
+    i < Math.min(targetTemplateCount, wordsForTemplates.length);
+    i++
+  ) {
+    const word = wordsForTemplates[i];
+
+    // Try AI template first
     const aiTemplate = aiTemplates.find(
       (t) => t.word.toLowerCase() === word.enUS.toLowerCase(),
     );
 
     if (aiTemplate) {
-      // Use AI template
-      const sameLabelOptions = words
-        .filter((w) => w.label === word.label && w.enUS !== word.enUS)
-        .sort(() => 0.5 - Math.random())
+      // Generate distractors: prioritize same label, but ensure we get 3
+      const distractors = words
+        .filter((w) => w.enUS !== word.enUS)
+        .sort((a, b) => {
+          if (a.label === word.label && b.label !== word.label) return -1;
+          if (a.label !== word.label && b.label === word.label) return 1;
+          return 0.5 - Math.random();
+        })
         .slice(0, 3);
-      const options = [...sameLabelOptions, word].sort(
-        () => 0.5 - Math.random(),
-      );
+      const options = [...distractors, word].sort(() => 0.5 - Math.random());
 
       templateQuestions.push({
         question: { text: aiTemplate.sentence, answer: word.enUS },
@@ -175,13 +186,16 @@ const genQuestions = async (
       // Fallback to hardcoded templates
       const template =
         word.templates![Math.floor(Math.random() * word.templates!.length)];
-      const sameLabelOptions = words
-        .filter((w) => w.label === word.label && w.enUS !== word.enUS)
-        .sort(() => 0.5 - Math.random())
+      
+      const distractors = words
+        .filter((w) => w.enUS !== word.enUS)
+        .sort((a, b) => {
+          if (a.label === word.label && b.label !== word.label) return -1;
+          if (a.label !== word.label && b.label === word.label) return 1;
+          return 0.5 - Math.random();
+        })
         .slice(0, 3);
-      const options = [...sameLabelOptions, word].sort(
-        () => 0.5 - Math.random(),
-      );
+      const options = [...distractors, word].sort(() => 0.5 - Math.random());
 
       templateQuestions.push({
         question: { text: template, answer: word.enUS },
@@ -195,9 +209,11 @@ const genQuestions = async (
   }
 
   // Basic questions (randomly use eng or cht for question/options)
+  // Backfill up to 10 questions total
+  const remainingCount = 10 - templateQuestions.length;
   const basicQuestions = shuffledWords
     .filter((w) => !templateQuestions.find((q) => q.question.answer === w.enUS))
-    .slice(0, basicCount)
+    .slice(0, remainingCount)
     .map((word) => {
       const useEnUSAsQuestion = Math.random() < ENUS_QUESTION_WEIGHT;
       const shuffledOptions = [...words]
