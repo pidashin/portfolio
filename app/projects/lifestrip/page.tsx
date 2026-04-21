@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FaBookOpen, FaMagic, FaUsers, FaHistory } from 'react-icons/fa';
 
 interface FamilyMember {
@@ -180,10 +181,12 @@ export default function LifeStripPage() {
                     key={i}
                     className="aspect-square bg-[#FBF9F1] rounded-[2rem] overflow-hidden relative group hover:scale-[1.03] transition-all duration-500 border-2 border-[#E5E1DA]"
                   >
-                    <img
+                    <Image
                       src={url}
                       alt={`Panel ${i + 1}`}
                       className="w-full h-full object-cover"
+                      fill
+                      unoptimized
                     />
                     <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md rounded-xl text-slate-700 text-[10px] font-black px-3 py-1.5 shadow-sm border border-[#E5E1DA] italic">
                       STEP {i + 1}

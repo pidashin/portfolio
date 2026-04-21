@@ -186,7 +186,7 @@ const genQuestions = async (
       // Fallback to hardcoded templates
       const template =
         word.templates![Math.floor(Math.random() * word.templates!.length)];
-      
+
       const distractors = words
         .filter((w) => w.enUS !== word.enUS)
         .sort((a, b) => {

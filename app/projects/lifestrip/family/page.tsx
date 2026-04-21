@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   FaPlus,
   FaTrash,
@@ -121,10 +122,12 @@ export default function FamilyPage() {
             >
               <div className="aspect-square bg-[#FBF9F1] relative">
                 {member.avatarUrl && (
-                  <img
+                  <Image
                     src={member.avatarUrl}
                     alt={member.name}
                     className="w-full h-full object-cover"
+                    fill
+                    unoptimized
                   />
                 )}
                 <button
@@ -206,10 +209,12 @@ export default function FamilyPage() {
                   />
                   {uploadedImage ? (
                     <div className="relative aspect-video w-full rounded-2xl overflow-hidden border-2 border-[#AAD7D9]">
-                      <img
+                      <Image
                         src={uploadedImage}
                         alt="Preview"
                         className="w-full h-full object-cover"
+                        fill
+                        unoptimized
                       />
                       <button
                         onClick={() => setUploadedImage(null)}
