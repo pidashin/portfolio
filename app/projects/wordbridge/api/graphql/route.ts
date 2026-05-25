@@ -1,9 +1,12 @@
+export const runtime = 'nodejs';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { ApolloServer } from '@apollo/server';
 import { gql } from 'graphql-tag';
 import fs from 'fs';
 import path from 'path';
 import { NextRequest } from 'next/server';
+import prisma from '../db';
+import { aiTemplateService } from '../../services/aiTemplateService';
 
 // Define the shape of a word
 interface Word {
@@ -211,9 +214,31 @@ const typeDefs = gql`
     answer: String!
   }
 
+  input AITemplateInput {
+    word: String!
+    sentence: String!
+    options: [String!]!
+    answer: String!
+  }
+
   input WordInput {
     enUS: String!
     zhTW: String!
+  }
+
+  type User {
+    id: ID!
+    username: String!
+    createdAt: String!
+  }
+
+  type ExamHistory {
+    id: ID!
+    userId: String!
+    score: Int!
+    mode: String!
+    wrongAnswers: String!
+    createdAt: String!
   }
 
   type Query {
@@ -221,6 +246,8 @@ const typeDefs = gql`
     wordsWithAITemplates: [Word!]!
     aiTemplates: [AITemplate!]!
     clearCache: Boolean!
+    getUsers: [User!]!
+    getExamHistory(userId: String!): [ExamHistory!]!
   }
 
   type Mutation {
@@ -231,6 +258,18 @@ const typeDefs = gql`
     addWords(words: [WordInput!]!): [Word!]!
     updateWords(words: [WordInput!]!): [Word!]!
     deleteWords(enUsKeys: [String!]!): Boolean
+
+    createUser(username: String!): User!
+    deleteUser(id: ID!): Boolean
+    saveExamResult(
+      userId: String!
+      score: Int!
+      mode: String!
+      wrongAnswers: String!
+    ): ExamHistory!
+
+    saveAITemplate(template: AITemplateInput!): AITemplate!
+    deleteAITemplate(word: String!): Boolean!
   }
 `;
 
@@ -272,6 +311,22 @@ const resolvers = {
     clearCache: (): boolean => {
       clearCache();
       return true;
+    },
+
+    getUsers: async () => {
+      const users = await prisma.user.findMany();
+      return users.map((u) => ({ ...u, createdAt: u.createdAt.toISOString() }));
+    },
+
+    getExamHistory: async (_: unknown, { userId }: { userId: string }) => {
+      const history = await prisma.examHistory.findMany({
+        where: { userId },
+        orderBy: { createdAt: 'desc' },
+      });
+      return history.map((h) => ({
+        ...h,
+        createdAt: h.createdAt.toISOString(),
+      }));
     },
   },
   Mutation: {
@@ -360,6 +415,115 @@ const resolvers = {
       }
 
       saveWords(newWords);
+      return true;
+    },
+
+    createUser: async (_: unknown, { username }: { username: string }) => {
+      const user = await prisma.user.create({
+        data: { username },
+      });
+      return { ...user, createdAt: user.createdAt.toISOString() };
+    },
+
+    deleteUser: async (_: unknown, { id }: { id: string }) => {
+      try {
+        await prisma.user.delete({
+          where: { id },
+        });
+        return true;
+      } catch (error) {
+        console.error('Error deleting user:', error);
+        return false;
+      }
+    },
+
+    saveExamResult: async (
+      _: unknown,
+      {
+        userId,
+        score,
+        mode,
+        wrongAnswers,
+      }: { userId: string; score: number; mode: string; wrongAnswers: string },
+    ) => {
+      const history = await prisma.examHistory.create({
+        data: { userId, score, mode, wrongAnswers },
+      });
+      return { ...history, createdAt: history.createdAt.toISOString() };
+    },
+
+    saveAITemplate: (
+      _: unknown,
+      { template }: { template: AITemplate },
+    ): AITemplate => {
+      const templates = loadAITemplates();
+      const index = templates.findIndex(
+        (t) => t.word.toLowerCase() === template.word.toLowerCase(),
+      );
+
+      if (index > -1) {
+        templates[index] = template;
+      } else {
+        templates.push(template);
+      }
+
+      const templatesPath =
+        process.env.WORDS_AI_JSON_PATH ||
+        path.join(
+          process.cwd(),
+          'app',
+          'projects',
+          'wordbridge',
+          'api',
+          'graphql',
+          'words_ai.json',
+        );
+      fs.writeFileSync(templatesPath, JSON.stringify(templates, null, 2));
+
+      aiTemplatesCache = templates;
+      aiTemplatesLastModified = Date.now();
+
+      try {
+        aiTemplateService.clearCache();
+      } catch (e) {
+        console.error('Failed to clear aiTemplateService cache:', e);
+      }
+
+      return template;
+    },
+
+    deleteAITemplate: (_: unknown, { word }: { word: string }): boolean => {
+      const templates = loadAITemplates();
+      const filtered = templates.filter(
+        (t) => t.word.toLowerCase() !== word.toLowerCase(),
+      );
+
+      if (filtered.length === templates.length) {
+        return false;
+      }
+
+      const templatesPath =
+        process.env.WORDS_AI_JSON_PATH ||
+        path.join(
+          process.cwd(),
+          'app',
+          'projects',
+          'wordbridge',
+          'api',
+          'graphql',
+          'words_ai.json',
+        );
+      fs.writeFileSync(templatesPath, JSON.stringify(filtered, null, 2));
+
+      aiTemplatesCache = filtered;
+      aiTemplatesLastModified = Date.now();
+
+      try {
+        aiTemplateService.clearCache();
+      } catch (e) {
+        console.error('Failed to clear aiTemplateService cache:', e);
+      }
+
       return true;
     },
   },

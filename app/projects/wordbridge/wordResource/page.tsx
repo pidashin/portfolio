@@ -1,26 +1,69 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { FiTrash, FiPlus, FiZap, FiRefreshCw, FiShield } from 'react-icons/fi';
+import {
+  FiTrash,
+  FiPlus,
+  FiZap,
+  FiRefreshCw,
+  FiShield,
+  FiSearch,
+  FiEdit3,
+} from 'react-icons/fi';
 import { useQuery, useMutation } from '@apollo/client';
 import ADD_WORDS_MUTATION from '../gql/addWords';
 import DELETE_WORDS_MUTATION from '../gql/deleteWords';
 import GET_WORDS from '../gql/getWords';
+import GET_AI_TEMPLATES from '../gql/getAITemplates';
+import SAVE_AI_TEMPLATE from '../gql/saveAITemplate';
+import DELETE_AI_TEMPLATE from '../gql/deleteAITemplate';
 import Notice, { ColorVariant } from '../components/notice';
 import { TbJson } from 'react-icons/tb';
 import JsonInputModal from './JsonInputModal';
 import AddWordModal from './AddWordModal';
 import { Word } from './types';
 
-const WordGrid: React.FC = () => {
-  const { data, loading, error, refetch } = useQuery(GET_WORDS);
+// Extended type to handle words merged with their AI fill-in-the-blank template
+interface WordWithTemplate extends Word {
+  aiTemplate?: {
+    sentence: string;
+    options: string[];
+    answer: string;
+  };
+}
 
-  const [wordGroups, setWordGroups] = useState<Word[]>([]);
+const WordGrid: React.FC = () => {
+  // Query both words and existing AI templates
+  const {
+    data: wordsData,
+    loading: wordsLoading,
+    error: wordsError,
+    refetch: refetchWords,
+  } = useQuery(GET_WORDS);
+  const {
+    data: templatesData,
+    loading: templatesLoading,
+    error: templatesError,
+    refetch: refetchTemplates,
+  } = useQuery(GET_AI_TEMPLATES);
+
+  const [wordGroups, setWordGroups] = useState<WordWithTemplate[]>([]);
+
+  // Search and filter states
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'with' | 'missing'>(
+    'all',
+  );
+
+  // Inline editor states
+  const [expandedWord, setExpandedWord] = useState<string | null>(null);
+  const [editSentence, setEditSentence] = useState('');
+  const [editOptions, setEditOptions] = useState<string[]>(['', '', '', '']);
+  const [editAnswer, setEditAnswer] = useState('');
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const [isJsonInputModalOpen, setIsJsonInputModalOpen] = useState(false);
-
   const [isAddWordModalOpen, setIsAddWordModalOpen] = useState(false);
-
   const [errMsg, setErrMsg] = useState<string | null>(null);
 
   // AI Generation state
@@ -37,14 +80,46 @@ const WordGrid: React.FC = () => {
   const [aiError, setAiError] = useState<string | null>(null);
 
   const [addWords] = useMutation(ADD_WORDS_MUTATION);
-
   const [deleteWordsMutation] = useMutation(DELETE_WORDS_MUTATION);
+  const [saveAITemplateMutation] = useMutation(SAVE_AI_TEMPLATE);
+  const [deleteAITemplateMutation] = useMutation(DELETE_AI_TEMPLATE);
 
+  // Sync and merge words and templates when data loads
   useEffect(() => {
-    if (data) {
-      setWordGroups(data.words);
+    if (wordsData && wordsData.words) {
+      const templates = templatesData?.aiTemplates || [];
+      const merged: WordWithTemplate[] = wordsData.words.map((word: Word) => {
+        const matchingTemplate = templates.find(
+          (t: {
+            word: string;
+            sentence: string;
+            options: string[];
+            answer: string;
+          }) => t.word.toLowerCase() === word.enUS.toLowerCase(),
+        );
+        return {
+          ...word,
+          aiTemplate: matchingTemplate
+            ? {
+                sentence: matchingTemplate.sentence,
+                options: matchingTemplate.options,
+                answer: matchingTemplate.answer,
+              }
+            : undefined,
+        };
+      });
+      setWordGroups(merged);
     }
-  }, [data]);
+  }, [wordsData, templatesData]);
+
+  // Combined refetch
+  const refetch = async () => {
+    try {
+      await Promise.all([refetchWords(), refetchTemplates()]);
+    } catch (err) {
+      console.error('Error refetching data:', err);
+    }
+  };
 
   // AI Generation functions
   const startAIGeneration = async () => {
@@ -68,7 +143,6 @@ const WordGrid: React.FC = () => {
         throw new Error(errorData.error || 'Failed to start AI generation');
       }
 
-      // Start polling for status
       pollAIGenerationStatus();
     } catch (error) {
       console.error('Failed to start AI generation:', error);
@@ -123,7 +197,6 @@ const WordGrid: React.FC = () => {
         throw new Error(errorData.error || 'Failed to retry AI generation');
       }
 
-      // Start polling for status
       pollAIGenerationStatus();
     } catch (error) {
       console.error('Failed to retry AI generation:', error);
@@ -146,11 +219,9 @@ const WordGrid: React.FC = () => {
         setAiError(status.error);
       }
 
-      // Continue polling if still running
       if (status.status === 'running') {
         setTimeout(pollAIGenerationStatus, 2000);
       } else if (status.status === 'completed') {
-        // Refresh data when generation completes to get updated AI template status
         refetch();
       }
     } catch (error) {
@@ -161,7 +232,6 @@ const WordGrid: React.FC = () => {
   };
 
   const handleConfirmJsonInput = (newWords: Word[]) => {
-    // Add isNew property to each new word
     const updatedNewWords = newWords.map((word) => ({ ...word, isNew: true }));
     setWordGroups((prev) => [...prev, ...updatedNewWords]);
   };
@@ -178,15 +248,15 @@ const WordGrid: React.FC = () => {
     }
 
     try {
-      setErrMsg(null); // Clear any previous error
+      setErrMsg(null);
       await addWords({
         variables: {
           words: newWords.map(({ enUS, zhTW }) => ({ enUS, zhTW })),
         },
       });
 
-      // Mark all new words as not new
       setWordGroups((prev) => prev.map((word) => ({ ...word, isNew: false })));
+      refetch();
     } catch (error) {
       console.error('Error saving new words:', error);
       setErrMsg('Failed to save new words. Please try again.');
@@ -195,12 +265,29 @@ const WordGrid: React.FC = () => {
 
   const handleDeleteWord = async (index: number) => {
     const wordToDelete = wordGroups[index];
-
-    // Set loading state
     setErrMsg(null);
 
+    if (
+      !confirm(
+        `Are you sure you want to delete the word "${wordToDelete.enUS}"?`,
+      )
+    ) {
+      return;
+    }
+
     try {
-      // Call the delete mutation
+      if (wordToDelete.isNew) {
+        setWordGroups((prev) => prev.filter((_, i) => i !== index));
+        return;
+      }
+
+      // If it has an AI template, also delete it
+      if (wordToDelete.hasAITemplate) {
+        await deleteAITemplateMutation({
+          variables: { word: wordToDelete.enUS },
+        });
+      }
+
       const { data, errors } = await deleteWordsMutation({
         variables: { enUsKeys: [wordToDelete.enUS] },
       });
@@ -208,11 +295,10 @@ const WordGrid: React.FC = () => {
       if (errors) {
         setErrMsg('Failed to delete the word. Please try again.');
       } else if (data?.deleteWords) {
-        // Remove the word from the state list if deletion was successful
         setWordGroups((prev) => prev.filter((_, i) => i !== index));
+        refetch();
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
+    } catch {
       setErrMsg('An error occurred while deleting the word.');
     }
   };
@@ -221,7 +307,6 @@ const WordGrid: React.FC = () => {
     const invalidWords = wordGroups.filter((word) => {
       const en = word.enUS.toLowerCase();
       const zh = word.zhTW.toLowerCase();
-      // Invalid if zhTW is exactly enUS or enUS wrapped in brackets
       return zh === en || zh === `[${en}]`;
     });
 
@@ -249,7 +334,6 @@ const WordGrid: React.FC = () => {
         });
       }
 
-      // Update local state to remove all invalid words (both saved and new)
       setWordGroups((prev) =>
         prev.filter((word) => {
           const en = word.enUS.toLowerCase();
@@ -259,6 +343,7 @@ const WordGrid: React.FC = () => {
       );
 
       alert(`Successfully removed ${invalidWords.length} invalid words.`);
+      refetch();
     } catch (error) {
       console.error('Error cleaning words:', error);
       setErrMsg(
@@ -267,19 +352,167 @@ const WordGrid: React.FC = () => {
     }
   };
 
+  // Inline editor functions
+  const handleToggleExpand = (word: WordWithTemplate) => {
+    if (expandedWord === word.enUS) {
+      setExpandedWord(null);
+    } else {
+      setExpandedWord(word.enUS);
+      setEditSentence(word.aiTemplate?.sentence || '');
+      setEditOptions(
+        word.aiTemplate?.options && word.aiTemplate.options.length === 4
+          ? [...word.aiTemplate.options]
+          : [word.enUS, '', '', ''], // Default word itself to option 1
+      );
+      setEditAnswer(word.enUS);
+      setValidationError(null);
+    }
+  };
+
+  const handleOptionChange = (idx: number, val: string) => {
+    setEditOptions((prev) => {
+      const updated = [...prev];
+      updated[idx] = val;
+      return updated;
+    });
+  };
+
+  const handleSaveTemplate = async (wordKey: string) => {
+    if (!editSentence.includes('____')) {
+      setValidationError(
+        'Sentence must contain a blank represented by four underscores (____).',
+      );
+      return;
+    }
+
+    const trimmedOptions = editOptions.map((opt) => opt.trim());
+    if (trimmedOptions.some((opt) => !opt)) {
+      setValidationError('All 4 options must be filled.');
+      return;
+    }
+
+    const correctExists = trimmedOptions.some(
+      (opt) => opt.toLowerCase() === wordKey.toLowerCase(),
+    );
+    if (!correctExists) {
+      setValidationError(
+        `One of the options must exactly match the word "${wordKey}".`,
+      );
+      return;
+    }
+
+    setValidationError(null);
+
+    try {
+      await saveAITemplateMutation({
+        variables: {
+          template: {
+            word: wordKey,
+            sentence: editSentence.trim(),
+            options: trimmedOptions,
+            answer: wordKey,
+          },
+        },
+      });
+
+      // Update state locally
+      setWordGroups((prev) =>
+        prev.map((word) => {
+          if (word.enUS.toLowerCase() === wordKey.toLowerCase()) {
+            return {
+              ...word,
+              hasAITemplate: true,
+              aiTemplate: {
+                sentence: editSentence.trim(),
+                options: trimmedOptions,
+                answer: wordKey,
+              },
+            };
+          }
+          return word;
+        }),
+      );
+
+      setExpandedWord(null);
+    } catch (err) {
+      console.error('Error saving template:', err);
+      setValidationError('Failed to save the template. Please try again.');
+    }
+  };
+
+  const handleDeleteTemplate = async (wordKey: string) => {
+    if (
+      !confirm(
+        `Are you sure you want to delete the question template for "${wordKey}"?`,
+      )
+    ) {
+      return;
+    }
+
+    try {
+      await deleteAITemplateMutation({
+        variables: { word: wordKey },
+      });
+
+      setWordGroups((prev) =>
+        prev.map((word) => {
+          if (word.enUS.toLowerCase() === wordKey.toLowerCase()) {
+            return {
+              ...word,
+              hasAITemplate: false,
+              aiTemplate: undefined,
+            };
+          }
+          return word;
+        }),
+      );
+
+      setExpandedWord(null);
+    } catch (err) {
+      console.error('Error deleting template:', err);
+      alert('Failed to delete the template. Please try again.');
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setExpandedWord(null);
+  };
+
+  // Filtered and searched groups
+  const filteredWordGroups = wordGroups.filter((word) => {
+    const matchesSearch =
+      word.enUS.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      word.zhTW.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (word.aiTemplate?.sentence || '')
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+
+    if (statusFilter === 'with') {
+      return matchesSearch && word.hasAITemplate;
+    }
+    if (statusFilter === 'missing') {
+      return matchesSearch && !word.hasAITemplate;
+    }
+    return matchesSearch;
+  });
+
+  const loading = wordsLoading || templatesLoading;
+  const error = wordsError || templatesError;
+
   if (loading) {
     return (
       <Notice
         colorVariant={ColorVariant.Loading}
-        message="Loading questions, please wait..."
+        message="Loading words and templates, please wait..."
       />
     );
   }
+
   if (error) {
     return (
       <Notice
         colorVariant={ColorVariant.Loading}
-        message={`Error loading questions: ${error}`}
+        message={`Error loading data: ${error.message}`}
       />
     );
   }
@@ -289,7 +522,9 @@ const WordGrid: React.FC = () => {
       <div className="p-8 space-y-6 max-w-7xl mx-auto">
         {/* Toolbar Section */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Manage Words</h1>
+          <h1 className="text-3xl font-bold text-slate-800 tracking-tight">
+            Manage Words
+          </h1>
           <div className="flex space-x-4">
             {/* AI Generation Button */}
             <button
@@ -301,7 +536,7 @@ const WordGrid: React.FC = () => {
                     : aiGenerationStatus === 'paused'
                       ? 'bg-yellow-500 hover:bg-yellow-600'
                       : 'bg-purple-500 hover:bg-purple-600'
-              } text-white`}
+              } text-white transition-colors`}
               onClick={
                 aiGenerationStatus === 'running'
                   ? stopAIGeneration
@@ -325,16 +560,16 @@ const WordGrid: React.FC = () => {
 
             {/* Button to open modal for adding words from JSON */}
             <button
-              className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
               onClick={() => setIsJsonInputModalOpen(true)}
               title="Import JSON"
             >
-              <TbJson size={24} /> {/* Use TbJson icon for JSON import */}
+              <TbJson size={24} />
             </button>
 
             {/* Button to validate and clean invalid translations */}
             <button
-              className="p-2 bg-teal-600 text-white rounded-md hover:bg-teal-700"
+              className="p-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors"
               onClick={handleValidateAndClean}
               title="Validate & Clean Translations"
             >
@@ -343,16 +578,16 @@ const WordGrid: React.FC = () => {
 
             {/* Button to open modal for adding a single word */}
             <button
-              className="p-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-              onClick={() => setIsAddWordModalOpen(true)} // This will open the modal for adding a single word
+              className="p-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+              onClick={() => setIsAddWordModalOpen(true)}
             >
-              <FiPlus size={24} /> {/* Use FiPlus icon for adding a word */}
+              <FiPlus size={24} />
             </button>
 
             {/* Button to refresh data */}
             <button
-              className="p-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
-              onClick={() => refetch()}
+              className="p-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition-colors"
+              onClick={refetch}
               title="Refresh Data"
             >
               <FiRefreshCw size={24} />
@@ -431,85 +666,327 @@ const WordGrid: React.FC = () => {
           </div>
         )}
 
+        {/* Search & Filter Toolbar */}
+        <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          {/* Search bar */}
+          <div className="relative flex-1 max-w-md">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+              <FiSearch size={18} />
+            </span>
+            <input
+              type="text"
+              className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm bg-white text-slate-700"
+              placeholder="Search words, translations, or questions..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
+          {/* Status filters */}
+          <div className="flex items-center space-x-2 text-sm">
+            <span className="text-slate-500 font-medium">Filter:</span>
+            <button
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                statusFilter === 'all'
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'bg-white text-slate-600 border border-slate-300 hover:bg-slate-50'
+              }`}
+              onClick={() => setStatusFilter('all')}
+            >
+              All ({wordGroups.length})
+            </button>
+            <button
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                statusFilter === 'with'
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'bg-white text-slate-600 border border-slate-300 hover:bg-slate-50'
+              }`}
+              onClick={() => setStatusFilter('with')}
+            >
+              With Question ({wordGroups.filter((w) => w.hasAITemplate).length})
+            </button>
+            <button
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                statusFilter === 'missing'
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'bg-white text-slate-600 border border-slate-300 hover:bg-slate-50'
+              }`}
+              onClick={() => setStatusFilter('missing')}
+            >
+              Missing Question (
+              {wordGroups.filter((w) => !w.hasAITemplate).length})
+            </button>
+          </div>
+        </div>
+
         {/* Word Grid */}
-        {/* Limit height and allow scrolling */}
         <div className="grid grid-cols-12 gap-x-4 gap-y-2 items-center w-full">
           {/* Header */}
-          <div className="col-span-3 font-bold">English (enUS)</div>
-          <div className="col-span-3 font-bold">Chinese (zhTW)</div>
-          <div className="col-span-3 font-bold">AI Template</div>
-          <div className="col-span-3 font-bold">Actions</div>
+          <div className="col-span-2 font-bold text-slate-700 text-sm tracking-wider uppercase">
+            English
+          </div>
+          <div className="col-span-2 font-bold text-slate-700 text-sm tracking-wider uppercase">
+            Chinese
+          </div>
+          <div className="col-span-2 font-bold text-slate-700 text-sm tracking-wider uppercase">
+            AI Status
+          </div>
+          <div className="col-span-4 font-bold text-slate-700 text-sm tracking-wider uppercase">
+            Question Sentence
+          </div>
+          <div className="col-span-2 font-bold text-slate-700 text-sm tracking-wider uppercase text-right pr-2">
+            Actions
+          </div>
 
-          <div className="col-span-12 grid grid-cols-subgrid gap-x-4 gap-y-2  overflow-y-auto max-h-[550px]">
+          <div className="col-span-12 grid grid-cols-subgrid gap-x-4 gap-y-2 overflow-y-auto max-h-[550px] pr-1">
             {/* Rows */}
-            {wordGroups.map((word, index) => (
-              <div
-                key={index}
-                className={`grid grid-cols-subgrid col-span-12 gap-4 items-center p-2 rounded-md shadow-sm w-full max-w-full ${
-                  word.isNew
-                    ? 'bg-yellow-100 hover:bg-yellow-200'
-                    : 'bg-white hover:bg-gray-50'
-                }`}
-              >
-                {/* English */}
-                <div className="col-span-3">{word.enUS}</div>
+            {filteredWordGroups.length > 0 ? (
+              filteredWordGroups.map((word, index) => {
+                const isExpanded = expandedWord === word.enUS;
+                return (
+                  <React.Fragment key={word.enUS + '-' + index}>
+                    <div
+                      className={`grid grid-cols-subgrid col-span-12 gap-4 items-center p-2 rounded-md shadow-sm w-full max-w-full transition-colors ${
+                        word.isNew
+                          ? 'bg-yellow-100 hover:bg-yellow-200'
+                          : isExpanded
+                            ? 'bg-indigo-50 border border-indigo-200'
+                            : 'bg-white hover:bg-slate-50 border border-slate-100'
+                      }`}
+                    >
+                      {/* English */}
+                      <div className="col-span-2 font-semibold text-slate-900">
+                        {word.enUS}
+                      </div>
 
-                {/* Chinese */}
-                <div className="col-span-3">{word.zhTW}</div>
+                      {/* Chinese */}
+                      <div className="col-span-2 text-slate-700">
+                        {word.zhTW}
+                      </div>
 
-                {/* AI Template Status */}
-                <div className="col-span-3 flex items-center">
-                  {word.hasAITemplate === true ? (
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      ✅ Available
-                    </span>
-                  ) : word.hasAITemplate === false ? (
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
-                      ❌ Not Available
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-600">
-                      {word.isNew ? '🆕 New Word' : '⏳ Loading...'}
-                    </span>
-                  )}
-                </div>
+                      {/* AI Template Status */}
+                      <div className="col-span-2 flex items-center">
+                        {word.hasAITemplate === true ? (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+                            Available
+                          </span>
+                        ) : word.hasAITemplate === false ? (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-100 text-rose-800">
+                            Missing
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">
+                            {word.isNew ? 'New Word' : 'Loading...'}
+                          </span>
+                        )}
+                      </div>
 
-                {/* Actions */}
-                <div className="col-span-3 flex space-x-2">
-                  <button
-                    className="p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-                    onClick={() => handleDeleteWord(index)}
-                  >
-                    <FiTrash />
-                  </button>
-                </div>
+                      {/* Question Preview */}
+                      <div
+                        className="col-span-4 text-xs text-slate-600 truncate"
+                        title={word.aiTemplate?.sentence}
+                      >
+                        {word.aiTemplate ? (
+                          word.aiTemplate.sentence
+                        ) : (
+                          <span className="text-slate-400 italic">
+                            No question template
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="col-span-2 flex justify-end space-x-2">
+                        <button
+                          className={`p-1.5 rounded text-white transition-colors ${
+                            isExpanded
+                              ? 'bg-indigo-600 hover:bg-indigo-700'
+                              : 'bg-slate-400 hover:bg-slate-500'
+                          }`}
+                          onClick={() => handleToggleExpand(word)}
+                          title={
+                            isExpanded
+                              ? 'Collapse Question Editor'
+                              : 'Edit Question Template'
+                          }
+                        >
+                          <FiEdit3 size={16} />
+                        </button>
+                        <button
+                          className="p-1.5 bg-rose-500 text-white rounded hover:bg-rose-600 transition-colors"
+                          onClick={() => handleDeleteWord(index)}
+                          title="Delete Word"
+                        >
+                          <FiTrash size={16} />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Expandable Editor Card */}
+                    {isExpanded && (
+                      <div className="col-span-12 bg-indigo-50/40 border border-indigo-200 rounded-lg p-4 -mt-2 mb-2 space-y-4 shadow-inner">
+                        <div className="flex justify-between items-center border-b border-indigo-100 pb-2">
+                          <h4 className="text-sm font-bold text-indigo-900">
+                            Review/Edit Question Template for &ldquo;{word.enUS}
+                            &rdquo;
+                          </h4>
+                          {word.aiTemplate && (
+                            <button
+                              className="text-xs text-rose-600 hover:text-rose-800 flex items-center space-x-1 font-semibold transition-colors"
+                              onClick={() => handleDeleteTemplate(word.enUS)}
+                            >
+                              <FiTrash size={12} />
+                              <span>Delete Question Template</span>
+                            </button>
+                          )}
+                        </div>
+
+                        <div className="grid grid-cols-12 gap-4">
+                          {/* Sentence input */}
+                          <div className="col-span-12 md:col-span-8">
+                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
+                              Question Sentence (Must contain four underscores
+                              &ldquo;____&rdquo;)
+                            </label>
+                            <input
+                              type="text"
+                              className="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm bg-white text-slate-800"
+                              value={editSentence}
+                              onChange={(e) => setEditSentence(e.target.value)}
+                              placeholder="Example: The ____ is a beautiful animal."
+                            />
+                            <span className="text-[10px] text-slate-400 mt-1 block">
+                              Hint: The correct word will replace the blank when
+                              presenting to students.
+                            </span>
+                          </div>
+
+                          {/* Correct Answer input */}
+                          <div className="col-span-12 md:col-span-4">
+                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
+                              Correct Answer
+                            </label>
+                            <input
+                              type="text"
+                              className="w-full p-2.5 border border-slate-300 rounded-lg bg-slate-100 text-slate-500 text-sm font-medium cursor-not-allowed"
+                              value={editAnswer}
+                              readOnly
+                              title="The correct answer matches the English key exactly."
+                            />
+                            <span className="text-[10px] text-slate-400 mt-1 block">
+                              Locked to the word key.
+                            </span>
+                          </div>
+
+                          {/* Options inputs */}
+                          <div className="col-span-12">
+                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                              Options (Options must include the correct word
+                              &ldquo;{word.enUS}&rdquo;)
+                            </label>
+                            <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                              {editOptions.map((option, i) => {
+                                const isCorrectOpt =
+                                  option.toLowerCase() ===
+                                  word.enUS.toLowerCase();
+                                return (
+                                  <div key={i} className="relative">
+                                    <input
+                                      type="text"
+                                      className={`w-full p-2.5 border rounded-lg text-sm bg-white focus:outline-none transition-all ${
+                                        isCorrectOpt
+                                          ? 'border-emerald-500 bg-emerald-50/50 pr-8 font-semibold text-emerald-800'
+                                          : 'border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-slate-700'
+                                      }`}
+                                      value={option}
+                                      onChange={(e) =>
+                                        handleOptionChange(i, e.target.value)
+                                      }
+                                      placeholder={`Option ${i + 1}`}
+                                    />
+                                    {isCorrectOpt && (
+                                      <span
+                                        className="absolute right-3 top-3.5 text-emerald-600 font-bold"
+                                        title="Correct Answer Match"
+                                      >
+                                        ✓
+                                      </span>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <span className="text-[10px] text-slate-400 block mt-1">
+                              Distractors should be simple English nouns. The
+                              green-outlined box is the option that matches the
+                              answer.
+                            </span>
+                          </div>
+                        </div>
+
+                        {validationError && (
+                          <p className="text-xs text-rose-600 font-bold tracking-wide">
+                            {validationError}
+                          </p>
+                        )}
+
+                        <div className="flex justify-end space-x-2 pt-2">
+                          <button
+                            className="px-4 py-2 bg-slate-200 text-slate-700 text-xs font-bold rounded-lg hover:bg-slate-300 transition-colors"
+                            onClick={handleCancelEdit}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            className="px-4 py-2 bg-indigo-600 text-white text-xs font-bold rounded-lg hover:bg-indigo-700 transition-colors shadow-sm"
+                            onClick={() => handleSaveTemplate(word.enUS)}
+                          >
+                            Save Question
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              })
+            ) : (
+              <div className="col-span-12 p-8 text-center bg-white border border-dashed border-slate-200 rounded-lg text-slate-400 text-sm">
+                No words match your search or filter.
               </div>
-            ))}
+            )}
           </div>
         </div>
 
         {/* AI Template Summary */}
         {wordGroups.length > 0 && (
-          <div className="bg-blue-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-2">AI Template Summary</h3>
+          <div className="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+            <h3 className="text-lg font-semibold mb-3 text-indigo-950">
+              AI Template Summary
+            </h3>
             <div className="grid grid-cols-3 gap-4 text-sm">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">
+              <div className="text-center bg-white p-3 rounded-lg border border-indigo-100 shadow-sm">
+                <div className="text-2xl font-bold text-emerald-600">
                   {wordGroups.filter((w) => w.hasAITemplate === true).length}
                 </div>
-                <div className="text-gray-600">With AI Template</div>
+                <div className="text-slate-500 font-medium mt-1">
+                  With AI Template
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-gray-600">
+              <div className="text-center bg-white p-3 rounded-lg border border-indigo-100 shadow-sm">
+                <div className="text-2xl font-bold text-rose-500">
                   {wordGroups.filter((w) => w.hasAITemplate === false).length}
                 </div>
-                <div className="text-gray-600">Without AI Template</div>
+                <div className="text-slate-500 font-medium mt-1">
+                  Without AI Template
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">
+              <div className="text-center bg-white p-3 rounded-lg border border-indigo-100 shadow-sm">
+                <div className="text-2xl font-bold text-indigo-600">
                   {wordGroups.length}
                 </div>
-                <div className="text-gray-600">Total Words</div>
+                <div className="text-slate-500 font-medium mt-1">
+                  Total Words
+                </div>
               </div>
             </div>
           </div>
@@ -517,9 +994,7 @@ const WordGrid: React.FC = () => {
 
         <div className="mb-2 mt-6 min-h-[24px]">
           {errMsg && (
-            <p className="text-red-500 text-sm">
-              Failed to save new words. Please try again.
-            </p>
+            <p className="text-rose-600 font-semibold text-sm">{errMsg}</p>
           )}
         </div>
 
@@ -527,7 +1002,7 @@ const WordGrid: React.FC = () => {
         {wordGroups.some((word) => word.isNew) && (
           <div className="flex justify-end">
             <button
-              className="py-2 px-6 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600"
+              className="py-2.5 px-6 bg-emerald-500 text-white font-bold rounded-lg hover:bg-emerald-600 shadow-md transition-colors"
               onClick={handleSaveNewWords}
             >
               Save New Words

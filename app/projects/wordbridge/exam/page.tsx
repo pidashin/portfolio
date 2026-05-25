@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 // import wordResource from './words.json';
 import { FiX } from 'react-icons/fi'; // Icon for exit button
 import GET_WORDS from '../gql/getWords';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import { SAVE_EXAM_RESULT } from '../gql/user';
 import Notice, { ColorVariant } from '../components/notice';
 import { aiTemplateService, AITemplate } from '../services/aiTemplateService';
 
@@ -257,6 +258,8 @@ const ExamPage = () => {
   const [showExitAlert, setShowExitAlert] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
+  const [saveExamResult] = useMutation(SAVE_EXAM_RESULT);
+
   // Ensure we're on the client side before generating questions
   React.useEffect(() => {
     setIsClient(true);
@@ -320,13 +323,28 @@ const ExamPage = () => {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentQuestionIndex + 1 < questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedOptionIdx(null);
       setIsCorrect(null);
     } else {
       setShowSummary(true);
+      const userId = localStorage.getItem('wordbridge_user_id');
+      if (userId && selectedMode) {
+        try {
+          await saveExamResult({
+            variables: {
+              userId,
+              score,
+              mode: selectedMode,
+              wrongAnswers: JSON.stringify(wrongAnswers),
+            },
+          });
+        } catch (e) {
+          console.error('Failed to save exam result', e);
+        }
+      }
     }
   };
 
