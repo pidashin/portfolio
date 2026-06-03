@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import path from "path";
-import { defineConfig, env } from "prisma/config";
+import { defineConfig } from "prisma/config";
 
 // Load environment variables from .env.local, fallback to default .env
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
@@ -12,6 +12,6 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: env("DATABASE_URL"),
+    url: process.env.DATABASE_URL || "file:./dev.db",
   },
 });
