@@ -12,7 +12,9 @@ services:
       - WORDS_JSON_PATH=/app/data/words.json
       - WORDS_AI_JSON_PATH=/app/data/words_ai.json
       - OCR_RESULTS_PATH=/app/data/ocr-results.json
+      - DATABASE_URL=file:/app/data/dev.db
     volumes:
       - /volume1/docker/data:/app/data
     ports:
       - '3000:3000'
+    command: sh -c "npx prisma db push && npm start"
