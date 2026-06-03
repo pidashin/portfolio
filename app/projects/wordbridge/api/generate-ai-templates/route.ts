@@ -144,64 +144,63 @@ function createMockResponse(words: Word[]): AITemplate[] {
 
 // Call Hugging Face Inference Providers API
 async function callHuggingFaceAPI(words: Word[]): Promise<AITemplate[]> {
+  let client;
   try {
-    const client = getInferenceClient();
-    const prompt = createBatchPrompt(words);
-
-    console.log('🔍 Calling Hugging Face Inference Providers API...');
-    console.log('- Words:', words.map((w) => w.enUS).join(', '));
-    console.log('- Prompt length:', prompt.length);
-
-    const response = await client.chatCompletion({
-      provider: 'hyperbolic', // Using hyperbolic provider as suggested
-      model: 'Qwen/Qwen3-Next-80B-A3B-Instruct',
-      messages: [
-        {
-          role: 'user',
-          content: prompt,
-        },
-      ],
-      max_tokens: 2000,
-      temperature: 0.7,
-    });
-
-    console.log('📥 Response received from Hugging Face API');
-
-    const content = response.choices[0].message.content || '';
-    console.log('📝 Raw response:', content);
-
-    // Try to parse JSON response
-    try {
-      const jsonMatch = content.match(/\[[\s\S]*\]/);
-      if (jsonMatch) {
-        const jsonStr = jsonMatch[0];
-        const parsed = JSON.parse(jsonStr);
-
-        if (Array.isArray(parsed)) {
-          console.log(`✅ Successfully parsed ${parsed.length} templates`);
-          return parsed.map((item: Record<string, unknown>) => ({
-            word: String(item.word || ''),
-            sentence: String(item.sentence || ''),
-            options: Array.isArray(item.options)
-              ? item.options.map(String)
-              : [],
-            answer: String(item.answer || item.word || ''),
-          }));
-        }
-      }
-
-      throw new Error('No valid JSON array found in response');
-    } catch (parseError) {
-      console.error('❌ Failed to parse JSON response:', parseError);
-      console.log('📝 Raw content:', content);
-      throw new Error('Failed to parse AI response as JSON');
-    }
+    client = getInferenceClient();
   } catch (error) {
-    console.error('❌ Hugging Face API error:', error);
-
-    // Fallback to mock response
-    console.log('🔄 Falling back to mock response...');
+    console.warn('⚠️ Hugging Face API key missing. Falling back to mock response for testing.');
     return createMockResponse(words);
+  }
+
+  const prompt = createBatchPrompt(words);
+
+  console.log('🔍 Calling Hugging Face Inference Providers API...');
+  console.log('- Words:', words.map((w) => w.enUS).join(', '));
+  console.log('- Prompt length:', prompt.length);
+
+  const response = await client.chatCompletion({
+    provider: 'hyperbolic', // Using hyperbolic provider to respect billing / free tier
+    model: 'meta-llama/Llama-3.3-70B-Instruct',
+    messages: [
+      {
+        role: 'user',
+        content: prompt,
+      },
+    ],
+    max_tokens: 2000,
+    temperature: 0.7,
+  });
+
+  console.log('📥 Response received from Hugging Face API');
+
+  const content = response.choices[0].message.content || '';
+  console.log('📝 Raw response:', content);
+
+  // Try to parse JSON response
+  try {
+    const jsonMatch = content.match(/\[[\s\S]*\]/);
+    if (jsonMatch) {
+      const jsonStr = jsonMatch[0];
+      const parsed = JSON.parse(jsonStr);
+
+      if (Array.isArray(parsed)) {
+        console.log(`✅ Successfully parsed ${parsed.length} templates`);
+        return parsed.map((item: Record<string, unknown>) => ({
+          word: String(item.word || ''),
+          sentence: String(item.sentence || ''),
+          options: Array.isArray(item.options)
+            ? item.options.map(String)
+            : [],
+          answer: String(item.answer || item.word || ''),
+        }));
+      }
+    }
+
+    throw new Error('No valid JSON array found in response');
+  } catch (parseError) {
+    console.error('❌ Failed to parse JSON response:', parseError);
+    console.log('📝 Raw content:', content);
+    throw new Error('Failed to parse AI response as JSON');
   }
 }
 
