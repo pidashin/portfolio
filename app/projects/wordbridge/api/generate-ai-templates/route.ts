@@ -147,8 +147,10 @@ async function callHuggingFaceAPI(words: Word[]): Promise<AITemplate[]> {
   let client;
   try {
     client = getInferenceClient();
-  } catch (error) {
-    console.warn('⚠️ Hugging Face API key missing. Falling back to mock response for testing.');
+  } catch {
+    console.warn(
+      '⚠️ Hugging Face API key missing. Falling back to mock response for testing.',
+    );
     return createMockResponse(words);
   }
 
@@ -188,9 +190,7 @@ async function callHuggingFaceAPI(words: Word[]): Promise<AITemplate[]> {
         return parsed.map((item: Record<string, unknown>) => ({
           word: String(item.word || ''),
           sentence: String(item.sentence || ''),
-          options: Array.isArray(item.options)
-            ? item.options.map(String)
-            : [],
+          options: Array.isArray(item.options) ? item.options.map(String) : [],
           answer: String(item.answer || item.word || ''),
         }));
       }
