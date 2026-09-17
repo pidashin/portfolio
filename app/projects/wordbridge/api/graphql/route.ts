@@ -25,6 +25,17 @@ interface AITemplate {
   answer: string;
 }
 
+// Define the shape of a reported question flag
+interface QuestionFlag {
+  word: string;
+  questionType: string;
+  questionText: string;
+  reason?: string;
+  count: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface WordInput {
   enUS: string;
   zhTW: string;
@@ -56,17 +67,26 @@ const wordsAIFilePath =
     'words_ai.json',
   );
 
+// Path to the word_flags.json file (kept next to words_ai.json)
+const flagsFilePath =
+  process.env.WORD_FLAGS_JSON_PATH ||
+  path.join(path.dirname(wordsAIFilePath), 'word_flags.json');
+
 let wordsCache: Word[] | null = null;
 let aiTemplatesCache: AITemplate[] | null = null;
+let flagsCache: QuestionFlag[] | null = null;
 let wordsLastModified: number | null = null;
 let aiTemplatesLastModified: number | null = null;
+let flagsLastModified: number | null = null;
 
 // Clear cache function
 const clearCache = () => {
   wordsCache = null;
   aiTemplatesCache = null;
+  flagsCache = null;
   wordsLastModified = null;
   aiTemplatesLastModified = null;
+  flagsLastModified = null;
   console.log('🔄 GraphQL cache cleared');
 };
 
@@ -111,6 +131,94 @@ const loadAITemplates = (): AITemplate[] => {
   }
 
   return aiTemplatesCache || [];
+};
+
+// Drop malformed records so a hand-edited file cannot break the words query
+const sanitizeQuestionFlags = (parsed: unknown[]): QuestionFlag[] => {
+  const now = new Date().toISOString();
+
+  return parsed.reduce<QuestionFlag[]>((valid, entry) => {
+    if (!entry || typeof entry !== 'object') {
+      console.warn('Skipping malformed question flag entry:', entry);
+      return valid;
+    }
+
+    const record = entry as Record<string, unknown>;
+    if (typeof record.word !== 'string' || !record.word) {
+      console.warn('Skipping question flag without a word:', entry);
+      return valid;
+    }
+
+    const count = Number(record.count);
+
+    valid.push({
+      word: record.word,
+      questionType:
+        typeof record.questionType === 'string' ? record.questionType : 'basic',
+      questionText:
+        typeof record.questionText === 'string' ? record.questionText : '',
+      reason: typeof record.reason === 'string' ? record.reason : '',
+      count: Number.isFinite(count) && count > 0 ? Math.floor(count) : 1,
+      createdAt: typeof record.createdAt === 'string' ? record.createdAt : now,
+      updatedAt: typeof record.updatedAt === 'string' ? record.updatedAt : now,
+    });
+
+    return valid;
+  }, []);
+};
+
+// Load question flags from file
+const loadQuestionFlags = (): QuestionFlag[] => {
+  // Check if file has been modified since last cache
+  const fileExists = fs.existsSync(flagsFilePath);
+  if (fileExists) {
+    const stats = fs.statSync(flagsFilePath);
+    const lastModified = stats.mtime.getTime();
+
+    // If file has been modified since last cache, clear cache
+    if (flagsLastModified !== null && lastModified > flagsLastModified) {
+      console.log('🔄 Question flags file updated, clearing cache');
+      flagsCache = null;
+    }
+
+    // If we have valid cache, return it
+    if (flagsCache && flagsLastModified === lastModified) {
+      return flagsCache;
+    }
+
+    // Load fresh data from file
+    try {
+      console.log('Loading question flags from:', flagsFilePath);
+      const fileData = fs.readFileSync(flagsFilePath, 'utf-8');
+      const parsed = JSON.parse(fileData);
+      flagsCache = Array.isArray(parsed) ? sanitizeQuestionFlags(parsed) : [];
+      flagsLastModified = lastModified;
+      console.log('Loaded', flagsCache?.length || 0, 'question flags');
+    } catch (error) {
+      console.error('Error loading question flags:', error);
+      flagsCache = [];
+      flagsLastModified = lastModified;
+    }
+  } else {
+    flagsCache = [];
+    flagsLastModified = null;
+  }
+
+  return flagsCache || [];
+};
+
+// Save question flags to file, throwing so callers can report the failure
+const saveQuestionFlags = (flags: QuestionFlag[]) => {
+  try {
+    fs.writeFileSync(flagsFilePath, JSON.stringify(flags, null, 2));
+  } catch (error) {
+    console.error('Error saving the word_flags.json file:', error);
+    throw new Error('Failed to save the question flag.');
+  }
+
+  // Only adopt the new state once it is actually on disk
+  flagsCache = flags;
+  flagsLastModified = Date.now();
 };
 
 // Check if a word has AI template
@@ -214,6 +322,16 @@ const typeDefs = gql`
     answer: String!
   }
 
+  type QuestionFlag {
+    word: String!
+    questionType: String!
+    questionText: String!
+    reason: String
+    count: Int!
+    createdAt: String!
+    updatedAt: String!
+  }
+
   input AITemplateInput {
     word: String!
     sentence: String!
@@ -245,6 +363,7 @@ const typeDefs = gql`
     words: [Word!]!
     wordsWithAITemplates: [Word!]!
     aiTemplates: [AITemplate!]!
+    questionFlags: [QuestionFlag!]!
     clearCache: Boolean!
     getUsers: [User!]!
     getExamHistory(userId: String!): [ExamHistory!]!
@@ -270,6 +389,14 @@ const typeDefs = gql`
 
     saveAITemplate(template: AITemplateInput!): AITemplate!
     deleteAITemplate(word: String!): Boolean!
+
+    flagQuestion(
+      word: String!
+      questionType: String!
+      questionText: String!
+      reason: String
+    ): QuestionFlag!
+    resolveQuestionFlag(word: String!, questionType: String): Boolean!
   }
 `;
 
@@ -306,6 +433,10 @@ const resolvers = {
 
     aiTemplates: (): AITemplate[] => {
       return loadAITemplates();
+    },
+
+    questionFlags: (): QuestionFlag[] => {
+      return loadQuestionFlags();
     },
 
     clearCache: (): boolean => {
@@ -524,6 +655,79 @@ const resolvers = {
         console.error('Failed to clear aiTemplateService cache:', e);
       }
 
+      return true;
+    },
+
+    flagQuestion: (
+      _: unknown,
+      {
+        word,
+        questionType,
+        questionText,
+        reason,
+      }: {
+        word: string;
+        questionType: string;
+        questionText: string;
+        reason?: string;
+      },
+    ): QuestionFlag => {
+      // Work on a copy so a failed write leaves the cache untouched
+      const flags = [...loadQuestionFlags()];
+      const now = new Date().toISOString();
+      const index = flags.findIndex(
+        (f) =>
+          f.word.toLowerCase() === word.toLowerCase() &&
+          f.questionType === questionType,
+      );
+
+      let flag: QuestionFlag;
+      if (index > -1) {
+        flag = {
+          ...flags[index],
+          questionText,
+          reason: reason || '',
+          count: flags[index].count + 1,
+          updatedAt: now,
+        };
+        flags[index] = flag;
+      } else {
+        flag = {
+          word,
+          questionType,
+          questionText,
+          reason: reason || '',
+          count: 1,
+          createdAt: now,
+          updatedAt: now,
+        };
+        flags.push(flag);
+      }
+
+      saveQuestionFlags(flags);
+
+      return flag;
+    },
+
+    resolveQuestionFlag: (
+      _: unknown,
+      { word, questionType }: { word: string; questionType?: string },
+    ): boolean => {
+      const flags = loadQuestionFlags();
+      // Without a questionType every flag for the word is cleared
+      const filtered = flags.filter((f) =>
+        f.word.toLowerCase() !== word.toLowerCase()
+          ? true
+          : questionType
+            ? f.questionType !== questionType
+            : false,
+      );
+
+      if (filtered.length === flags.length) {
+        return false;
+      }
+
+      saveQuestionFlags(filtered);
       return true;
     },
   },

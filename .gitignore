@@ -42,3 +42,6 @@ next-env.d.ts
 /app/generated/prisma
 /dev.db
 /generated
+
+# wordbridge question reports (runtime data)
+word_flags.json

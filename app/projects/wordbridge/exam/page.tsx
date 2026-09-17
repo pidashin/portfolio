@@ -2,10 +2,11 @@
 
 import React, { useState } from 'react';
 // import wordResource from './words.json';
-import { FiX } from 'react-icons/fi'; // Icon for exit button
+import { FiX, FiFlag } from 'react-icons/fi'; // Icons for exit and report buttons
 import GET_WORDS from '../gql/getWords';
 import { useQuery, useMutation } from '@apollo/client';
 import { SAVE_EXAM_RESULT } from '../gql/user';
+import FLAG_QUESTION from '../gql/flagQuestion';
 import Notice, { ColorVariant } from '../components/notice';
 import { aiTemplateService, AITemplate } from '../services/aiTemplateService';
 
@@ -29,6 +30,7 @@ type Question = {
   };
   options: Option[]; // Array of option objects
   type?: 'template' | 'basic';
+  word: string; // The source word's enUS key, used when reporting a problem
 };
 
 type WrongAnswer = {
@@ -182,6 +184,7 @@ const genQuestions = async (
           translation: opt.zhTW,
         })),
         type: 'template' as const,
+        word: word.enUS,
       });
     } else if (word.templates && word.templates.length > 0) {
       // Fallback to hardcoded templates
@@ -205,6 +208,7 @@ const genQuestions = async (
           translation: opt.zhTW,
         })),
         type: 'template' as const,
+        word: word.enUS,
       });
     }
   }
@@ -235,6 +239,7 @@ const genQuestions = async (
             translation: useEnUSAsQuestion ? opt.enUS : opt.zhTW,
           })),
         type: 'basic' as const,
+        word: word.enUS,
       };
     });
 
@@ -257,8 +262,14 @@ const ExamPage = () => {
   const [showSummary, setShowSummary] = useState(false);
   const [showExitAlert, setShowExitAlert] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [reportedQuestions, setReportedQuestions] = useState<Set<number>>(
+    new Set(),
+  );
+  const [reportingIdx, setReportingIdx] = useState<number | null>(null);
+  const [reportError, setReportError] = useState<string | null>(null);
 
   const [saveExamResult] = useMutation(SAVE_EXAM_RESULT);
+  const [flagQuestion] = useMutation(FLAG_QUESTION);
 
   // Ensure we're on the client side before generating questions
   React.useEffect(() => {
@@ -323,11 +334,39 @@ const ExamPage = () => {
     }
   };
 
+  const handleReportQuestion = async () => {
+    const currentQuestion = questions[currentQuestionIndex];
+    if (!currentQuestion || reportedQuestions.has(currentQuestionIndex)) {
+      return;
+    }
+
+    setReportError(null);
+    setReportingIdx(currentQuestionIndex);
+
+    try {
+      await flagQuestion({
+        variables: {
+          word: currentQuestion.word,
+          questionType: currentQuestion.type || 'basic',
+          questionText: currentQuestion.question.text,
+          reason: '',
+        },
+      });
+      setReportedQuestions((prev) => new Set(prev).add(currentQuestionIndex));
+    } catch (e) {
+      console.error('Failed to report question', e);
+      setReportError('Could not send the report. Please try again.');
+    } finally {
+      setReportingIdx(null);
+    }
+  };
+
   const handleNext = async () => {
     if (currentQuestionIndex + 1 < questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedOptionIdx(null);
       setIsCorrect(null);
+      setReportError(null);
     } else {
       setShowSummary(true);
       const userId = localStorage.getItem('wordbridge_user_id');
@@ -367,6 +406,8 @@ const ExamPage = () => {
     setShowSummary(false);
     setWrongAnswers([]);
     setScore(0);
+    setReportedQuestions(new Set());
+    setReportError(null);
     setQuestions([]); // Trigger useEffect
   };
   const handleChangeMode = () => {
@@ -377,6 +418,8 @@ const ExamPage = () => {
     setIsCorrect(null);
     setWrongAnswers([]);
     setScore(0);
+    setReportedQuestions(new Set());
+    setReportError(null);
     setQuestions([]);
   };
 
@@ -445,6 +488,7 @@ const ExamPage = () => {
   }
 
   const currentQuestion = questions[currentQuestionIndex];
+  const isQuestionReported = reportedQuestions.has(currentQuestionIndex);
 
   return (
     <div className="p-8">
@@ -462,9 +506,39 @@ const ExamPage = () => {
         />
       )}
 
-      <h1 className="text-2xl font-bold mb-6">
-        Question {currentQuestionIndex + 1}
-      </h1>
+      <div className="flex items-center justify-between gap-4 mb-6 pr-10">
+        <h1 className="text-2xl font-bold">
+          Question {currentQuestionIndex + 1}
+        </h1>
+        <div className="flex items-center gap-2">
+          {isQuestionReported && (
+            <span className="text-xs text-rose-500">
+              Reported — we&apos;ll regenerate this one
+            </span>
+          )}
+          <button
+            className={`p-1 rounded transition-colors ${
+              isQuestionReported
+                ? 'text-rose-500'
+                : 'text-slate-400 hover:text-slate-600'
+            } disabled:cursor-default`}
+            onClick={handleReportQuestion}
+            disabled={isQuestionReported || reportingIdx !== null}
+            title="Report a problem with this question"
+            aria-label="Report a problem with this question"
+          >
+            <FiFlag
+              size={16}
+              fill={isQuestionReported ? 'currentColor' : 'none'}
+            />
+          </button>
+        </div>
+      </div>
+      {reportError && (
+        <p className="text-xs text-red-500 mb-4 text-right pr-10">
+          {reportError}
+        </p>
+      )}
       <p
         className={`mb-4 text-3xl font-semibold ${currentQuestion?.type === 'basic' ? 'capitalize' : ''}`}
       >

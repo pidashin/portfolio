@@ -9,6 +9,8 @@ import {
   FiShield,
   FiSearch,
   FiEdit3,
+  FiFlag,
+  FiX,
 } from 'react-icons/fi';
 import { useQuery, useMutation } from '@apollo/client';
 import ADD_WORDS_MUTATION from '../gql/addWords';
@@ -17,6 +19,8 @@ import GET_WORDS from '../gql/getWords';
 import GET_AI_TEMPLATES from '../gql/getAITemplates';
 import SAVE_AI_TEMPLATE from '../gql/saveAITemplate';
 import DELETE_AI_TEMPLATE from '../gql/deleteAITemplate';
+import GET_QUESTION_FLAGS from '../gql/getQuestionFlags';
+import RESOLVE_QUESTION_FLAG from '../gql/resolveQuestionFlag';
 import Notice, { ColorVariant } from '../components/notice';
 import { TbJson } from 'react-icons/tb';
 import JsonInputModal from './JsonInputModal';
@@ -30,6 +34,18 @@ interface WordWithTemplate extends Word {
     options: string[];
     answer: string;
   };
+  flagCount?: number;
+  flags?: QuestionFlag[];
+}
+
+interface QuestionFlag {
+  word: string;
+  questionType: string;
+  questionText: string;
+  reason?: string;
+  count: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 const WordGrid: React.FC = () => {
@@ -46,14 +62,23 @@ const WordGrid: React.FC = () => {
     error: templatesError,
     refetch: refetchTemplates,
   } = useQuery(GET_AI_TEMPLATES);
+  const {
+    data: flagsData,
+    loading: flagsLoading,
+    error: flagsError,
+    refetch: refetchFlags,
+  } = useQuery(GET_QUESTION_FLAGS);
 
   const [wordGroups, setWordGroups] = useState<WordWithTemplate[]>([]);
 
   // Search and filter states
   const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState<'all' | 'with' | 'missing'>(
-    'all',
-  );
+  const [statusFilter, setStatusFilter] = useState<
+    'all' | 'with' | 'missing' | 'flagged'
+  >('all');
+
+  // Word currently being regenerated from a report
+  const [regeneratingWord, setRegeneratingWord] = useState<string | null>(null);
 
   // Inline editor states
   const [expandedWord, setExpandedWord] = useState<string | null>(null);
@@ -83,11 +108,13 @@ const WordGrid: React.FC = () => {
   const [deleteWordsMutation] = useMutation(DELETE_WORDS_MUTATION);
   const [saveAITemplateMutation] = useMutation(SAVE_AI_TEMPLATE);
   const [deleteAITemplateMutation] = useMutation(DELETE_AI_TEMPLATE);
+  const [resolveQuestionFlagMutation] = useMutation(RESOLVE_QUESTION_FLAG);
 
-  // Sync and merge words and templates when data loads
+  // Sync and merge words, templates and reported flags when data loads
   useEffect(() => {
     if (wordsData && wordsData.words) {
       const templates = templatesData?.aiTemplates || [];
+      const flags: QuestionFlag[] = flagsData?.questionFlags || [];
       const merged: WordWithTemplate[] = wordsData.words.map((word: Word) => {
         const matchingTemplate = templates.find(
           (t: {
@@ -96,6 +123,9 @@ const WordGrid: React.FC = () => {
             options: string[];
             answer: string;
           }) => t.word.toLowerCase() === word.enUS.toLowerCase(),
+        );
+        const matchingFlags = flags.filter(
+          (f) => f.word.toLowerCase() === word.enUS.toLowerCase(),
         );
         return {
           ...word,
@@ -106,16 +136,18 @@ const WordGrid: React.FC = () => {
                 answer: matchingTemplate.answer,
               }
             : undefined,
+          flagCount: matchingFlags.reduce((sum, f) => sum + f.count, 0),
+          flags: matchingFlags,
         };
       });
       setWordGroups(merged);
     }
-  }, [wordsData, templatesData]);
+  }, [wordsData, templatesData, flagsData]);
 
   // Combined refetch
   const refetch = async () => {
     try {
-      await Promise.all([refetchWords(), refetchTemplates()]);
+      await Promise.all([refetchWords(), refetchTemplates(), refetchFlags()]);
     } catch (err) {
       console.error('Error refetching data:', err);
     }
@@ -478,6 +510,62 @@ const WordGrid: React.FC = () => {
     setExpandedWord(null);
   };
 
+  // Reported question actions
+  const handleRegenerateFlagged = async (wordKey: string) => {
+    setErrMsg(null);
+    setRegeneratingWord(wordKey);
+
+    try {
+      // The regenerate endpoint replaces the template, so nothing is deleted up
+      // front — a failed call must leave the existing template intact.
+      const response = await fetch(
+        '/projects/wordbridge/api/generate-ai-templates',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ action: 'regenerate', words: [wordKey] }),
+        },
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to regenerate the question');
+      }
+
+      // Only the template report is resolved; a translation report still stands
+      await resolveQuestionFlagMutation({
+        variables: { word: wordKey, questionType: 'template' },
+      });
+
+      await refetch();
+    } catch (error) {
+      console.error('Error regenerating flagged question:', error);
+      setErrMsg(
+        error instanceof Error
+          ? `Failed to regenerate "${wordKey}": ${error.message}`
+          : `Failed to regenerate "${wordKey}". Please try again.`,
+      );
+    } finally {
+      setRegeneratingWord(null);
+    }
+  };
+
+  const handleDismissFlag = async (wordKey: string) => {
+    setErrMsg(null);
+
+    try {
+      await resolveQuestionFlagMutation({
+        variables: { word: wordKey },
+      });
+      await refetch();
+    } catch (error) {
+      console.error('Error dismissing flag:', error);
+      setErrMsg(`Failed to dismiss the report for "${wordKey}".`);
+    }
+  };
+
   // Filtered and searched groups
   const filteredWordGroups = wordGroups.filter((word) => {
     const matchesSearch =
@@ -493,11 +581,14 @@ const WordGrid: React.FC = () => {
     if (statusFilter === 'missing') {
       return matchesSearch && !word.hasAITemplate;
     }
+    if (statusFilter === 'flagged') {
+      return matchesSearch && !!word.flagCount;
+    }
     return matchesSearch;
   });
 
-  const loading = wordsLoading || templatesLoading;
-  const error = wordsError || templatesError;
+  const loading = wordsLoading || templatesLoading || flagsLoading;
+  const error = wordsError || templatesError || flagsError;
 
   if (loading) {
     return (
@@ -716,6 +807,16 @@ const WordGrid: React.FC = () => {
               Missing Question (
               {wordGroups.filter((w) => !w.hasAITemplate).length})
             </button>
+            <button
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                statusFilter === 'flagged'
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'bg-white text-slate-600 border border-slate-300 hover:bg-slate-50'
+              }`}
+              onClick={() => setStatusFilter('flagged')}
+            >
+              Flagged ({wordGroups.filter((w) => !!w.flagCount).length})
+            </button>
           </div>
         </div>
 
@@ -743,6 +844,12 @@ const WordGrid: React.FC = () => {
             {filteredWordGroups.length > 0 ? (
               filteredWordGroups.map((word, index) => {
                 const isExpanded = expandedWord === word.enUS;
+                const hasTemplateFlag = !!word.flags?.some(
+                  (f) => f.questionType === 'template',
+                );
+                const hasBasicFlag = !!word.flags?.some(
+                  (f) => f.questionType !== 'template',
+                );
                 return (
                   <React.Fragment key={word.enUS + '-' + index}>
                     <div
@@ -765,7 +872,20 @@ const WordGrid: React.FC = () => {
                       </div>
 
                       {/* AI Template Status */}
-                      <div className="col-span-2 flex items-center">
+                      <div className="col-span-2 flex items-center flex-wrap gap-1.5">
+                        {word.flags?.map((flag) => (
+                          <span
+                            key={flag.questionType}
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-100 text-rose-800"
+                            title={`Reported ${flag.questionType} question: ${flag.questionText}`}
+                          >
+                            <FiFlag size={11} />
+                            {flag.questionType === 'template'
+                              ? 'Question'
+                              : 'Translation'}
+                            {flag.count > 1 ? ` (${flag.count})` : ''}
+                          </span>
+                        ))}
                         {word.hasAITemplate === true ? (
                           <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
                             Available
@@ -783,20 +903,55 @@ const WordGrid: React.FC = () => {
 
                       {/* Question Preview */}
                       <div
-                        className="col-span-4 text-xs text-slate-600 truncate"
+                        className="col-span-4 text-xs text-slate-600 min-w-0"
                         title={word.aiTemplate?.sentence}
                       >
-                        {word.aiTemplate ? (
-                          word.aiTemplate.sentence
-                        ) : (
-                          <span className="text-slate-400 italic">
-                            No question template
-                          </span>
+                        <div className="truncate">
+                          {word.aiTemplate ? (
+                            word.aiTemplate.sentence
+                          ) : (
+                            <span className="text-slate-400 italic">
+                              No question template
+                            </span>
+                          )}
+                        </div>
+                        {hasBasicFlag && (
+                          <div className="text-rose-600 mt-0.5">
+                            Translation reported — fix the Chinese manually, AI
+                            regeneration will not help.
+                          </div>
                         )}
                       </div>
 
                       {/* Actions */}
-                      <div className="col-span-2 flex justify-end space-x-2">
+                      <div className="col-span-2 flex justify-end flex-wrap gap-2">
+                        {hasTemplateFlag && (
+                          <button
+                            className="p-1.5 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            onClick={() => handleRegenerateFlagged(word.enUS)}
+                            disabled={regeneratingWord !== null}
+                            title="Regenerate Question Template"
+                          >
+                            <FiRefreshCw
+                              size={16}
+                              className={
+                                regeneratingWord === word.enUS
+                                  ? 'animate-spin'
+                                  : ''
+                              }
+                            />
+                          </button>
+                        )}
+                        {!!word.flagCount && (
+                          <button
+                            className="p-1.5 bg-slate-400 text-white rounded hover:bg-slate-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            onClick={() => handleDismissFlag(word.enUS)}
+                            disabled={regeneratingWord !== null}
+                            title="Dismiss Report"
+                          >
+                            <FiX size={16} />
+                          </button>
+                        )}
                         <button
                           className={`p-1.5 rounded text-white transition-colors ${
                             isExpanded
