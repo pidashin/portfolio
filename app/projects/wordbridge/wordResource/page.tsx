@@ -15,6 +15,7 @@ import {
 import { useQuery, useMutation } from '@apollo/client';
 import ADD_WORDS_MUTATION from '../gql/addWords';
 import DELETE_WORDS_MUTATION from '../gql/deleteWords';
+import UPDATE_WORDS_MUTATION from '../gql/updateWords';
 import GET_WORDS from '../gql/getWords';
 import GET_AI_TEMPLATES from '../gql/getAITemplates';
 import SAVE_AI_TEMPLATE from '../gql/saveAITemplate';
@@ -47,6 +48,15 @@ interface QuestionFlag {
   createdAt: string;
   updatedAt: string;
 }
+
+interface TranslationResult {
+  enUS: string;
+  zhTW: string;
+}
+
+// Keep AI translation requests small, matching the batching used for AI
+// template generation, so one bad batch doesn't cost the whole run.
+const TRANSLATION_BATCH_SIZE = 10;
 
 const WordGrid: React.FC = () => {
   // Query both words and existing AI templates
@@ -104,8 +114,21 @@ const WordGrid: React.FC = () => {
   });
   const [aiError, setAiError] = useState<string | null>(null);
 
+  // Translation regeneration state (Validate & Regenerate button)
+  const [translationRegenStatus, setTranslationRegenStatus] = useState<
+    'idle' | 'running' | 'completed' | 'error'
+  >('idle');
+  const [translationProgress, setTranslationProgress] = useState({
+    processed: 0,
+    total: 0,
+    currentBatch: 0,
+    totalBatches: 0,
+  });
+  const [translationError, setTranslationError] = useState<string | null>(null);
+
   const [addWords] = useMutation(ADD_WORDS_MUTATION);
   const [deleteWordsMutation] = useMutation(DELETE_WORDS_MUTATION);
+  const [updateWordsMutation] = useMutation(UPDATE_WORDS_MUTATION);
   const [saveAITemplateMutation] = useMutation(SAVE_AI_TEMPLATE);
   const [deleteAITemplateMutation] = useMutation(DELETE_AI_TEMPLATE);
   const [resolveQuestionFlagMutation] = useMutation(RESOLVE_QUESTION_FLAG);
@@ -335,7 +358,7 @@ const WordGrid: React.FC = () => {
     }
   };
 
-  const handleValidateAndClean = async () => {
+  const handleValidateAndRegenerate = async () => {
     const invalidWords = wordGroups.filter((word) => {
       const en = word.enUS.toLowerCase();
       const zh = word.zhTW.toLowerCase();
@@ -349,39 +372,104 @@ const WordGrid: React.FC = () => {
 
     if (
       !confirm(
-        `Found ${invalidWords.length} invalid words (where translation matches English or is [English]). Do you want to remove them?`,
+        `Found ${invalidWords.length} invalid words (where translation matches English or is [English]). Regenerate their Chinese translations with AI?`,
       )
     ) {
       return;
     }
 
-    const enUsKeysToDelete = invalidWords
-      .filter((w) => !w.isNew)
-      .map((w) => w.enUS);
+    setErrMsg(null);
+    setTranslationError(null);
+    setTranslationRegenStatus('running');
 
-    try {
-      if (enUsKeysToDelete.length > 0) {
-        await deleteWordsMutation({
-          variables: { enUsKeys: enUsKeysToDelete },
-        });
+    const totalBatches = Math.ceil(
+      invalidWords.length / TRANSLATION_BATCH_SIZE,
+    );
+    setTranslationProgress({
+      processed: 0,
+      total: invalidWords.length,
+      currentBatch: 0,
+      totalBatches,
+    });
+
+    let regeneratedCount = 0;
+
+    for (let i = 0; i < invalidWords.length; i += TRANSLATION_BATCH_SIZE) {
+      const batch = invalidWords.slice(i, i + TRANSLATION_BATCH_SIZE);
+      const batchNumber = Math.floor(i / TRANSLATION_BATCH_SIZE) + 1;
+      setTranslationProgress((prev) => ({
+        ...prev,
+        currentBatch: batchNumber,
+      }));
+
+      try {
+        const response = await fetch(
+          '/projects/wordbridge/api/regenerate-translations',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ words: batch.map((w) => w.enUS) }),
+          },
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(
+            errorData.error || `Failed to regenerate batch ${batchNumber}.`,
+          );
+        }
+
+        const { translations } = (await response.json()) as {
+          translations: TranslationResult[];
+        };
+
+        // New (unsaved) words don't exist in the word store yet, so only
+        // persist translations for words that are already saved.
+        const toPersist = batch
+          .filter((w) => !w.isNew)
+          .map((w) => {
+            const match = translations.find(
+              (t) => t.enUS.toLowerCase() === w.enUS.toLowerCase(),
+            );
+            return { enUS: w.enUS, zhTW: match?.zhTW ?? w.zhTW };
+          });
+
+        if (toPersist.length > 0) {
+          await updateWordsMutation({ variables: { words: toPersist } });
+        }
+
+        setWordGroups((prev) =>
+          prev.map((word) => {
+            const match = translations.find(
+              (t) => t.enUS.toLowerCase() === word.enUS.toLowerCase(),
+            );
+            return match ? { ...word, zhTW: match.zhTW } : word;
+          }),
+        );
+
+        regeneratedCount += batch.length;
+        setTranslationProgress((prev) => ({
+          ...prev,
+          processed: prev.processed + batch.length,
+        }));
+      } catch (error) {
+        // Batches before this one already persisted, so re-running the
+        // button later will only retry what's left.
+        console.error('Error regenerating translations:', error);
+        setTranslationRegenStatus('error');
+        setTranslationError(
+          error instanceof Error
+            ? error.message
+            : `Failed to regenerate batch ${batchNumber}.`,
+        );
+        await refetch();
+        return;
       }
-
-      setWordGroups((prev) =>
-        prev.filter((word) => {
-          const en = word.enUS.toLowerCase();
-          const zh = word.zhTW.toLowerCase();
-          return !(zh === en || zh === `[${en}]`);
-        }),
-      );
-
-      alert(`Successfully removed ${invalidWords.length} invalid words.`);
-      refetch();
-    } catch (error) {
-      console.error('Error cleaning words:', error);
-      setErrMsg(
-        'Failed to clean invalid words. Please check console for details.',
-      );
     }
+
+    setTranslationRegenStatus('completed');
+    alert(`Successfully regenerated ${regeneratedCount} translations.`);
+    await refetch();
   };
 
   // Inline editor functions
@@ -658,13 +746,19 @@ const WordGrid: React.FC = () => {
               <TbJson size={24} />
             </button>
 
-            {/* Button to validate and clean invalid translations */}
+            {/* Button to validate and regenerate invalid translations */}
             <button
-              className="p-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors"
-              onClick={handleValidateAndClean}
-              title="Validate & Clean Translations"
+              className="p-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={handleValidateAndRegenerate}
+              disabled={translationRegenStatus === 'running'}
+              title="Validate & Regenerate Translations"
             >
-              <FiShield size={24} />
+              <FiShield
+                size={24}
+                className={
+                  translationRegenStatus === 'running' ? 'animate-pulse' : ''
+                }
+              />
             </button>
 
             {/* Button to open modal for adding a single word */}
@@ -751,6 +845,53 @@ const WordGrid: React.FC = () => {
                 <strong>Error:</strong> {aiError}
                 <div className="mt-1 text-sm">
                   Click &quot;Retry&quot; to continue from where it left off.
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Translation Regeneration Status */}
+        {translationRegenStatus !== 'idle' && (
+          <div className="bg-gray-100 p-4 rounded-lg">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-lg font-semibold">
+                Translation Regeneration
+                {translationRegenStatus === 'running' && ' (In Progress)'}
+                {translationRegenStatus === 'completed' && ' (Completed)'}
+                {translationRegenStatus === 'error' && ' (Error)'}
+              </h3>
+            </div>
+
+            {translationRegenStatus === 'running' && (
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span>
+                    Progress: {translationProgress.processed} /{' '}
+                    {translationProgress.total}
+                  </span>
+                  <span>
+                    Batch: {translationProgress.currentBatch} /{' '}
+                    {translationProgress.totalBatches}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    className="bg-teal-600 h-2 rounded-full transition-all duration-300"
+                    style={{
+                      width: `${translationProgress.total > 0 ? (translationProgress.processed / translationProgress.total) * 100 : 0}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+
+            {translationError && (
+              <div className="mt-2 p-2 bg-red-100 border border-red-400 text-red-700 rounded">
+                <strong>Error:</strong> {translationError}
+                <div className="mt-1 text-sm">
+                  Already-regenerated words are saved. Click &quot;Validate
+                  &amp; Regenerate&quot; again to retry the rest.
                 </div>
               </div>
             )}
