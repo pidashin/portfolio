@@ -213,6 +213,37 @@ async function processBatch(words: Word[]): Promise<AITemplate[]> {
   return templates;
 }
 
+// Reject a regenerated batch unless every requested word came back usable
+function validateRegeneratedTemplates(
+  requested: Word[],
+  templates: AITemplate[],
+): string | null {
+  for (const word of requested) {
+    const template = templates.find(
+      (t) => t.word.toLowerCase() === word.enUS.toLowerCase(),
+    );
+
+    if (!template) {
+      return `The AI did not return a question for "${word.enUS}".`;
+    }
+    if (!template.sentence.includes('____')) {
+      return `The generated question for "${word.enUS}" has no blank (____).`;
+    }
+    if (template.options.length !== 4) {
+      return `The generated question for "${word.enUS}" does not have exactly 4 options.`;
+    }
+    if (
+      !template.options.some(
+        (opt) => opt.toLowerCase() === word.enUS.toLowerCase(),
+      )
+    ) {
+      return `The generated options for "${word.enUS}" do not include the word itself.`;
+    }
+  }
+
+  return null;
+}
+
 // GET - Check generation status
 export async function GET() {
   return NextResponse.json(generationStatus);
@@ -221,7 +252,92 @@ export async function GET() {
 // POST - Start, stop, or retry generation
 export async function POST(request: NextRequest) {
   try {
-    const { action } = await request.json();
+    const { action, words: requestedWords } = await request.json();
+
+    if (action === 'regenerate') {
+      if (!Array.isArray(requestedWords) || requestedWords.length === 0) {
+        return NextResponse.json(
+          { error: 'No words provided to regenerate' },
+          { status: 400 },
+        );
+      }
+
+      const allWords = loadWords();
+      const targets: Word[] = [];
+      const missing: string[] = [];
+
+      requestedWords.forEach((requested: string) => {
+        const match = allWords.find(
+          (w) => w.enUS.toLowerCase() === String(requested).toLowerCase(),
+        );
+        if (match) {
+          targets.push(match);
+        } else {
+          missing.push(String(requested));
+        }
+      });
+
+      if (missing.length > 0) {
+        return NextResponse.json(
+          { error: `Word(s) not found: ${missing.join(', ')}` },
+          { status: 400 },
+        );
+      }
+
+      // Never let the mock fallback back a one-click "fix this report" action
+      if (!process.env.HUGGING_FACE_API_KEY) {
+        return NextResponse.json(
+          {
+            error:
+              'HUGGING_FACE_API_KEY is not configured, so a real question cannot be regenerated.',
+          },
+          { status: 503 },
+        );
+      }
+
+      try {
+        const newTemplates = await callHuggingFaceAPI(targets);
+
+        const validationError = validateRegeneratedTemplates(
+          targets,
+          newTemplates,
+        );
+        if (validationError) {
+          return NextResponse.json({ error: validationError }, { status: 500 });
+        }
+
+        // Persist only the validated templates for the requested words
+        const validatedTemplates = targets.map(
+          (word) =>
+            newTemplates.find(
+              (t) => t.word.toLowerCase() === word.enUS.toLowerCase(),
+            ) as AITemplate,
+        );
+
+        const existingTemplates = loadAITemplates();
+        const regeneratedWords = new Set(
+          validatedTemplates.map((t) => t.word.toLowerCase()),
+        );
+        const merged = existingTemplates
+          .filter((t) => !regeneratedWords.has(t.word.toLowerCase()))
+          .concat(validatedTemplates);
+
+        await saveAITemplates(merged);
+
+        return NextResponse.json({ templates: validatedTemplates });
+      } catch (error) {
+        console.error('❌ Regeneration failed:', error);
+        return NextResponse.json(
+          {
+            error:
+              error instanceof Error
+                ? error.message
+                : 'Failed to regenerate templates',
+          },
+          { status: 500 },
+        );
+      }
+    }
 
     if (action === 'start') {
       if (generationStatus.status === 'running') {
